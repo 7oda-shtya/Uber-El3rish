@@ -1,0 +1,54 @@
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+	reportsList: [
+		{
+			id: "rep-1",
+			reporterId: "d_50",
+			reportedId: "c_01",
+			tripId: "trip-101",
+			reason: "تأخير شديد عند الاستلام",
+			date: "2026-06-21",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		},
+		{
+			id: "rep-2",
+			reporterId: "d_50",
+			reportedId: "c_01",
+			tripId: "trip-204",
+			reason: "إلغاء الرحلة بعد الوصول",
+			date: "2026-06-19",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		},
+		{
+			id: "rep-3",
+			reporterId: "d_50",
+			reportedId: "c_02",
+			tripId: "trip-300",
+			reason: "سلوك غير لائق",
+			date: "2026-06-15",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		}
+	]
+}
+
+const reportsSlice = createSlice({
+	name: 'reports',
+	initialState,
+	reducers: {
+		addReport: (state, action) => {
+			const newReport = {
+				id: `rep-${Date.now()}`,
+				date: new Date().toISOString().split('T')[0],
+				...action.payload
+			}
+			state.reportsList.push(newReport)
+		},
+	}
+})
+
+export const { addReport, deleteReport } = reportsSlice.actions
+export default reportsSlice.reducer
