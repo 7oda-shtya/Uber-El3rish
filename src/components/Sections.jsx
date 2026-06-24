@@ -1,6 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStar, faTriangleExclamation, faCircleInfo, faHashtag, faUser, faClock, faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import Tag from './Tag'
 
 export const SentRates = ({ rates }) => {
   if (!rates || rates.length === 0) {
@@ -12,7 +13,7 @@ export const SentRates = ({ rates }) => {
       {rates.map((rate) => (
         <div key={rate.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
           <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
-            <span className='text-[11px] font-medium text-blue-400 bg-blue-950/40 px-2.5 py-0.5 rounded-full'>تقييم مرسل</span>
+            <Tag color='blue'>تقييم مرسل</Tag>
             <div className='flex text-yellow-400 text-xs gap-0.5 bg-yellow-500/5 px-2 py-0.5 rounded-lg'>
               {[...Array(Number(rate.value || 5))].map((_, i) => (
                 <FontAwesomeIcon key={i} icon={faStar} />
@@ -46,7 +47,7 @@ export const ReceivedRates = ({ rates }) => {
       {rates.map((rate) => (
         <div key={rate.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
           <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
-            <span className='text-[11px] font-medium text-green-400 bg-green-950/40 px-2.5 py-0.5 rounded-full'>تقييم مستلم</span>
+            <Tag color='green'>تقييم مستلم</Tag>
             <div className='flex text-yellow-400 text-xs gap-0.5 bg-yellow-500/5 px-2 py-0.5 rounded-lg'>
               {[...Array(Number(rate.value || 5))].map((_, i) => (
                 <FontAwesomeIcon key={i} icon={faStar} />
@@ -79,11 +80,11 @@ export const SentReports = ({ reports }) => {
     switch (status) {
       case 'accepted':
       case 'resolved':
-        return <span className='text-[10px] font-bold text-green-400 bg-green-950/50 border border-green-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faCheckCircle} /> تم الحل</span>
+        return <Tag color='green' icon={faCheckCircle}>تم الحل</Tag>
       case 'rejected':
-        return <span className='text-[10px] font-bold text-red-400 bg-red-950/50 border border-red-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faXmarkCircle} /> مرفوض</span>
+        return <Tag color='red' icon={faXmarkCircle}>مرفوض</Tag>
       default:
-        return <span className='text-[10px] font-bold text-blue-400 bg-blue-950/50 border border-blue-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faClock} /> قيد المراجعة</span>
+        return <Tag color='blue' icon={faClock} pulse>قيد المراجعة</Tag>
     }
   }
 
@@ -92,10 +93,8 @@ export const SentReports = ({ reports }) => {
       {reports.map((report) => (
         <div key={report.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
           <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
-            <span className='text-[11px] font-medium text-amber-400 bg-amber-950/40 px-2.5 py-0.5 rounded-full flex items-center gap-1'>
-              <FontAwesomeIcon icon={faTriangleExclamation} className='text-[10px]' /> بلاغ مرسل منك
-            </span>
-            {getStatusBadge(report.status)} 
+            <Tag color='amber' icon={faTriangleExclamation}>بلاغ مرسل منك</Tag>
+            {getStatusBadge(report.status)}
           </div>
 
           <p className='text-zinc-100 text-sm font-semibold mt-1 text-right'>السبب: <span className='text-zinc-300 font-normal'>{report.reason}</span></p>
@@ -126,11 +125,11 @@ export const ReceivedReports = ({ reports }) => {
     switch (status) {
       case 'accepted':
       case 'resolved':
-        return <span className='text-[10px] font-bold text-green-400 bg-green-950/50 border border-green-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faCheckCircle} /> تم الفصل فيه</span>
+        return <Tag color='green' icon={faCheckCircle}>تم الفصل فيه</Tag>
       case 'rejected':
-        return <span className='text-[10px] font-bold text-red-400 bg-red-950/50 border border-red-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faXmarkCircle} /> ملغي / مرفوض</span>
+        return <Tag color='red' icon={faXmarkCircle}>ملغي / مرفوض</Tag>
       default:
-        return <span className='text-[10px] font-bold text-blue-400 bg-blue-950/50 border border-blue-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'><FontAwesomeIcon icon={faClock} /> تحت التحقيق</span>
+        return <Tag color='blue' icon={faClock} pulse>تحت التحقيق</Tag>
     }
   }
 
@@ -139,9 +138,7 @@ export const ReceivedReports = ({ reports }) => {
       {reports.map((report) => (
         <div key={report.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
           <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
-            <span className='text-[11px] font-medium text-red-400 bg-red-950/40 px-2.5 py-0.5 rounded-full flex items-center gap-1'>
-              <FontAwesomeIcon icon={faCircleInfo} className='text-[10px]' /> شكوى مقدمة ضدك
-            </span>
+            <Tag color='red' icon={faCircleInfo}>شكوى مقدمة ضدك</Tag>
             {getStatusBadge(report.status)}
           </div>
 

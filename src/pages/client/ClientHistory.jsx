@@ -2,24 +2,22 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronRight, faLocationDot, faCar, faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { faChevronRight, faLocationDot, faCar, faCheckCircle, faXmarkCircle, faMapPin } from '@fortawesome/free-solid-svg-icons'
 import Navigation from '../../components/Navigation'
+import Tag from '../../components/Tag'
 
 const statusBadge = (status) =>
 	status === 'completed' ? (
-		<span className='text-[10px] font-bold text-green-400 bg-green-950/50 border border-green-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'>
-			<FontAwesomeIcon icon={faCheckCircle} /> مكتملة
-		</span>
+		<Tag color='green' icon={faCheckCircle}>مكتملة</Tag>
 	) : (
-		<span className='text-[10px] font-bold text-red-400 bg-red-950/50 border border-red-900/50 px-2 py-0.5 rounded-md flex items-center gap-1'>
-			<FontAwesomeIcon icon={faXmarkCircle} /> ملغاة
-		</span>
+		<Tag color='red' icon={faXmarkCircle}>ملغاة</Tag>
 	)
 
 const History = () => {
 	const navigate = useNavigate()
-	const trips = useSelector((state) => state.trip?.history || [])
+	const allTrips = useSelector((state) => state.trip?.history || [])
 	const userId = useSelector((state) => state.auth?.id)
+	const trips = allTrips.filter((trip) => !trip.clientId || trip.clientId === userId)
 
 	return (
 		<div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative flex flex-col p-4 pt-20 pb-28' dir='rtl'>
@@ -38,12 +36,17 @@ const History = () => {
 						<div key={trip.id} className='bg-zinc-800/70 border border-zinc-700/40 rounded-2xl p-4 flex flex-col gap-3'>
 							<div className='flex justify-between items-center'>
 								<span className='text-xs text-zinc-400'>{trip.date} · {trip.time}</span>
-								{statusBadge(trip.status)}
+								<div className='flex items-center gap-1.5'>
+									{trip.waypoints?.length > 0 && (
+										<Tag color='blue' icon={faMapPin}>{trip.waypoints.length} محطات</Tag>
+									)}
+									{statusBadge(trip.status)}
+								</div>
 							</div>
 
 							<div className='flex flex-col gap-1.5 text-sm'>
-								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-emerald-400 text-xs' /> {trip.from?.name}</p>
-								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-red-400 text-xs' /> {trip.to?.name}</p>
+								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-emerald-400 text-xs' /> {trip.startPin?.name}</p>
+								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-red-400 text-xs' /> {trip.endPin?.name}</p>
 							</div>
 
 							<div className='flex justify-between items-center border-t border-zinc-700/40 pt-2.5 text-xs text-zinc-400'>
