@@ -1,6 +1,6 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLocationDot, faMapPin, faPlus, faTrash, faSpinner, faRoute, faBookmark, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLocationDot, faMapPin, faPlus, faTrash, faSpinner, faRoute, faBookmark, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 const PinRow = ({ title, color, icon, pin, placeholder, isEditing, onEdit, onRemove }) => (
   <div className={`flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 ${isEditing ? 'bg-zinc-800/80 border border-emerald-500/50 shadow-inner' : 'bg-transparent'}`}>
@@ -17,45 +17,26 @@ const PinRow = ({ title, color, icon, pin, placeholder, isEditing, onEdit, onRem
         <FontAwesomeIcon icon={icon} className='text-xs' />
       </div>
       <button onClick={onEdit} className='flex-1 min-w-0 text-right' dir='rtl'>
-        <p className={`text-sm truncate ${pin ? 'text-white font-medium' : 'text-zinc-400'} ${isEditing ? 'animate-pulse' : ''}`}>
-          {pin?.name || placeholder}
-        </p>
+        <p className={`text-sm truncate ${pin ? 'text-white font-medium' : 'text-zinc-400'} ${isEditing ? 'animate-pulse' : ''}`}>{pin?.name || placeholder}</p>
       </button>
     </div>
   </div>
-)
+);
 
-const TripPlannerPanel = ({
-  trip,
-  pickTarget,
-  onSetPickTarget,
-  onRemoveWaypoint,
-  onConfirm,
-  resolving,
-  requesting,
-  routeOptions,
-  selectedRouteIndex,
-  shortestRouteIndex,
-  showRouteOptions,
-  onSelectRouteOption,
-  proximity,
-  showProximityNote,
-  onProximityNoteChange,
-  savedTrips,
-  onToggleSaveTrip,
-  isTripSaved,
-  onLoadSavedTrip,
-  onRemoveSavedTrip,
-}) => {
+const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onRemoveWaypoint, onConfirm, resolving, requesting, routeOptions, selectedRouteIndex, shortestRouteIndex, showRouteOptions, onSelectRouteOption, proximity, showProximityNote, onProximityNoteChange, savedTrips, onToggleSaveTrip, isTripSaved, onLoadSavedTrip, onRemoveSavedTrip }) => {
   const canConfirm = !!trip.startPin && !!trip.endPin && !resolving && !pickTarget;
+  const MAX_DISTANCE = 100;
+  const isTooFar = proximity.distanceM !== null && proximity.distanceM > MAX_DISTANCE;
+
+  // 2. حدد هل الزرار المفروض يكون مقفول؟
+  // الزرار يتقفل لو (البيانات ناقصة) أو (بيعمل Request) أو (هو بعيد جداً)
+  const isButtonDisabled = !canConfirm || requesting || isTooFar;
+
+  
 
   return (
     // 🌟 نزلنا الديف لتحت (bottom-6) وأخفينا السكرول بار بالكلاسات دي: [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
-    <div
-      dir='rtl'
-      className='absolute bottom-6 left-3 right-3 z-30 bg-zinc-900 border border-zinc-700/40 rounded-3xl p-4 shadow-2xl flex flex-col gap-3 max-h-[70vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'
-    >
-      
+    <div dir='rtl' className='absolute bottom-6 left-3 right-3 z-30 bg-zinc-900 border border-zinc-700/40 rounded-3xl p-4 shadow-2xl flex flex-col gap-3 max-h-[70vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
       {/* 🌟 بانرات توجيهية مع زراير تأكيد يدوية */}
       {pickTarget === 'start' && (
         <div className='flex flex-col gap-2 mb-1'>
@@ -89,7 +70,7 @@ const TripPlannerPanel = ({
             <FontAwesomeIcon icon={faMapPin} className='animate-bounce' /> حدد موقع المحطة من الخريطة
           </div>
           <button onClick={() => onSetPickTarget(null)} className='bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-2.5 text-sm font-bold transition-all shadow-lg flex justify-center items-center gap-2'>
-             تأكيد المحطة <FontAwesomeIcon icon={faCheck} />
+            تأكيد المحطة <FontAwesomeIcon icon={faCheck} />
           </button>
         </div>
       )}
@@ -99,9 +80,14 @@ const TripPlannerPanel = ({
         <div className='flex flex-col gap-1.5'>
           <p className='text-[11px] text-zinc-500 font-medium'>رحلاتي المحفوظة</p>
           <div className='flex gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
-            {savedTrips.map((saved) => (
+            {savedTrips.map(saved => (
               <div key={saved.id} className='shrink-0 max-w-[200px] bg-zinc-800/70 border border-zinc-700/40 rounded-xl pr-2 pl-1 py-2 flex items-center gap-2'>
-                <button onClick={() => { onLoadSavedTrip(saved); onSetPickTarget(null); }} className='text-right min-w-0'>
+                <button
+                  onClick={() => {
+                    onLoadSavedTrip(saved);
+                    onSetPickTarget(null);
+                  }}
+                  className='text-right min-w-0'>
                   <p className='text-xs font-medium text-white truncate'>{saved.startPin?.name}</p>
                   <p className='text-[10px] text-zinc-400 truncate'>→ {saved.endPin?.name}</p>
                 </button>
@@ -114,65 +100,26 @@ const TripPlannerPanel = ({
         </div>
       )}
 
-      <PinRow
-        title="نقطة البداية"
-        color='bg-emerald-500/15 text-emerald-400'
-        icon={faLocationDot}
-        pin={trip.startPin}
-        placeholder='اضغط هنا لتعديل نقطة البداية'
-        isEditing={pickTarget === 'start'}
-        onEdit={() => onSetPickTarget(pickTarget === 'start' ? null : 'start')}
-      />
+      <PinRow title='نقطة البداية' color='bg-emerald-500/15 text-emerald-400' icon={faLocationDot} pin={trip.startPin} placeholder='اضغط هنا لتعديل نقطة البداية' isEditing={pickTarget === 'start'} onEdit={() => onSetPickTarget(pickTarget === 'start' ? null : 'start')} />
 
       {trip.waypoints?.map((wp, i) => (
-        <PinRow
-          key={i}
-          title={`محطة في الطريق ${i + 1}`}
-          color='bg-blue-500/15 text-blue-400'
-          icon={faMapPin}
-          pin={wp}
-          placeholder='حدد المحطة...'
-          isEditing={false}
-          onEdit={() => {}}
-          onRemove={() => onRemoveWaypoint(i)}
-        />
+        <PinRow key={i} title={`محطة في الطريق ${i + 1}`} color='bg-blue-500/15 text-blue-400' icon={faMapPin} pin={wp} placeholder='حدد المحطة...' isEditing={false} onEdit={() => {}} onRemove={() => onRemoveWaypoint(i)} />
       ))}
 
-      <PinRow
-        title="نقطة النهاية"
-        color='bg-red-500/15 text-red-400'
-        icon={faLocationDot}
-        pin={trip.endPin}
-        placeholder='اضغط هنا لتحديد نقطة الوصول'
-        isEditing={pickTarget === 'end'}
-        onEdit={() => onSetPickTarget(pickTarget === 'end' ? null : 'end')}
-      />
+      <PinRow title='نقطة النهاية' color='bg-red-500/15 text-red-400' icon={faLocationDot} pin={trip.endPin} placeholder='اضغط هنا لتحديد نقطة الوصول' isEditing={pickTarget === 'end'} onEdit={() => onSetPickTarget(pickTarget === 'end' ? null : 'end')} />
 
       {!pickTarget?.waypoint && (
-        <button
-          onClick={() => onSetPickTarget({ waypoint: true })}
-          className='flex items-center justify-center gap-2 border border-dashed border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 rounded-xl py-2 text-xs font-medium active:scale-[0.99] transition-all mt-1'
-        >
+        <button onClick={() => onSetPickTarget({ waypoint: true })} className='flex items-center justify-center gap-2 border border-dashed border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 rounded-xl py-2 text-xs font-medium active:scale-[0.99] transition-all mt-1'>
           <FontAwesomeIcon icon={faPlus} className='text-[10px]' /> إضافة محطة في الطريق
         </button>
       )}
 
       {showRouteOptions && !pickTarget && (
         <div className='flex gap-2 mt-2'>
-          <button
-            onClick={() => onSelectRouteOption(0)}
-            className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${
-              selectedRouteIndex === 0 ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'
-            }`}
-          >
+          <button onClick={() => onSelectRouteOption(0)} className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${selectedRouteIndex === 0 ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'}`}>
             الأسرع
           </button>
-          <button
-            onClick={() => onSelectRouteOption(shortestRouteIndex)}
-            className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${
-              selectedRouteIndex === shortestRouteIndex ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'
-            }`}
-          >
+          <button onClick={() => onSelectRouteOption(shortestRouteIndex)} className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${selectedRouteIndex === shortestRouteIndex ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'}`}>
             الأقصر
           </button>
         </div>
@@ -198,49 +145,42 @@ const TripPlannerPanel = ({
       {showProximityNote && proximity?.needsNote && !pickTarget && (
         <div className='bg-red-500/10 border border-red-500/30 rounded-xl p-3 flex flex-col gap-2 mt-1 animate-fade-in'>
           <p className='text-[11px] text-red-300 font-medium'>
-            {proximity.failed
-              ? 'تعذر تأكيد موقعك الحالي - '
-              : `يبدو أنك بعيد عن نقطة الانطلاق بحوالي ${Math.round(proximity.distanceM)} متر - `}
+            {proximity.failed ? 'تعذر تأكيد موقعك الحالي - ' : `يبدو أنك بعيد عن نقطة الانطلاق بحوالي ${Math.round(proximity.distanceM)} متر - `}
             برجاء كتابة سبب ذلك للكابتن لتجنب الإلغاء
           </p>
-          <textarea
-            value={proximity.note}
-            onChange={(e) => onProximityNoteChange(e.target.value)}
-            placeholder='مثال: هكون في المكان كمان ٥ دقايق...'
-            rows={2}
-            className='bg-zinc-800 border border-zinc-700/60 rounded-lg px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-red-500 text-white placeholder:text-zinc-500 resize-none'
-          />
+          <textarea value={proximity.note} onChange={e => onProximityNoteChange(e.target.value)} placeholder='مثال: هكون في المكان كمان ٥ دقايق...' rows={2} className='bg-zinc-800 border border-zinc-700/60 rounded-lg px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-red-500 text-white placeholder:text-zinc-500 resize-none' />
         </div>
       )}
 
       {/* زراير الطلب والحفظ بنخفيها لو هو لسه بيختار نقط عشان نركز انتباهه على التأكيد */}
       {!pickTarget && (
-        <div className='flex gap-2 mt-1 animate-fade-in'>
-          <button
-            onClick={onConfirm}
-            disabled={!canConfirm || requesting}
-            className='flex-1 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed rounded-2xl py-3 text-sm font-bold transition-colors shadow-lg'
-          >
-            {requesting ? 'جارِ إرسال الطلب...' : 'طلب الرحلة'}
-          </button>
-          {trip.startPin && trip.endPin && (
+        <div className='flex flex-col gap-2 mt-1 animate-fade-in'>
+          {/* رسالة التنبيه لو هو بعيد (بتظهر فقط لو بعيد) */}
+          {isTooFar && <p className='text-[11px] text-red-400 text-center bg-red-950/20 py-1 px-2 rounded-lg border border-red-500/20'>أنت بعيد عن نقطة البداية ({Math.round(proximity.distanceM)} متر). يرجى الاقتراب لطلب الرحلة.</p>}
+
+          <div className='flex gap-2'>
             <button
-              onClick={onToggleSaveTrip}
-              title='حفظ الرحلة'
-              // 🌟 استايل الزرار بيتغير: أخضر مليان لو محفوظ، رمادي بحواف خضراء لو مش محفوظ
-              className={`w-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 border ${
-                isTripSaved 
-                  ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-500/20' 
-                  : 'bg-zinc-800 text-emerald-400 border-zinc-700 hover:border-emerald-500/50'
-              }`}
-            >
-              <FontAwesomeIcon icon={faBookmark} />
+              onClick={onConfirm}
+              disabled={isButtonDisabled} // الزرار هيتقفل هنا
+              className={`flex-1 rounded-2xl py-3 text-sm font-bold transition-all shadow-lg 
+          ${isButtonDisabled ? 'bg-zinc-800 text-zinc-500 cursor-not-allowed border border-zinc-700' : 'bg-emerald-600 hover:bg-emerald-500 text-white'}`}>
+              {requesting ? 'جارِ إرسال الطلب...' : isTooFar ? 'بعيد عن الموقع' : 'طلب الرحلة'}
             </button>
-          )}
+
+            {/* زرار الحفظ */}
+            {!isTooFar && trip.startPin && trip.endPin && (
+              <button
+                onClick={onToggleSaveTrip}
+                // ... نفس الكود القديم للزرار
+              >
+                <FontAwesomeIcon icon={faBookmark} />
+              </button>
+            )}
+          </div>
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TripPlannerPanel
+export default TripPlannerPanel;

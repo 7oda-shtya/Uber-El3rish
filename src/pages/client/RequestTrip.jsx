@@ -2,27 +2,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom'; // 🌟 ضفنا useNavigate
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette, faTriangleExclamation, faChevronRight } from '@fortawesome/free-solid-svg-icons'; // 🌟 ضفنا أيقونة الرجوع
+import { faPalette, faTriangleExclamation, faChevronRight, faCheck } from '@fortawesome/free-solid-svg-icons'; // 🌟 ضفنا أيقونة الرجوع
 import MapComponent from '../../components/MapComponent';
 import MapDesignModal from '../../popups/MapDesignModal';
 import TripPlannerPanel from '../../components/trip/TripPlannerPanel';
 import TripStatusPanel from '../../components/trip/TripStatusPanel';
-import {
-  ACTIVE_TRIP_STATUSES,
-  findNamedArea,
-  updateStartPin,
-  updateEndPin,
-  addWaypoint,
-  removeWaypoint,
-  setRoute,
-  saveTrip,
-  removeSavedTrip,
-  loadSavedTrip,
-  requestTrip,
-  acceptOffer,
-  cancelTrip,
-  completeTrip,
-} from '../../redux/reducers/tripSlice';
+import { ACTIVE_TRIP_STATUSES, findNamedArea, updateStartPin, updateEndPin, addWaypoint, removeWaypoint, setRoute, saveTrip, removeSavedTrip, loadSavedTrip, requestTrip, acceptOffer, cancelTrip, completeTrip } from '../../redux/reducers/tripSlice';
 import { reverseGeocode, fetchRouteOptions, estimateFare, distanceMeters } from '../../utils/geo';
 
 const PROXIMITY_LIMIT_M = 20;
@@ -31,20 +16,19 @@ const RequestTrip = () => {
   const { state } = useLocation();
   const navigate = useNavigate(); // 🌟 للتوجيه للخلف
   const dispatch = useDispatch();
-  const currentTrip = useSelector((s) => s.trip.currentTrip);
-  const offers = useSelector((s) => s.trip.offers);
-  const namedAreas = useSelector((s) => s.trip.namedAreas);
-  const savedTrips = useSelector((s) => s.trip.savedTrips);
-  const authId = useSelector((s) => s.auth.id);
+  const currentTrip = useSelector(s => s.trip.currentTrip);
+  const offers = useSelector(s => s.trip.offers);
+  const namedAreas = useSelector(s => s.trip.namedAreas);
+  const savedTrips = useSelector(s => s.trip.savedTrips);
 
   const [mapStyle, setMapStyle] = useState('dark');
   const [showMapDesign, setShowMapDesign] = useState(false);
-  const [pickTarget, setPickTarget] = useState('start'); 
+  const [pickTarget, setPickTarget] = useState('start');
   const [resolving, setResolving] = useState(false);
   const [requesting, setRequesting] = useState(false);
   const [routeOptions, setRouteOptions] = useState([]);
   const [selectedRouteIndex, setSelectedRouteIndex] = useState(0);
-  
+
   const [proximity, setProximity] = useState({ distanceM: null, checking: false, failed: false, note: '' });
   const [showProximityNote, setShowProximityNote] = useState(false);
   const [showTooFarModal, setShowTooFarModal] = useState(false);
@@ -53,13 +37,7 @@ const RequestTrip = () => {
   const coords = state?.coords;
 
   // 🌟 الكشف هل الرحلة دي محفوظة حالياً ولا لأ عشان نعرض شكل الزرار
-  const isTripSaved = savedTrips?.some(
-    (saved) =>
-      saved.startPin?.lat === currentTrip.startPin?.lat &&
-      saved.startPin?.lng === currentTrip.startPin?.lng &&
-      saved.endPin?.lat === currentTrip.endPin?.lat &&
-      saved.endPin?.lng === currentTrip.endPin?.lng
-  );
+  const isTripSaved = savedTrips?.some(saved => saved.startPin?.lat === currentTrip.startPin?.lat && saved.startPin?.lng === currentTrip.startPin?.lng && saved.endPin?.lat === currentTrip.endPin?.lat && saved.endPin?.lng === currentTrip.endPin?.lng);
 
   const resolvePinName = useCallback(
     async (lat, lng) => {
@@ -69,7 +47,7 @@ const RequestTrip = () => {
       if (localName) return { name: localName, unknown: false };
       return { name: 'موقع محدد على الخريطة', unknown: true };
     },
-    [namedAreas]
+    [namedAreas],
   );
 
   useEffect(() => {
@@ -80,22 +58,26 @@ const RequestTrip = () => {
         dispatch(updateStartPin({ lat: coords.lat, lng: coords.lng, name }));
       }
     });
-    return () => { active = false; };
-  }, []);
+    return () => {
+      active = false;
+    };
+  }, [isActive, currentTrip.startPin, coords, dispatch, resolvePinName]);
 
   useEffect(() => {
     if (isActive || !currentTrip.startPin || !currentTrip.endPin) return;
     const points = [currentTrip.startPin, ...currentTrip.waypoints, currentTrip.endPin];
     let active = true;
     setResolving(true);
-    fetchRouteOptions(points).then((options) => {
+    fetchRouteOptions(points).then(options => {
       if (!active) return;
       setRouteOptions(options);
       setSelectedRouteIndex(0);
       if (options[0]) dispatch(setRoute({ ...options[0], price: estimateFare(options[0].distanceKm) }));
       setResolving(false);
     });
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [currentTrip.startPin, currentTrip.endPin, currentTrip.waypoints, isActive, dispatch]);
 
   useEffect(() => {
@@ -104,48 +86,48 @@ const RequestTrip = () => {
       return;
     }
     if (!navigator.geolocation) {
-      setProximity((p) => ({ ...p, distanceM: null, checking: false, failed: true }));
+      setProximity(p => ({ ...p, distanceM: null, checking: false, failed: true }));
       return;
     }
     let active = true;
-    setProximity((p) => ({ ...p, checking: true, failed: false }));
+    setProximity(p => ({ ...p, checking: true, failed: false }));
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
+      pos => {
         if (!active) return;
         const d = distanceMeters({ lat: pos.coords.latitude, lng: pos.coords.longitude }, currentTrip.startPin);
-        setProximity((p) => ({ ...p, distanceM: d, checking: false, failed: false }));
+        setProximity(p => ({ ...p, distanceM: d, checking: false, failed: false }));
       },
       () => {
         if (!active) return;
-        setProximity((p) => ({ ...p, distanceM: null, checking: false, failed: true }));
+        setProximity(p => ({ ...p, distanceM: null, checking: false, failed: true }));
       },
-      { enableHighAccuracy: true, timeout: 10000 }
+      { enableHighAccuracy: true, timeout: 10000 },
     );
-    return () => { active = false; };
+    return () => {
+      active = false;
+    };
   }, [currentTrip.startPin, isActive]);
 
   // 🌟 تعديل الـ Pick عشان ميغيرش النقطة أوتوماتيك، بيستنى اليوزر يأكد بنفسه من الزرار
   const handlePick = useCallback(
-    async (latlng) => {
+    async latlng => {
       if (!pickTarget) return;
       const target = pickTarget;
       const { name } = await resolvePinName(latlng.lat, latlng.lng);
       const pin = { lat: latlng.lat, lng: latlng.lng, name };
-      
+
       if (target === 'start') {
         dispatch(updateStartPin(pin));
-      }
-      else if (target === 'end') {
+      } else if (target === 'end') {
         dispatch(updateEndPin(pin));
-      }
-      else if (target?.waypoint) {
+      } else if (target?.waypoint) {
         dispatch(addWaypoint(pin));
       }
     },
-    [pickTarget, dispatch, resolvePinName]
+    [pickTarget, dispatch, resolvePinName],
   );
 
-  const handleSelectRouteOption = (index) => {
+  const handleSelectRouteOption = index => {
     setSelectedRouteIndex(index);
     const chosen = routeOptions[index];
     if (chosen) dispatch(setRoute({ ...chosen, price: estimateFare(chosen.distanceKm) }));
@@ -154,9 +136,7 @@ const RequestTrip = () => {
   // 🌟 دالة عشان تـ Toggle الحفظ (تحفظ أو تحذف لو محفوظة)
   const handleToggleSaveTrip = () => {
     if (isTripSaved) {
-      const savedTrip = savedTrips.find(
-        t => t.startPin.lat === currentTrip.startPin.lat && t.endPin.lat === currentTrip.endPin.lat
-      );
+      const savedTrip = savedTrips.find(t => t.startPin.lat === currentTrip.startPin.lat && t.endPin.lat === currentTrip.endPin.lat);
       if (savedTrip) dispatch(removeSavedTrip(savedTrip.id));
     } else {
       dispatch(saveTrip({ startPin: currentTrip.startPin, endPin: currentTrip.endPin, waypoints: currentTrip.waypoints }));
@@ -170,38 +150,58 @@ const RequestTrip = () => {
   const proximityNeedsNote = isFarFromPickup || proximity.failed;
 
   const handleConfirmRequest = () => {
-    if (!currentTrip.startPin || !currentTrip.endPin) return;
+    // 1. فحص النقط (إضافة log للتأكد من الحالة)
+    console.log('Current Trip State:', currentTrip);
 
-    if (proximity.distanceM !== null && proximity.distanceM > 1000000) {
-      setShowTooFarModal(true);
+    if (!currentTrip.startPin || !currentTrip.endPin) {
+      console.error('خطأ: النقاط ناقصة!');
+      alert('برجاء تحديد نقطة البداية ونقطة الوصول أولاً!'); // تنبيه للمستخدم
       return;
     }
 
+    // 2. فحص المسافة (Proximity)
     if (proximityNeedsNote && !showProximityNote) {
+      console.log('يجب كتابة ملاحظة للمسافة');
       setShowProximityNote(true);
-      return; 
-    }
-    if (proximityNeedsNote && showProximityNote && !proximity.note.trim()) {
-      return; 
+      return;
     }
 
+    if (proximityNeedsNote && showProximityNote && !proximity.note.trim()) {
+      console.error('خطأ: يجب كتابة سبب للمسافة');
+      alert('من فضلك اكتب سبباً لوجودك بعيداً عن نقطة البداية!');
+      return;
+    }
+
+    // 3. الطلب
+    console.log('جاري طلب الرحلة...');
     setRequesting(true);
+
+    // تأكد أنك ترسل البيانات الصحيحة
     dispatch(
       requestTrip({
-        clientId: authId,
-        price: currentTrip.route?.price || 0,
-        startTime: new Date().toLocaleTimeString('ar-EG'),
-        pickupDistanceM: proximity.distanceM,
-        farFromPickupNote: proximityNeedsNote ? proximity.note.trim() : null,
-      })
+        ...currentTrip,
+        // أي بيانات إضافية يحتاجها الـ reducer
+      }),
     );
+
     setRequesting(false);
+
+    // 4. إظهار البوب أب (هنا السحر)
+    setShowRequestSuccess(true);
+
+    // 5. الانتظار ثم الانتقال
+    setTimeout(() => {
+      setShowRequestSuccess(false);
+      navigate('/home'); // أو المسار الذي تريده للهوم
+    }, 1500);
   };
+
+  // حالة عرض بوبوب نجاح الطلب
+  const [showRequestSuccess, setShowRequestSuccess] = useState(false);
 
   return (
     // 🌟 لغينا حجز مساحة النافيجيشن بالأسفل وبقت الصفحة واخدة راحتها بالكامل
     <div className='w-full h-screen flex flex-col bg-zinc-950 relative overflow-hidden'>
-      
       {showTooFarModal && (
         <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
           <div className='w-full max-w-sm bg-zinc-900 border border-zinc-700/50 rounded-3xl p-6 flex flex-col items-center gap-4 text-center'>
@@ -209,43 +209,48 @@ const RequestTrip = () => {
               <FontAwesomeIcon icon={faTriangleExclamation} />
             </div>
             <h3 className='text-lg font-bold text-white'>نقطة الانطلاق بعيدة جداً!</h3>
-            <p className='text-sm text-zinc-400'>
-              عذراً، نقطة الانطلاق التي حددتها تبعد عن موقعك الحالي بأكثر من 1000 كيلومتر. لا يمكنك طلب رحلة من هذه المسافة.
-            </p>
-            <button 
-              onClick={() => setShowTooFarModal(false)}
-              className='w-full bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl py-3 mt-2 transition-colors'
-            >
+            <p className='text-sm text-zinc-400'>عذراً، نقطة الانطلاق التي حددتها تبعد عن موقعك الحالي بأكثر من 1000 كيلومتر. لا يمكنك طلب رحلة من هذه المسافة.</p>
+            <button onClick={() => setShowTooFarModal(false)} className='w-full bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl py-3 mt-2 transition-colors'>
               حسناً، فهمت
             </button>
           </div>
         </div>
       )}
 
+      {showRequestSuccess && (
+        <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
+          <div className='w-full max-w-sm bg-zinc-900 border border-zinc-700/50 rounded-3xl p-6 flex flex-col items-center gap-4 text-center'>
+            <div className='w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mb-2'>
+              <FontAwesomeIcon icon={faCheck} />
+            </div>
+            <h3 className='text-lg font-bold text-white'>تم إرسال طلب الرحلة</h3>
+            <p className='text-sm text-zinc-400'>طلبك اتعرض على السواقين القريبين منك وسيتم التواصل لاحقًا.</p>
+            <div className='flex gap-2 w-full'>
+              <button
+                onClick={() => {
+                  setShowRequestSuccess(false);
+                  navigate('/');
+                }}
+                className='flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl py-3 mt-2 transition-colors'>
+                اذهب للرئيسية
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className='flex-1 relative'>
-        <MapComponent
-          startPin={currentTrip.startPin}
-          endPin={currentTrip.endPin}
-          waypoints={currentTrip.waypoints}
-          routeCoords={currentTrip.route?.coordinates}
-          pickTarget={isActive ? null : pickTarget}
-          onPick={handlePick}
-          mapStyle={mapStyle}
-        />
+        <MapComponent startPin={currentTrip.startPin} endPin={currentTrip.endPin} waypoints={currentTrip.waypoints} routeCoords={currentTrip.route?.coordinates} pickTarget={isActive ? null : pickTarget} onPick={handlePick} mapStyle={mapStyle} />
 
         {/* 🌟 زرار الرجوع فوق عالشمال */}
         <button
           onClick={() => navigate(-1)} // 🌟 يرجعه للصفحة اللي قبلها
-          className='absolute top-4 left-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-white hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'
-        >
-          <FontAwesomeIcon icon={faChevronRight} className="rotate-180" />
+          className='absolute top-4 left-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-white hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'>
+          <FontAwesomeIcon icon={faChevronRight} className='rotate-180' />
         </button>
 
         {/* 🌟 زرار تغيير التصميم يمين */}
-        <button
-          onClick={() => setShowMapDesign(true)}
-          className='absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-emerald-400 hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'
-        >
+        <button onClick={() => setShowMapDesign(true)} className='absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-emerald-400 hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'>
           <FontAwesomeIcon icon={faPalette} />
         </button>
 
@@ -256,7 +261,7 @@ const RequestTrip = () => {
             trip={currentTrip}
             pickTarget={pickTarget}
             onSetPickTarget={setPickTarget}
-            onRemoveWaypoint={(i) => dispatch(removeWaypoint(i))}
+            onRemoveWaypoint={i => dispatch(removeWaypoint(i))}
             onConfirm={handleConfirmRequest}
             resolving={resolving}
             requesting={requesting}
@@ -267,24 +272,18 @@ const RequestTrip = () => {
             onSelectRouteOption={handleSelectRouteOption}
             proximity={proximity}
             showProximityNote={showProximityNote}
-            onProximityNoteChange={(note) => setProximity((p) => ({ ...p, note }))}
+            onProximityNoteChange={note => setProximity(p => ({ ...p, note }))}
             savedTrips={savedTrips}
             isTripSaved={isTripSaved} // 🌟 باصينا المتغير ده للبانل
             onToggleSaveTrip={handleToggleSaveTrip} // 🌟 الدالة الجديدة
-            onLoadSavedTrip={(saved) => dispatch(loadSavedTrip(saved))}
-            onRemoveSavedTrip={(id) => dispatch(removeSavedTrip(id))}
+            onLoadSavedTrip={saved => dispatch(loadSavedTrip(saved))}
+            onRemoveSavedTrip={id => dispatch(removeSavedTrip(id))}
           />
         ) : (
-          <TripStatusPanel
-            trip={currentTrip}
-            offers={currentTrip.status === 'pending' ? offers : []}
-            onAccept={(offer) => dispatch(acceptOffer(offer))}
-            onCancel={() => dispatch(cancelTrip())}
-            onFinish={() => dispatch(completeTrip())}
-          />
+          <TripStatusPanel trip={currentTrip} offers={currentTrip.status === 'pending' ? offers : []} onAccept={offer => dispatch(acceptOffer(offer))} onCancel={() => dispatch(cancelTrip())} onFinish={() => dispatch(completeTrip())} />
         )}
       </div>
-      
+
       {/* 🌟 تم إلغاء النافيجيشن هنا تماماً */}
     </div>
   );

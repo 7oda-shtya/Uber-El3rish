@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux'; // Hook عشان نقرأ الداتا من الستور و Hook عشان ننفذ الأكشنز
 import { useNavigate } from 'react-router-dom'; // للتنقل بين الصفحات
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner, faLocationDot, faClock, faCarSide, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { cancelTrip } from '../../redux/reducers/tripSlice'; // أكشن الإلغاء
 import Navigation from '../../components/Navigation'; // نافيجيشن بار
 import Header from '../../components/Header'; // الهيدر
@@ -12,7 +12,7 @@ const ClientHome = () => {
   const navigate = useNavigate(); // بنستخدمه عشان ننقل اليوزر لصفحة الخريطة
 
   // بنسحب بيانات الرحلة من الـ Redux
-  const { currentTrip, offers } = useSelector((state) => state.trip);
+  const { currentTrip } = useSelector((state) => state.trip);
   
   // بنحدد هل فيه رحلة شغالة؟ (حالتها pending يعني لسه بتدور، أو ongoing يعني السواق ركب)
   const isTripActive = ["pending", "ongoing"].includes(currentTrip?.status);
@@ -28,18 +28,26 @@ const ClientHome = () => {
       <main className="flex-1 flex flex-col p-4">
         
         {isTripActive ? (
-          // لو في رحلة شغالة، اعرض كارت الرحلة
-          <div className="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-4 shadow-lg w-full">
+          // لو في رحلة شغالة، اعرض كارت الرحلة (قابل للضغط للانتقال لتفاصيل الرحلة)
+          <div onClick={() => navigate('/request-trip')} className="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-4 shadow-lg w-full cursor-pointer">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-white font-bold">
                 {currentTrip.status === "pending" ? "جاري البحث عن كابتن..." : "رحلتك الحالية"}
               </h2>
-              <button 
-                onClick={() => dispatch(cancelTrip())} // لما يدوس هنا، بيمسح الرحلة من الـ Redux
-                className="text-red-400 text-xs bg-red-950/30 px-3 py-1 rounded-full"
-              >
-                إلغاء
-              </button>
+              <div className='flex items-center gap-2'>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); dispatch(cancelTrip()); }} // وقف بابلينج عشان ميعملش ناڤيجيت
+                  className="text-red-400 text-xs bg-red-950/30 px-3 py-1 rounded-full"
+                >
+                  إلغاء
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate('/request-trip', { state: { editing: true } }); }}
+                  className='text-emerald-400 text-xs bg-emerald-950/10 px-3 py-1 rounded-full'
+                >
+                  تعديل
+                </button>
+              </div>
             </div>
             {/* ... بقية كود الرحلة ... */}
           </div>

@@ -1,0 +1,3966 @@
+This file is a merged representation of the entire codebase, combined into a single document by Repomix.
+
+<file_summary>
+This section contains a summary of this file.
+
+<purpose>
+This file contains a packed representation of the entire repository's contents.
+It is designed to be easily consumable by AI systems for analysis, code review,
+or other automated processes.
+</purpose>
+
+<file_format>
+The content is organized as follows:
+1. This summary section
+2. Repository information
+3. Directory structure
+4. Repository files (if enabled)
+5. Multiple file entries, each consisting of:
+  - File path as an attribute
+  - Full contents of the file
+</file_format>
+
+<usage_guidelines>
+- This file should be treated as read-only. Any changes should be made to the
+  original repository files, not this packed version.
+- When processing this file, use the file path to distinguish
+  between different files in the repository.
+- Be aware that this file may contain sensitive information. Handle it with
+  the same level of security as you would the original repository.
+</usage_guidelines>
+
+<notes>
+- Some files may have been excluded based on .gitignore rules and Repomix's configuration
+- Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
+- Files matching patterns in .gitignore are excluded
+- Files matching default ignore patterns are excluded
+- Files are sorted by Git change count (files with more changes are at the bottom)
+</notes>
+
+</file_summary>
+
+<directory_structure>
+.gitignore
+package.json
+postcss.config.js
+public/favicon.ico
+public/images/14.png
+public/index.html
+public/logo192.png
+public/logo512.png
+public/manifest.json
+public/robots.txt
+README.md
+src/App.jsx
+src/App.test.js
+src/components/Header.jsx
+src/components/MapComponent.jsx
+src/components/Navigation.jsx
+src/components/ProfileSections.jsx
+src/components/Sections.jsx
+src/components/Setting.jsx
+src/components/Tag.jsx
+src/components/trip/LocationSearchInput.jsx
+src/components/trip/TripPlannerPanel.jsx
+src/components/trip/TripStatusPanel.jsx
+src/components/Wallet.jsx
+src/index.css
+src/index.js
+src/pages/client/ClientEditProfile.jsx
+src/pages/client/ClientFavorites.jsx
+src/pages/client/ClientHistory.jsx
+src/pages/client/ClientHome.jsx
+src/pages/client/ClientProfile.jsx
+src/pages/client/ClientSignIn.jsx
+src/pages/client/ClientSignUp.jsx
+src/pages/client/RequestTrip.jsx
+src/pages/driver/DriverHome.jsx
+src/pages/driver/DriverSignIn.jsx
+src/pages/driver/DriverSignUp.jsx
+src/pages/Sign.jsx
+src/popups/ImageCropperModel.jsx
+src/popups/MapDesignModal.jsx
+src/popups/ShareLocationModal.jsx
+src/redux/reducers/adminSlice.jsx
+src/redux/reducers/authSlice.jsx
+src/redux/reducers/clientSlice.jsx
+src/redux/reducers/driverSlice.jsx
+src/redux/reducers/ratesSlice.jsx
+src/redux/reducers/reportsSlice.jsx
+src/redux/reducers/tripSlice.jsx
+src/redux/store.jsx
+src/reportWebVitals.js
+src/setupTests.js
+src/utils/geo.js
+tailwind.config.js
+</directory_structure>
+
+<files>
+This section contains the contents of the repository's files.
+
+<file path=".gitignore">
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+</file>
+
+<file path="postcss.config.js">
+module.exports = {
+  plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
+  ],
+}
+</file>
+
+<file path="public/manifest.json">
+{
+  "short_name": "React App",
+  "name": "Create React App Sample",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
+</file>
+
+<file path="public/robots.txt">
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow:
+</file>
+
+<file path="README.md">
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+### `npm run eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+</file>
+
+<file path="src/App.test.js">
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+</file>
+
+<file path="src/components/Header.jsx">
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWallet, faBell } from '@fortawesome/free-solid-svg-icons'
+import Wallet from './Wallet'
+const Header = () => {
+
+	return (
+		<div className='text-white fixed top-0 left-0 right-0 flex justify-between p-4 items-center z-50'>
+
+			<div className='relative z-20 flex-1 max-w-[75%]'>
+				<button className='text-white bg-zinc-800 rounded-full h-14 w-14 max-w-full min-w-[3.5rem] flex items-center justify-start px-4 gap-4 overflow-hidden transition-all duration-500 ease-in-out hover:w-full group shadow-2xl hover:bg-blue-600'>
+
+					<FontAwesomeIcon icon={faBell} className='shrink-0 text-xl' />
+
+					<span className='whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium delay-100'>
+						تم قبول كابتن أحمد لرحلتك!
+					</span>
+				</button>
+			</div>
+
+			<h1 className='absolute left-1/2 -translate-x-1/2 text-base font-medium z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0'>
+				مرحبا بك عمرو
+			</h1>
+
+			<Wallet />
+
+		</div>
+	)
+}
+
+export default Header
+</file>
+
+<file path="src/components/MapComponent.jsx">
+import React, { useEffect } from 'react'
+import { MapContainer, TileLayer, Marker, Polyline, useMap, useMapEvents } from 'react-leaflet'
+import L from 'leaflet'
+
+const EL_ARISH_CENTER = [31.1285, 33.8015]
+
+const MAP_STYLES = {
+  standard: { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', attribution: '&copy; OpenStreetMap' },
+  satellite: { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attribution: 'Tiles &copy; Esri' },
+  terrain: { url: 'https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', attribution: '&copy; OpenTopoMap' },
+  dark: { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', attribution: '&copy; CARTO' },
+}
+
+// أيقونات بسيطة ونضيفة بدل الماركر التقليدي - من غير عرض أي إحداثيات
+const pinIcon = (color, label) =>
+  L.divIcon({
+    className: '',
+    html: `<div class="map-pin" style="background:${color}">${label ?? ''}</div>`,
+    iconSize: [26, 26],
+    iconAnchor: [13, 13],
+  })
+
+const ClickCapture = ({ onPick }) => {
+  useMapEvents({
+    click: (e) => onPick && onPick(e.latlng),
+  })
+  return null
+}
+
+const FitToPoints = ({ points }) => {
+  const map = useMap()
+  useEffect(() => {
+    if (!points || points.length === 0) return
+    if (points.length === 1) {
+      map.setView(points[0], 15)
+      return
+    }
+    map.fitBounds(points, { padding: [60, 60] })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(points)])
+  return null
+}
+
+const MapComponent = ({ startPin, endPin, waypoints = [], routeCoords, pickTarget, onPick, mapStyle = 'dark' }) => {
+  const layer = MAP_STYLES[mapStyle] || MAP_STYLES.dark
+  const boundsPoints = [startPin, ...waypoints, endPin].filter(Boolean).map((p) => [p.lat, p.lng])
+
+  // position+z-index هنا لازمين عشان يحصروا الـ z-index الداخلي لطبقات Leaflet (لحد 700) جوه الخريطة، وما يطلعش يتعارض مع عناصر الواجهة اللي فوقها
+  return (
+    <div style={{ height: '100%', width: '100%' }} className={`relative z-0 ${pickTarget ? 'cursor-crosshair' : ''}`}>
+      <MapContainer center={EL_ARISH_CENTER} zoom={14} zoomControl={false} scrollWheelZoom style={{ height: '100%', width: '100%' }}>
+        <TileLayer attribution={layer.attribution} url={layer.url} />
+
+        {boundsPoints.length > 0 && <FitToPoints points={boundsPoints} />}
+
+        {routeCoords && routeCoords.length > 1 && (
+          <Polyline positions={routeCoords} pathOptions={{ color: '#10b981', weight: 5, opacity: 0.85 }} />
+        )}
+
+        {startPin && <Marker position={[startPin.lat, startPin.lng]} icon={pinIcon('#10b981')} />}
+
+        {waypoints.map((wp, i) => (
+          <Marker key={i} position={[wp.lat, wp.lng]} icon={pinIcon('#3b82f6', i + 1)} />
+        ))}
+
+        {endPin && <Marker position={[endPin.lat, endPin.lng]} icon={pinIcon('#ef4444')} />}
+
+        {pickTarget && <ClickCapture onPick={onPick} />}
+      </MapContainer>
+    </div>
+  )
+}
+
+export default MapComponent
+</file>
+
+<file path="src/components/ProfileSections.jsx">
+import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
+import { SentRates, ReceivedRates, SentReports, ReceivedReports } from './Sections'
+
+const ProfileSections = ({ selectedSection }) => {
+	const client = useSelector((state) => state.auth || {})
+	const { rates = { sent: [], received: [] }, reports = { sent: [], received: [] }, favorites = [] } = client
+	const [ratesDirection, setRatesDirection] = useState('sent')
+	const [reportsDirection, setReportsDirection] = useState('sent')
+
+	const hasAnyData = (rates?.sent?.length || 0) + (rates?.received?.length || 0) + (reports?.sent?.length || 0) + (reports?.received?.length || 0) + favorites.length > 0
+	const sentRates = rates?.sent || []
+	const receivedRates = rates?.received || []
+	const sentReports = reports?.sent || []
+	const receivedReports = reports?.received || []
+
+	return (
+		<div>
+			<div className='flex-1 flex flex-col items-center text-zinc-400 text-sm py-8 w-full'>
+				{!hasAnyData ? (
+					<p>لا توجد بيانات لعرضها حالياً</p>
+				) : selectedSection === 'rates' ? (
+					<div className='w-full space-y-4 transition-all duration-300'>
+						<div className='flex gap-2 justify-center mb-4'>
+							<button
+								onClick={() => setRatesDirection('sent')}
+								className={`px-4 py-2 rounded-full ${ratesDirection === 'sent' ? 'bg-green-500 text-white' : 'bg-zinc-700 text-zinc-300'}`}>
+								التقييمات المرسلة
+							</button>
+							<button
+								onClick={() => setRatesDirection('received')}
+								className={`px-4 py-2 rounded-full ${ratesDirection === 'received' ? 'bg-blue-500 text-white' : 'bg-zinc-700 text-zinc-300'}`}>
+								التقييمات المستلمة
+							</button>
+						</div>
+						{ratesDirection === 'sent' ? (
+							<SentRates rates={sentRates} />
+						) : (
+							<ReceivedRates rates={receivedRates} />
+						)}
+					</div>
+				) : selectedSection === 'reports' ? (
+					<div className='w-full space-y-4'>
+						<div className='flex gap-2 justify-center mb-4'>
+							<button
+								onClick={() => setReportsDirection('sent')}
+								className={`px-4 py-2 rounded-full ${reportsDirection === 'sent' ? 'bg-yellow-500 text-white' : 'bg-zinc-700 text-zinc-300'}`}>
+								البلاغات المرسلة
+							</button>
+							<button
+								onClick={() => setReportsDirection('received')}
+								className={`px-4 py-2 rounded-full ${reportsDirection === 'received' ? 'bg-red-500 text-white' : 'bg-zinc-700 text-zinc-300'}`}>
+								البلاغات المستلمة
+							</button>
+						</div>
+						{reportsDirection === 'sent' ? (
+							<SentReports reports={sentReports} />
+						) : (
+							<ReceivedReports reports={receivedReports} />
+						)}
+					</div>
+				) : selectedSection === 'favorites' ? (
+					<div className='w-full space-y-3'>
+						{favorites.length === 0 ? (
+							<p className='text-zinc-400'>لا توجد مفضلات حتى الآن</p>
+						) : (
+							favorites.map((favorite, index) => (
+								<div key={index} className='w-full bg-zinc-700/50 p-4 rounded-lg mb-4'>
+									<p>{favorite.name || `عنصر ${index + 1}`}</p>
+								</div>
+							))
+						)}
+					</div>
+				) : (
+					<p className='text-zinc-400'>يرجى اختيار قسم من الأعلى</p>
+				)}
+			</div>
+		</div>
+	)
+}
+
+export default ProfileSections
+</file>
+
+<file path="src/components/Setting.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faGear, faX } from '@fortawesome/free-solid-svg-icons'
+
+const Setting = ({ isOpen, onClose }) => {
+  return (
+    <div 
+      className={`fixed top-0 bottom-0 left-0 w-[80%] bg-zinc-900 border-r border-zinc-800 p-6 pt-6 z-50 transform transition-transform duration-500 ease-in-out rounded-r-2xl flex flex-col justify-between overflow-hidden
+        ${isOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}`}
+    >
+      
+      <div>
+        <div className='flex items-center justify-between mb-8'>
+          <h1 className='text-2xl font-bold text-white flex items-center gap-2'>
+            <FontAwesomeIcon icon={faGear} className='text-zinc-400' />
+            <span className='text-xl font-semibold'>الإعدادات</span>
+          </h1>
+          <button 
+            onClick={onClose}
+            className='text-zinc-400 hover:text-white bg-zinc-800/60 rounded-full w-10 h-10 flex items-center justify-center active:scale-95 transition-all'
+          >
+            <FontAwesomeIcon icon={faX} className='text-sm' />
+          </button>
+        </div>
+
+        <div className='flex flex-col gap-3'>
+          <button className='w-full p-4 bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-800/30 text-right rounded-xl flex justify-between items-center transition-all active:scale-[0.99]'>
+            <span className='font-medium'>اللغة</span>
+            <span className='text-zinc-500 text-sm'>العربية ❯</span>
+          </button>
+          <button className='w-full p-4 bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-800/30 text-right rounded-xl flex justify-between items-center transition-all active:scale-[0.99]'>
+            <span className='font-medium'>الوضع الداكن</span>
+            <span className='text-green-500 text-sm'>مفعل ❯</span>
+          </button>
+          <button className='w-full p-4 bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-800/30 text-right rounded-xl flex justify-between items-center transition-all active:scale-[0.99]'>
+            <span className='font-medium'>التنببهات</span>
+            <span className='text-zinc-500'>❯</span>
+          </button>
+          <button className='w-full p-4 bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-800/30 text-right rounded-xl flex justify-between items-center transition-all active:scale-[0.99]'>
+            <span className='font-medium'>تغيير كلمة المرور</span>
+            <span className='text-zinc-500'>❯</span>
+          </button>
+          <button className='w-full p-4 bg-zinc-800/40 hover:bg-zinc-800 border border-zinc-800/30 text-right rounded-xl flex justify-between items-center transition-all active:scale-[0.99]'>
+            <span className='font-medium'>مساعدة ودعم</span>
+            <span className='text-zinc-500'>❯</span>
+          </button>
+        </div>
+      </div>
+
+      {/* الجزء السفلي: أزرار تسجيل الخروج وحذف الحساب مع الفيرجن */}
+      <div className='flex flex-col gap-4 items-center w-full'>
+        <div className='flex justify-between items-center w-full gap-4 text-sm'>
+          <button className='flex-1 p-3 bg-zinc-800 border border-zinc-700 text-red-500 font-medium rounded-xl active:scale-95 transition-all text-center'>
+            تسجيل الخروج
+          </button>
+          <button className='flex-1 p-3 bg-red-950/30 border border-red-900/40 text-red-400 font-medium rounded-xl active:scale-95 transition-all text-center text-xs'>
+            حذف الحساب
+          </button>
+        </div>
+        
+        <span className='text-xs text-zinc-600 font-mono tracking-wider'>
+          نسخة 1.0.0
+        </span>
+      </div>
+
+    </div>
+  )
+}
+
+export default Setting
+</file>
+
+<file path="src/components/Tag.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+const COLOR_STYLES = {
+  blue: 'text-blue-300 bg-blue-500/15 border-blue-400/40 shadow-blue-500/30',
+  green: 'text-emerald-300 bg-emerald-500/15 border-emerald-400/40 shadow-emerald-500/30',
+  red: 'text-red-300 bg-red-500/15 border-red-400/40 shadow-red-500/30',
+  amber: 'text-amber-300 bg-amber-500/15 border-amber-400/40 shadow-amber-500/30',
+}
+
+const Tag = ({ children, icon, color = 'blue', pulse = false, className = '' }) => (
+  <span
+    className={`inline-flex items-center gap-1.5 text-[11px] font-bold leading-none px-2.5 py-1 rounded-full border backdrop-blur-sm shadow-[0_0_10px_-2px] ${COLOR_STYLES[color]} ${pulse ? 'animate-pulse' : ''} ${className}`}
+  >
+    {icon && <FontAwesomeIcon icon={icon} className='text-[10px]' />}
+    {children}
+  </span>
+)
+
+export default Tag
+</file>
+
+<file path="src/components/trip/LocationSearchInput.jsx">
+import React, { useEffect, useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass, faSpinner, faLocationDot } from '@fortawesome/free-solid-svg-icons'
+import { searchPlaces } from '../../utils/geo'
+
+const LocationSearchInput = ({ placeholder, onSelect }) => {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (query.trim().length < 2) {
+      setResults([])
+      return
+    }
+    setLoading(true)
+    const handle = setTimeout(() => {
+      searchPlaces(query).then((places) => {
+        setResults(places)
+        setLoading(false)
+      })
+    }, 450)
+    return () => clearTimeout(handle)
+  }, [query])
+
+  return (
+    <div className='flex flex-col gap-1.5'>
+      <div className='relative'>
+        <FontAwesomeIcon icon={faMagnifyingGlass} className='absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs' />
+        <input
+          autoFocus
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={placeholder}
+          className='w-full bg-zinc-800 border border-zinc-700/60 rounded-xl pr-9 pl-8 py-2.5 text-sm outline-none focus:ring-1 focus:ring-emerald-500 text-white placeholder:text-zinc-500'
+        />
+        {loading && <FontAwesomeIcon icon={faSpinner} className='absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 text-xs animate-spin' />}
+      </div>
+
+      {results.length > 0 && (
+        <ul className='bg-zinc-800/60 border border-zinc-700/40 rounded-xl overflow-hidden divide-y divide-zinc-700/40 max-h-48 overflow-y-auto'>
+          {results.map((place, i) => (
+            <li key={i}>
+              <button
+                onClick={() => onSelect(place)}
+                className='w-full text-right px-3 py-2.5 text-xs text-zinc-200 hover:bg-zinc-700/50 flex items-center gap-2 transition-colors'
+              >
+                <FontAwesomeIcon icon={faLocationDot} className='text-zinc-500 text-[10px] shrink-0' />
+                <span className='truncate'>{place.name}</span>
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
+export default LocationSearchInput
+</file>
+
+<file path="src/components/trip/TripPlannerPanel.jsx">
+import React, { useState } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationDot, faMapPin, faPlus, faTrash, faSpinner, faRoute, faBookmark, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons'
+
+const PinRow = ({ title, color, icon, pin, placeholder, isEditing, onEdit, onRemove }) => (
+  <div className={`flex flex-col gap-1 p-2 rounded-xl transition-all duration-300 ${isEditing ? 'bg-zinc-800/80 border border-emerald-500/50 shadow-inner' : 'bg-transparent'}`}>
+    <div className='flex items-center justify-between px-1'>
+      <span className={`text-[11px] font-bold ${isEditing ? 'text-emerald-400' : 'text-zinc-500'}`}>{title}</span>
+      {onRemove && (
+        <button onClick={onRemove} className='text-red-400 hover:text-red-300 bg-red-950/30 w-6 h-6 rounded-full flex items-center justify-center transition-colors'>
+          <FontAwesomeIcon icon={faTrash} className='text-[10px]' />
+        </button>
+      )}
+    </div>
+    <div dir='ltr' className='flex items-center gap-3'>
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${color}`}>
+        <FontAwesomeIcon icon={icon} className='text-xs' />
+      </div>
+      <button onClick={onEdit} className='flex-1 min-w-0 text-right' dir='rtl'>
+        <p className={`text-sm truncate ${pin ? 'text-white font-medium' : 'text-zinc-400'} ${isEditing ? 'animate-pulse' : ''}`}>
+          {pin?.name || placeholder}
+        </p>
+      </button>
+    </div>
+  </div>
+)
+
+const TripPlannerPanel = ({
+  trip,
+  pickTarget,
+  onSetPickTarget,
+  onRemoveWaypoint,
+  onConfirm,
+  resolving,
+  requesting,
+  routeOptions,
+  selectedRouteIndex,
+  shortestRouteIndex,
+  showRouteOptions,
+  onSelectRouteOption,
+  proximity,
+  showProximityNote,
+  onProximityNoteChange,
+  savedTrips,
+  onToggleSaveTrip,
+  isTripSaved,
+  onLoadSavedTrip,
+  onRemoveSavedTrip,
+}) => {
+  const canConfirm = !!trip.startPin && !!trip.endPin && !resolving && !pickTarget;
+  const [localNotice, setLocalNotice] = useState('');
+
+  const handleConfirmClick = () => {
+    if (requesting) return;
+    // If both pins exist but user is still in pick mode, exit pick mode then confirm
+    if (trip.startPin && trip.endPin && pickTarget) {
+      onSetPickTarget && onSetPickTarget(null);
+      // small delay so UI updates before we fire the request
+      setTimeout(() => {
+        onConfirm && onConfirm();
+      }, 150);
+      return;
+    }
+
+    if (!canConfirm) {
+      // Show short inline hint so user understands why nothing happened
+      setLocalNotice('برجاء تأكيد نقطة البداية ونقطة الوصول أولاً');
+      setTimeout(() => setLocalNotice(''), 2200);
+      return;
+    }
+
+    onConfirm && onConfirm();
+  };
+
+  return (
+    // 🌟 نزلنا الديف لتحت (bottom-6) وأخفينا السكرول بار بالكلاسات دي: [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
+    <div
+      dir='rtl'
+      className='absolute bottom-6 left-3 right-3 z-30 bg-zinc-900 border border-zinc-700/40 rounded-3xl p-4 shadow-2xl flex flex-col gap-3 max-h-[70vh] overflow-y-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'
+    >
+      
+      {/* 🌟 بانرات توجيهية مع زراير تأكيد يدوية */}
+      {pickTarget === 'start' && (
+        <div className='flex flex-col gap-2 mb-1'>
+          <div className='bg-emerald-500/10 text-emerald-400 font-bold text-center py-2.5 rounded-xl text-sm border border-emerald-500/30 flex items-center justify-center gap-2'>
+            <FontAwesomeIcon icon={faLocationDot} className='animate-bounce' /> حدد نقطة البداية من الخريطة
+          </div>
+          {trip.startPin && (
+            <button onClick={() => onSetPickTarget('end')} className='bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl py-2.5 text-sm font-bold transition-all shadow-lg flex justify-center items-center gap-2'>
+              تأكيد نقطة البداية <FontAwesomeIcon icon={faCheck} />
+            </button>
+          )}
+        </div>
+      )}
+
+      {pickTarget === 'end' && (
+        <div className='flex flex-col gap-2 mb-1'>
+          <div className='bg-red-500/10 text-red-400 font-bold text-center py-2.5 rounded-xl text-sm border border-red-500/30 flex items-center justify-center gap-2'>
+            <FontAwesomeIcon icon={faLocationDot} className='animate-bounce' /> حدد نقطة الوصول من الخريطة
+          </div>
+          {trip.endPin && (
+            <button onClick={() => onSetPickTarget(null)} className='bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl py-2.5 text-sm font-bold transition-all shadow-lg flex justify-center items-center gap-2'>
+              تأكيد نقطة الوصول <FontAwesomeIcon icon={faCheck} />
+            </button>
+          )}
+        </div>
+      )}
+
+      {pickTarget?.waypoint && (
+        <div className='flex flex-col gap-2 mb-1'>
+          <div className='bg-blue-500/10 text-blue-400 font-bold text-center py-2.5 rounded-xl text-sm border border-blue-500/30 flex items-center justify-center gap-2'>
+            <FontAwesomeIcon icon={faMapPin} className='animate-bounce' /> حدد موقع المحطة من الخريطة
+          </div>
+          <button onClick={() => onSetPickTarget(null)} className='bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-2.5 text-sm font-bold transition-all shadow-lg flex justify-center items-center gap-2'>
+             تأكيد المحطة <FontAwesomeIcon icon={faCheck} />
+          </button>
+        </div>
+      )}
+
+      {/* الرحلات المحفوظة */}
+      {savedTrips?.length > 0 && !trip.startPin && !trip.endPin && (
+        <div className='flex flex-col gap-1.5'>
+          <p className='text-[11px] text-zinc-500 font-medium'>رحلاتي المحفوظة</p>
+          <div className='flex gap-2 overflow-x-auto pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]'>
+            {savedTrips.map((saved) => (
+              <div key={saved.id} className='shrink-0 max-w-[200px] bg-zinc-800/70 border border-zinc-700/40 rounded-xl pr-2 pl-1 py-2 flex items-center gap-2'>
+                <button onClick={() => { onLoadSavedTrip(saved); onSetPickTarget(null); }} className='text-right min-w-0'>
+                  <p className='text-xs font-medium text-white truncate'>{saved.startPin?.name}</p>
+                  <p className='text-[10px] text-zinc-400 truncate'>→ {saved.endPin?.name}</p>
+                </button>
+                <button onClick={() => onRemoveSavedTrip(saved.id)} className='text-zinc-500 hover:text-red-400 shrink-0 w-5 h-5 flex items-center justify-center'>
+                  <FontAwesomeIcon icon={faXmark} className='text-[10px]' />
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <PinRow
+        title="نقطة البداية"
+        color='bg-emerald-500/15 text-emerald-400'
+        icon={faLocationDot}
+        pin={trip.startPin}
+        placeholder='اضغط هنا لتعديل نقطة البداية'
+        isEditing={pickTarget === 'start'}
+        onEdit={() => onSetPickTarget(pickTarget === 'start' ? null : 'start')}
+      />
+
+      {trip.waypoints?.map((wp, i) => (
+        <PinRow
+          key={i}
+          title={`محطة في الطريق ${i + 1}`}
+          color='bg-blue-500/15 text-blue-400'
+          icon={faMapPin}
+          pin={wp}
+          placeholder='حدد المحطة...'
+          isEditing={false}
+          onEdit={() => {}}
+          onRemove={() => onRemoveWaypoint(i)}
+        />
+      ))}
+
+      <PinRow
+        title="نقطة النهاية"
+        color='bg-red-500/15 text-red-400'
+        icon={faLocationDot}
+        pin={trip.endPin}
+        placeholder='اضغط هنا لتحديد نقطة الوصول'
+        isEditing={pickTarget === 'end'}
+        onEdit={() => onSetPickTarget(pickTarget === 'end' ? null : 'end')}
+      />
+
+      {!pickTarget?.waypoint && (
+        <button
+          onClick={() => onSetPickTarget({ waypoint: true })}
+          className='flex items-center justify-center gap-2 border border-dashed border-zinc-700 text-zinc-400 hover:text-white hover:border-zinc-500 rounded-xl py-2 text-xs font-medium active:scale-[0.99] transition-all mt-1'
+        >
+          <FontAwesomeIcon icon={faPlus} className='text-[10px]' /> إضافة محطة في الطريق
+        </button>
+      )}
+
+      {showRouteOptions && !pickTarget && (
+        <div className='flex gap-2 mt-2'>
+          <button
+            onClick={() => onSelectRouteOption(0)}
+            className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${
+              selectedRouteIndex === 0 ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'
+            }`}
+          >
+            الأسرع
+          </button>
+          <button
+            onClick={() => onSelectRouteOption(shortestRouteIndex)}
+            className={`flex-1 rounded-xl py-2 text-xs font-bold border transition-colors ${
+              selectedRouteIndex === shortestRouteIndex ? 'bg-emerald-600 border-emerald-500 text-white' : 'bg-zinc-800/60 border-zinc-700/40 text-zinc-300'
+            }`}
+          >
+            الأقصر
+          </button>
+        </div>
+      )}
+
+      {(resolving || trip.route) && !pickTarget && (
+        <div className='flex items-center justify-between bg-zinc-800/70 border border-zinc-700/40 rounded-xl px-4 py-3 text-xs mt-1'>
+          {resolving ? (
+            <span className='flex items-center gap-2 text-zinc-400'>
+              <FontAwesomeIcon icon={faSpinner} className='animate-spin' /> جارٍ حساب أفضل طريق...
+            </span>
+          ) : (
+            <>
+              <span className='flex items-center gap-1.5 text-zinc-300'>
+                <FontAwesomeIcon icon={faRoute} className='text-emerald-400' /> {trip.route.distanceKm.toFixed(1)} كم · {Math.round(trip.route.durationMin)} دقيقة
+              </span>
+              <span className='font-bold text-white text-sm'>{trip.route.price} ج.م</span>
+            </>
+          )}
+        </div>
+      )}
+
+      {showProximityNote && proximity?.needsNote && !pickTarget && (
+        <div className='bg-red-500/10 border border-red-500/30 rounded-xl p-3 flex flex-col gap-2 mt-1 animate-fade-in'>
+          <p className='text-[11px] text-red-300 font-medium'>
+            {proximity.failed
+              ? 'تعذر تأكيد موقعك الحالي - '
+              : `يبدو أنك بعيد عن نقطة الانطلاق بحوالي ${Math.round(proximity.distanceM)} متر - `}
+            برجاء كتابة سبب ذلك للكابتن لتجنب الإلغاء
+          </p>
+          <textarea
+            value={proximity.note}
+            onChange={(e) => onProximityNoteChange(e.target.value)}
+            placeholder='مثال: هكون في المكان كمان ٥ دقايق...'
+            rows={2}
+            className='bg-zinc-800 border border-zinc-700/60 rounded-lg px-3 py-2 text-xs outline-none focus:ring-1 focus:ring-red-500 text-white placeholder:text-zinc-500 resize-none'
+          />
+        </div>
+      )}
+
+      {/* زراير الطلب والحفظ بنخفيها لو هو لسه بيختار نقط عشان نركز انتباهه على التأكيد */}
+      {!pickTarget && (
+        <div className='flex flex-col gap-2 mt-1 animate-fade-in'>
+          <div className='flex gap-2'>
+            <button
+              onClick={handleConfirmClick}
+              aria-disabled={!canConfirm || requesting}
+              className={`flex-1 bg-emerald-600 hover:bg-emerald-500 rounded-2xl py-3 text-sm font-bold transition-colors shadow-lg ${(!canConfirm || requesting) ? 'opacity-40' : ''}`}
+            >
+              {requesting ? 'جارِ إرسال الطلب...' : 'طلب الرحلة'}
+            </button>
+          {trip.startPin && trip.endPin && (
+            <button
+              onClick={onToggleSaveTrip}
+              title='حفظ الرحلة'
+              // 🌟 استايل الزرار بيتغير: أخضر مليان لو محفوظ، رمادي بحواف خضراء لو مش محفوظ
+              className={`w-12 rounded-2xl flex items-center justify-center shrink-0 transition-all duration-300 border ${
+                isTripSaved 
+                  ? 'bg-emerald-600 text-white border-emerald-500 shadow-lg shadow-emerald-500/20' 
+                  : 'bg-zinc-800 text-emerald-400 border-zinc-700 hover:border-emerald-500/50'
+              }`}
+            >
+              <FontAwesomeIcon icon={faBookmark} />
+            </button>
+          )}
+          </div>
+          {localNotice && (
+            <p className='text-[12px] text-red-300 text-center'>{localNotice}</p>
+          )}
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default TripPlannerPanel
+</file>
+
+<file path="src/components/trip/TripStatusPanel.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCar, faStar, faRoute, faClock, faFlagCheckered } from '@fortawesome/free-solid-svg-icons'
+
+const TripStatusPanel = ({ trip, offers, onAccept, onCancel, onFinish }) => {
+  const isPending = trip.status === 'pending'
+
+  return (
+    <div
+      dir='rtl'
+      className='absolute bottom-24 left-3 right-3 z-30 bg-zinc-900 border border-zinc-700/40 rounded-3xl p-4 shadow-2xl flex flex-col gap-3 max-h-[60vh] overflow-y-auto'
+    >
+      <div className='flex items-center justify-between'>
+        <h3 className='text-sm font-bold flex items-center gap-2'>
+          {isPending ? (
+            <>
+              <FontAwesomeIcon icon={faClock} className='text-amber-400 animate-pulse' /> جارِ البحث عن سائق...
+            </>
+          ) : (
+            <>
+              <FontAwesomeIcon icon={faCar} className='text-emerald-400' /> الرحلة جارية
+            </>
+          )}
+        </h3>
+        {trip.route && (
+          <span className='text-[11px] text-zinc-400 flex items-center gap-1'>
+            <FontAwesomeIcon icon={faRoute} /> {trip.route.distanceKm.toFixed(1)} كم
+          </span>
+        )}
+      </div>
+
+      <div className='flex flex-col gap-1.5 text-xs text-zinc-300 bg-zinc-800/50 rounded-xl p-3'>
+        <p className='flex items-center gap-2'>
+          <span className='w-2 h-2 rounded-full bg-emerald-400 shrink-0' /> {trip.startPin?.name}
+        </p>
+        {trip.waypoints?.map((wp, i) => (
+          <p key={i} className='flex items-center gap-2 text-zinc-400'>
+            <span className='w-2 h-2 rounded-full bg-blue-400 shrink-0' /> {wp.name}
+          </p>
+        ))}
+        <p className='flex items-center gap-2'>
+          <span className='w-2 h-2 rounded-full bg-red-400 shrink-0' /> {trip.endPin?.name}
+        </p>
+      </div>
+
+      {isPending ? (
+        <div className='flex flex-col gap-2'>
+          {offers.length === 0 ? (
+            <p className='text-zinc-500 text-xs text-center py-4'>لا يوجد سائقون متاحون حاليًا</p>
+          ) : (
+            offers.map((offer) => (
+              <div key={offer.id} className='flex items-center justify-between gap-3 bg-zinc-800/60 border border-zinc-700/40 rounded-2xl p-3'>
+                <div className='flex-1 min-w-0'>
+                  <p className='text-sm font-semibold truncate'>{offer.driverName}</p>
+                  <p className='text-[11px] text-zinc-400 flex items-center gap-2'>
+                    <span className='flex items-center gap-1'>
+                      <FontAwesomeIcon icon={faStar} className='text-yellow-400' /> {offer.rate}
+                    </span>
+                    <span>{offer.car}</span>
+                    <span>يصل خلال {offer.timeToReach}</span>
+                  </p>
+                </div>
+                <div className='text-left shrink-0 flex flex-col items-end gap-1.5'>
+                  <span className='font-bold text-sm'>{offer.price} ج.م</span>
+                  <button
+                    onClick={() => onAccept(offer)}
+                    className='bg-emerald-600 hover:bg-emerald-500 rounded-lg px-3 py-1.5 text-[11px] font-bold transition-colors'
+                  >
+                    قبول
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+
+          <button onClick={onCancel} className='w-full bg-red-950/40 text-red-400 border border-red-900/40 rounded-2xl py-2.5 text-xs font-bold mt-1 transition-colors'>
+            إلغاء الطلب
+          </button>
+        </div>
+      ) : (
+        <div className='flex flex-col gap-3'>
+          <div className='flex items-center justify-between bg-zinc-800/60 border border-zinc-700/40 rounded-2xl p-3'>
+            <div>
+              <p className='text-sm font-semibold'>{trip.driverName}</p>
+              <p className='text-[11px] text-zinc-400'>{trip.car}</p>
+            </div>
+            <span className='font-bold'>{trip.price} ج.م</span>
+          </div>
+
+          {/* TODO: الزر ده مؤقت للتجربة لحد ما الباكاند يبعت إشعار إنهاء حقيقي من تطبيق السائق */}
+          <button
+            onClick={onFinish}
+            className='w-full bg-emerald-600 hover:bg-emerald-500 rounded-2xl py-2.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors'
+          >
+            <FontAwesomeIcon icon={faFlagCheckered} /> إنهاء الرحلة (تجريبي)
+          </button>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export default TripStatusPanel
+</file>
+
+<file path="src/components/Wallet.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWallet } from '@fortawesome/free-solid-svg-icons'
+
+const Wallet = () => {
+	return (
+		<div>
+			<button className='text-white bg-zinc-800 rounded-full px-4 h-14 flex items-center justify-center gap-2 shadow-lg z-20 active:scale-95 transition-all shrink-0'>
+				<FontAwesomeIcon icon={faWallet} className='text-green-400' />
+				<span className='font-semibold'>$100</span>
+			</button>
+		</div>
+	)
+}
+
+export default Wallet
+</file>
+
+<file path="src/pages/client/ClientEditProfile.jsx">
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faCamera } from '@fortawesome/free-solid-svg-icons'
+import { updateClientInfo } from '../../redux/reducers/authSlice'
+
+const EditProfile = () => {
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+	const client = useSelector((state) => state.auth || {})
+
+	const [form, setForm] = useState({
+		name: client.name || '',
+		phone: client.phone || '',
+		email: client.email || '',
+		homeAddress: client.homeAddress || '',
+	})
+	const [avatarPreview, setAvatarPreview] = useState(client.avatar)
+	const [saved, setSaved] = useState(false)
+
+	const handleChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
+
+	const handleAvatarChange = (e) => {
+		const file = e.target.files?.[0]
+		if (file) setAvatarPreview(URL.createObjectURL(file))
+	}
+
+	const handleSave = (e) => {
+		e.preventDefault()
+		dispatch(updateClientInfo({ ...form, avatar: avatarPreview }))
+		setSaved(true)
+		setTimeout(() => navigate('/profile'), 800)
+	}
+
+	return (
+		<div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative flex flex-col p-4 pt-20 pb-10' dir='rtl'>
+			<header className='fixed top-0 left-0 right-0 p-4 z-40 flex items-center gap-4 bg-gray-800/80 backdrop-blur-md'>
+				<button onClick={() => navigate(-1)} className='w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center'>
+					<FontAwesomeIcon icon={faChevronRight} />
+				</button>
+				<h1 className='text-lg font-bold'>تعديل الملف الشخصي</h1>
+			</header>
+
+			<div className='flex flex-col items-center gap-3 mt-4 mb-6'>
+				<div className='relative'>
+					<img className='w-24 h-24 rounded-full border-2 border-zinc-700 object-cover' src={avatarPreview} alt='avatar' />
+					<label className='absolute bottom-0 right-0 bg-emerald-500 p-2.5 rounded-full text-xs shadow-md active:scale-95 transition-all cursor-pointer'>
+						<FontAwesomeIcon icon={faCamera} />
+						<input type='file' accept='image/*' className='hidden' onChange={handleAvatarChange} />
+					</label>
+				</div>
+			</div>
+
+			<form onSubmit={handleSave} className='flex flex-col gap-4'>
+				<div>
+					<label className='block text-zinc-400 text-xs mb-1.5'>الاسم</label>
+					<input name='name' value={form.name} onChange={handleChange} className='w-full bg-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-emerald-500' required />
+				</div>
+				<div>
+					<label className='block text-zinc-400 text-xs mb-1.5'>رقم الهاتف</label>
+					<input name='phone' value={form.phone} onChange={handleChange} className='w-full bg-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-emerald-500' required />
+				</div>
+				<div>
+					<label className='block text-zinc-400 text-xs mb-1.5'>البريد الإلكتروني</label>
+					<input type='email' name='email' value={form.email} onChange={handleChange} className='w-full bg-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-emerald-500' required />
+				</div>
+				<div>
+					<label className='block text-zinc-400 text-xs mb-1.5'>العنوان</label>
+					<input name='homeAddress' value={form.homeAddress} onChange={handleChange} className='w-full bg-zinc-800 rounded-xl px-4 py-3 text-sm outline-none focus:ring-1 focus:ring-emerald-500' />
+				</div>
+
+				<button type='submit' className='mt-2 w-full bg-emerald-600 hover:bg-emerald-500 rounded-xl py-3.5 font-bold transition-all active:scale-[0.99]'>
+					{saved ? 'تم الحفظ ✓' : 'حفظ التعديلات'}
+				</button>
+			</form>
+		</div>
+	)
+}
+
+export default EditProfile
+</file>
+
+<file path="src/pages/client/ClientFavorites.jsx">
+import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faHouse, faBriefcase, faLocationDot, faTrash, faPlus, faPen } from '@fortawesome/free-solid-svg-icons'
+import { addFavorite, removeFavorite, updateFavorite } from '../../redux/reducers/authSlice'
+import Navigation from '../../components/Navigation'
+
+const typeIcon = (type) => (type === 'home' ? faHouse : type === 'work' ? faBriefcase : faLocationDot)
+
+const Favorites = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const favorites = useSelector((state) => state.auth?.favorites || [])
+  
+  const [showAddForm, setShowAddForm] = useState(false)
+  const [showEditForm, setShowEditForm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [addForm, setAddForm] = useState({ name: '', address: '' })
+  const [editForm, setEditForm] = useState({ name: '', address: '' })
+  const [editingId, setEditingId] = useState(null)
+  const [deleteData, setDeleteData] = useState({ id: null, name: '' })
+
+  const handleAdd = () => {
+    if (!addForm.name.trim() || !addForm.address.trim()) return
+    dispatch(addFavorite({ ...addForm, type: 'custom' }))
+    resetAddForm()
+  }
+
+  const handleUpdate = () => {
+    if (!editForm.name.trim() || !editForm.address.trim() || !editingId) return
+    dispatch(updateFavorite({ id: editingId, ...editForm, type: 'custom' }))
+    resetEditForm()
+  }
+
+  const openDeleteConfirm = (id, name) => {
+    setDeleteData({ id, name })
+    setShowDeleteConfirm(true)
+  }
+
+  const handleConfirmDelete = () => {
+    if (deleteData.id) {
+      dispatch(removeFavorite(deleteData.id))
+      setShowDeleteConfirm(false)
+      setDeleteData({ id: null, name: '' })
+    }
+  }
+
+  const resetAddForm = () => {
+    setAddForm({ name: '', address: '' })
+    setShowAddForm(false)
+  }
+
+  const resetEditForm = () => {
+    setEditForm({ name: '', address: '' })
+    setEditingId(null)
+    setShowEditForm(false)
+  }
+
+  return (
+    <div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative flex flex-col p-4 pt-20 pb-28' dir='rtl'>
+      <header className='fixed top-0 left-0 right-0 p-4 z-40 flex items-center gap-4 bg-gray-800/80 backdrop-blur-md'>
+        <button onClick={() => navigate(-1)} className='w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center'>
+          <FontAwesomeIcon icon={faChevronRight} />
+        </button>
+        <h1 className='text-lg font-bold'>المفضلة</h1>
+      </header>
+
+      <div className='flex flex-col gap-3 mt-2'>
+        {favorites.length === 0 ? (
+          <p className='text-zinc-400 text-sm text-center py-10'>لا توجد مفضلات حتى الآن</p>
+        ) : (
+          favorites.map((fav) => (
+            <div key={fav.id} className='flex items-center gap-3 bg-zinc-800/70 border border-zinc-700/40 rounded-2xl p-4'>
+              <div className='w-11 h-11 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center shrink-0'>
+                <FontAwesomeIcon icon={typeIcon(fav.type)} />
+              </div>
+              <div className='flex-1 min-w-0'>
+                <p className='font-semibold'>{fav.name}</p>
+                <p className='text-xs text-zinc-400 truncate'>{fav.address}</p>
+              </div>
+              
+              <button
+                onClick={() => openDeleteConfirm(fav.id, fav.name)}
+                className='w-9 h-9 rounded-full bg-red-950/40 text-red-400 flex items-center justify-center active:scale-95 transition-all shrink-0'
+              >
+                <FontAwesomeIcon icon={faTrash} className='text-xs' />
+              </button>
+              
+              <button
+                onClick={() => {
+                  setEditForm({ name: fav.name, address: fav.address })
+                  setEditingId(fav.id)
+                  setShowEditForm(true)
+                }}
+                className='w-9 h-9 rounded-full bg-emerald-950/40 text-emerald-400 flex items-center justify-center active:scale-95 transition-all shrink-0'
+              >
+                <FontAwesomeIcon icon={faPen} className='text-xs' />
+              </button>
+            </div>
+          ))
+        )}
+
+        {showAddForm && (
+          <div className='bg-zinc-800/70 border border-zinc-700/40 rounded-2xl p-4 flex flex-col gap-3'>
+            <h3 className='text-xs font-semibold text-zinc-400 px-1'>إضافة مكان جديد</h3>
+            <input
+              value={addForm.name}
+              onChange={(e) => setAddForm((f) => ({ ...f, name: e.target.value }))}
+              placeholder='اسم المكان (مثال: النادي)'
+              className='bg-zinc-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-emerald-500'
+            />
+            <input
+              value={addForm.address}
+              onChange={(e) => setAddForm((f) => ({ ...f, address: e.target.value }))}
+              placeholder='العنوان بالتفصيل'
+              className='bg-zinc-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-emerald-500'
+            />
+            <div className='flex gap-2'>
+              <button 
+                onClick={handleAdd} 
+                className='flex-1 bg-emerald-600 rounded-xl py-2.5 text-sm font-semibold hover:bg-emerald-500 transition-colors'
+              >
+                حفظ
+              </button>
+              <button onClick={resetAddForm} className='flex-1 bg-zinc-700 rounded-xl py-2.5 text-sm hover:bg-zinc-600 transition-colors'>
+                إلغاء
+              </button>
+            </div>
+          </div>
+        )}
+
+        {showEditForm && (
+          <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50'>
+            <div className='bg-zinc-800 rounded-2xl p-6 flex flex-col gap-4 w-11/12 max-w-sm'>
+              <h3 className='text-lg font-semibold'>تعديل بيانات المكان</h3>
+              <input
+                value={editForm.name}
+                onChange={(e) => setEditForm((f) => ({ ...f, name: e.target.value }))}
+                placeholder='اسم المكان (مثال: النادي)'
+                className='bg-zinc-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-emerald-500'
+              />
+              <input
+                value={editForm.address}
+                onChange={(e) => setEditForm((f) => ({ ...f, address: e.target.value }))}
+                placeholder='العنوان بالتفصيل'
+                className='bg-zinc-900 rounded-xl px-4 py-2.5 text-sm outline-none focus:ring-1 focus:ring-emerald-500'
+              />
+              <div className='flex gap-2'>
+                <button 
+                  onClick={handleUpdate} 
+                  className='flex-1 bg-emerald-600 rounded-xl py-3 text-sm font-semibold hover:bg-emerald-500 transition-colors'
+                >
+                  تعديل المكان
+                </button>
+                <button onClick={resetEditForm} className='flex-1 bg-zinc-700 rounded-xl py-3 text-sm hover:bg-zinc-600 transition-colors'>
+                  إلغاء
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {showDeleteConfirm && (
+          <div className='fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50'>
+            <div className='bg-zinc-800 rounded-2xl p-6 flex flex-col gap-4 w-11/12 max-w-sm'>
+              <h3 className='text-lg font-semibold'>تأكيد الحذف</h3>
+              <p className='text-sm text-zinc-400'>هل أنت متأكد من حذف <span className='text-red-400 font-semibold'>"{deleteData.name}"</span> من المفضلة؟</p>
+              <div className='flex gap-2'>
+                <button 
+                  onClick={handleConfirmDelete} 
+                  className='flex-1 bg-red-600 rounded-xl py-3 text-sm font-semibold hover:bg-red-500 transition-colors'
+                >
+                  حذف
+                </button>
+                <button 
+                  onClick={() => setShowDeleteConfirm(false)} 
+                  className='flex-1 bg-zinc-700 rounded-xl py-3 text-sm hover:bg-zinc-600 transition-colors'
+                >
+                  إلغاء
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {!showAddForm && !showEditForm && (
+          <button
+            onClick={() => {
+              setAddForm({ name: '', address: '' })
+              setShowAddForm(true)
+            }}
+            className='flex items-center justify-center gap-2 border-2 border-dashed border-zinc-700 text-zinc-400 rounded-2xl py-4 mt-1 active:scale-[0.99] transition-all'
+          >
+            <FontAwesomeIcon icon={faPlus} />
+            <span className='text-sm font-medium'>إضافة مكان جديد للمفضلة</span>
+          </button>
+        )}
+      </div>
+
+      <Navigation />
+    </div>
+  )
+}
+
+export default Favorites
+</file>
+
+<file path="src/pages/client/ClientProfile.jsx">
+import React, { useState } from 'react'
+import Wallet from '../../components/Wallet'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPen, faHome, faEnvelope, faPhone, faLocationDot, faTriangleExclamation, faComments, faGear } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import Navigation from '../../components/Navigation'
+import ProfileSections from '../../components/ProfileSections'
+import Setting from '../../components/Setting' 
+
+const ClientProfile = () => {
+	const navigate = useNavigate()
+	const client = useSelector((state) => state.auth || {})
+	const [selectedSection, setSelectedSection] = useState('reports')
+	const [isSettingOpen, setIsSettingOpen] = useState(false) 
+
+	return (
+		<div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative flex flex-col p-4 pt-24 pb-28 select-none' dir="rtl">
+  
+			<header className='fixed top-0 left-0 right-0 p-4 z-40 text-xs flex items-center justify-between bg-gray-800/80 backdrop-blur-md'>
+				<Wallet />
+				
+				<button 
+					onClick={() => setIsSettingOpen(true)} 
+					className='text-white bg-zinc-800 rounded-full h-14 w-14 flex items-center justify-center shadow-lg active:scale-95 transition-all'
+				>
+					<FontAwesomeIcon icon={faGear} className='text-zinc-400 text-lg hover:text-white transition-colors' />
+				</button>
+			</header>
+
+			<div className='w-full rounded-3xl bg-zinc-800 p-4 flex flex-col items-center gap-4 shrink-0 shadow-md mt-2'>
+				<div className='relative'>
+					<img className='w-24 h-24 rounded-full border-2 border-zinc-700 object-cover' src={client.avatar} alt="avatar" />
+					<button onClick={() => navigate('/profile/edit')} className='absolute bottom-0 right-0 bg-blue-500 p-2 rounded-full text-xs shadow-md active:scale-95 transition-all'>
+						<FontAwesomeIcon icon={faPen} className='text-white' />
+					</button>
+				</div>
+				<span className='text-xl font-bold'>{client.name}</span>
+				<span className='flex text-sm items-center gap-2 text-zinc-400'>{client.homeAddress} <FontAwesomeIcon icon={faHome} /></span>
+				<div className='flex flex-wrap justify-center items-center gap-4 border-t border-zinc-700/50 pt-3 w-full font-thin text-zinc-400'>
+					<span className='flex text-xs items-center gap-2'> {client.phone} <FontAwesomeIcon icon={faPhone} /></span>
+					<span className='flex text-xs items-center gap-2'>{client.email} <FontAwesomeIcon icon={faEnvelope} /> </span>
+				</div>
+			</div>
+
+			<div className='w-full rounded-3xl bg-zinc-800 p-6 mt-4 flex-1 flex flex-col gap-6 shadow-md mb-4'>
+				<div className='flex justify-around items-center gap-4 border-b border-zinc-700/50 pb-4 text-zinc-400 font-bold'>
+					<button onClick={() => setSelectedSection('reports')} className={`flex flex-col items-center gap-1 flex-1 transition-colors ${selectedSection === 'reports' ? 'text-yellow-500' : 'hover:text-yellow-500'}`}><FontAwesomeIcon icon={faTriangleExclamation} className='text-xl' /><span className='text-[10px] font-normal'>البلاغات</span></button>
+					<div className='text-zinc-700 font-thin'>|</div>
+					<button onClick={() => setSelectedSection('myTrips')} className={`flex flex-col items-center gap-1 flex-1 transition-colors ${selectedSection === 'myTrips' ? 'text-blue-500' : 'hover:text-blue-500'}`}><FontAwesomeIcon icon={faLocationDot} className='text-xl' /><span className='text-[10px] font-normal'>تفاصيل رحلاتي</span></button>
+					<div className='text-zinc-700 font-thin'>|</div>
+					<button onClick={() => setSelectedSection('rates')} className={`flex flex-col items-center gap-1 flex-1 transition-colors ${selectedSection === 'rates' ? 'text-green-500' : 'hover:text-green-500'}`}><FontAwesomeIcon icon={faComments} className='text-xl' /><span className='text-[10px] font-normal'>التقييمات</span></button>
+				</div>
+
+				<ProfileSections selectedSection={selectedSection} />
+			</div>
+
+			<Navigation />
+
+			{isSettingOpen && (
+				<div
+					onClick={() => setIsSettingOpen(false)}
+					className='fixed inset-0 z-50 bg-black/50 backdrop-blur-sm'
+				/>
+			)}
+			<Setting isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} />
+		</div>
+	)
+}
+
+export default ClientProfile
+</file>
+
+<file path="src/pages/client/ClientSignIn.jsx">
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+
+function ClientSignIn() {
+	const navigate = useNavigate()
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState('')
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setLoading(true)
+		setError('')
+
+		try {
+			console.log('Client Sign In:', { email, password })
+		} catch (err) {
+			setError('فشل تسجيل الدخول. يرجى التحقق من البيانات.')
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	return (
+		<div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-600 p-4'>
+			<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+				<button
+					onClick={() => navigate('/sign')}
+					className='text-gray-600 hover:text-gray-800 mb-6 flex items-center'
+				>
+					← رجوع
+				</button>
+
+				<h1 className='text-3xl font-bold text-center text-gray-800 mb-2'>
+					تسجيل دخول 
+				</h1>
+				<p className='text-center text-gray-600 mb-8'>
+					مرحبًا بعودتك! يرجى تسجيل الدخول إلى حسابك
+				</p>
+
+				{error && (
+					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
+						{error}
+					</div>
+				)}
+
+				<form onSubmit={handleSubmit} className='space-y-4'>
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							البريد الإلكتروني
+						</label>
+						<input
+							type='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='example@email.com'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							كلمة المرور
+						</label>
+						<input
+							type='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='يجب أن تتكون من 8 أحرف على الأقل'
+							required
+						/>
+					</div>
+
+					<button
+						type='submit'
+						disabled={loading}
+						className='w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition duration-200'
+					>
+						{loading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
+					</button>
+				</form>
+
+				<div className='mt-6 text-center'>
+					<p className='text-gray-600'>
+						ليس لديك حساب؟{' '}
+						<button
+							onClick={() => navigate('/client/sign-up')}
+							className='text-blue-500 hover:text-blue-600 font-bold'
+						>
+							إنشاء حساب
+						</button>
+					</p>
+				</div>
+
+				<div className='mt-4 text-center'>
+					<button className='text-sm text-blue-500 hover:text-blue-600'>
+						نسيت كلمة المرور؟
+					</button>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default ClientSignIn
+</file>
+
+<file path="src/pages/client/ClientSignUp.jsx">
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+function ClientSignUp() {
+	const navigate = useNavigate()
+	const [formData, setFormData] = useState({
+		fullName: '',
+		email: '',
+		password: '',
+		confirmPassword: '',
+		phone: '',
+	})
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState('')
+	const [success, setSuccess] = useState(false)
+
+	const handleChange = (e) => {
+		const { name, value } = e.target
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}))
+	}
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setLoading(true)
+		setError('')
+
+		// Validation
+		if (formData.password !== formData.confirmPassword) {
+			setError('كلمات المرور غير متطابقة')
+			setLoading(false)
+			return
+		}
+
+		if (formData.password.length < 6) {
+			setError('يجب أن تتكون كلمة المرور من 6 أحرف على الأقل')
+			setLoading(false)
+			return
+		}
+
+		try {
+			// Add your sign-up API call here
+			// const response = await signUpClient(formData)
+			console.log('Client Sign Up:', formData)
+			setSuccess(true)
+			// Handle successful sign-up - maybe redirect after delay
+			setTimeout(() => {
+				// Redirect to sign in or home page
+			}, 2000)
+		} catch (err) {
+			setError('فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.')
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	if (success) {
+		return (
+			<div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-600 p-4'>
+				<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md text-center'>
+					<div className='text-5xl mb-4'>✓</div>
+					<h1 className='text-3xl font-bold text-green-600 mb-2'>
+						تم إنشاء الحساب!
+					</h1>
+					<p className='text-gray-600 mb-6'>
+						تم إنشاء حسابك بنجاح.
+					</p>
+					<button
+						onClick={() => navigate('/client/sign-in')}
+						className='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg'
+					>
+						الانتقال إلى تسجيل الدخول
+					</button>
+				</div>
+			</div>
+		)
+	}
+
+	return (
+		<div className='flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-blue-500 to-blue-600 p-4 py-8'>
+			<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+				<button
+					onClick={() => navigate('/sign')}
+					className='text-gray-600 hover:text-gray-800 mb-6 flex items-center'
+				>
+					← رجوع
+				</button>
+
+				<h1 className='text-3xl font-bold text-center text-gray-800 mb-2'>
+					تسجيل حساب جديد 
+				</h1>
+				<p className='text-center text-gray-600 mb-8'>
+					أنشئ حسابك وابدأ رحلتك
+				</p>
+
+				{error && (
+					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
+						{error}
+					</div>
+				)}
+
+				<form onSubmit={handleSubmit} className='space-y-4'>
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							الاسم الكامل
+						</label>
+						<input
+							type='text'
+							name='fullName'
+							value={formData.fullName}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='الاسم الكامل'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							البريد الإلكتروني
+						</label>
+						<input
+							type='email'
+							name='email'
+							value={formData.email}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='example@email.com'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							رقم الجوال
+						</label>
+						<input
+							type='tel'
+							name='phone'
+							value={formData.phone}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='+966 5xxxxxxxx'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							كلمة المرور
+						</label>
+						<input
+							type='password'
+							name='password'
+							value={formData.password}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='••••••••'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							تأكيد كلمة المرور
+						</label>
+						<input
+							type='password'
+							name='confirmPassword'
+							value={formData.confirmPassword}
+							onChange={handleChange}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500'
+							placeholder='••••••••'
+							required
+						/>
+					</div>
+
+					<button
+						type='submit'
+						disabled={loading}
+						className='w-full bg-blue-500 hover:bg-blue-600 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition duration-200'
+					>
+						{loading ? 'جاري إنشاء الحساب...' : 'إنشاء حساب'}
+					</button>
+				</form>
+
+				<div className='mt-6 text-center'>
+					<p className='text-gray-600'>
+						هل لديك حساب بالفعل؟{' '}
+						<button
+							onClick={() => navigate('/client/sign-in')}
+							className='text-blue-500 hover:text-blue-600 font-bold'
+						>
+							تسجيل الدخول
+						</button>
+					</p>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default ClientSignUp
+</file>
+
+<file path="src/pages/client/RequestTrip.jsx">
+import React, { useCallback, useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom'; // 🌟 ضفنا useNavigate
+import { useDispatch, useSelector } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette, faTriangleExclamation, faChevronRight, faCheck } from '@fortawesome/free-solid-svg-icons'; // 🌟 ضفنا أيقونة الرجوع
+import MapComponent from '../../components/MapComponent';
+import MapDesignModal from '../../popups/MapDesignModal';
+import TripPlannerPanel from '../../components/trip/TripPlannerPanel';
+import TripStatusPanel from '../../components/trip/TripStatusPanel';
+import {
+  ACTIVE_TRIP_STATUSES,
+  findNamedArea,
+  updateStartPin,
+  updateEndPin,
+  addWaypoint,
+  removeWaypoint,
+  setRoute,
+  saveTrip,
+  removeSavedTrip,
+  loadSavedTrip,
+  requestTrip,
+  acceptOffer,
+  cancelTrip,
+  completeTrip,
+} from '../../redux/reducers/tripSlice';
+import { reverseGeocode, fetchRouteOptions, estimateFare, distanceMeters } from '../../utils/geo';
+
+const PROXIMITY_LIMIT_M = 20;
+
+const RequestTrip = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate(); // 🌟 للتوجيه للخلف
+  const dispatch = useDispatch();
+  const currentTrip = useSelector((s) => s.trip.currentTrip);
+  const offers = useSelector((s) => s.trip.offers);
+  const namedAreas = useSelector((s) => s.trip.namedAreas);
+  const savedTrips = useSelector((s) => s.trip.savedTrips);
+  const authId = useSelector((s) => s.auth.id);
+
+  const [mapStyle, setMapStyle] = useState('dark');
+  const [showMapDesign, setShowMapDesign] = useState(false);
+  const [pickTarget, setPickTarget] = useState('start'); 
+  const [resolving, setResolving] = useState(false);
+  const [requesting, setRequesting] = useState(false);
+  const [routeOptions, setRouteOptions] = useState([]);
+  const [selectedRouteIndex, setSelectedRouteIndex] = useState(0);
+  
+  const [proximity, setProximity] = useState({ distanceM: null, checking: false, failed: false, note: '' });
+  const [showProximityNote, setShowProximityNote] = useState(false);
+  const [showTooFarModal, setShowTooFarModal] = useState(false);
+
+  const isActive = ACTIVE_TRIP_STATUSES.includes(currentTrip.status);
+  const coords = state?.coords;
+
+  // 🌟 الكشف هل الرحلة دي محفوظة حالياً ولا لأ عشان نعرض شكل الزرار
+  const isTripSaved = savedTrips?.some(
+    (saved) =>
+      saved.startPin?.lat === currentTrip.startPin?.lat &&
+      saved.startPin?.lng === currentTrip.startPin?.lng &&
+      saved.endPin?.lat === currentTrip.endPin?.lat &&
+      saved.endPin?.lng === currentTrip.endPin?.lng
+  );
+
+  const resolvePinName = useCallback(
+    async (lat, lng) => {
+      const area = findNamedArea(namedAreas, lat, lng);
+      if (area?.name) return { name: area.name, unknown: false };
+      const { localName } = await reverseGeocode(lat, lng);
+      if (localName) return { name: localName, unknown: false };
+      return { name: 'موقع محدد على الخريطة', unknown: true };
+    },
+    [namedAreas]
+  );
+
+  useEffect(() => {
+    if (isActive || currentTrip.startPin || !coords) return;
+    let active = true;
+    resolvePinName(coords.lat, coords.lng).then(({ name }) => {
+      if (active) {
+        dispatch(updateStartPin({ lat: coords.lat, lng: coords.lng, name }));
+      }
+    });
+    return () => { active = false; };
+  }, []);
+
+  useEffect(() => {
+    if (isActive || !currentTrip.startPin || !currentTrip.endPin) return;
+    const points = [currentTrip.startPin, ...currentTrip.waypoints, currentTrip.endPin];
+    let active = true;
+    setResolving(true);
+    fetchRouteOptions(points).then((options) => {
+      if (!active) return;
+      setRouteOptions(options);
+      setSelectedRouteIndex(0);
+      if (options[0]) dispatch(setRoute({ ...options[0], price: estimateFare(options[0].distanceKm) }));
+      setResolving(false);
+    });
+    return () => { active = false; };
+  }, [currentTrip.startPin, currentTrip.endPin, currentTrip.waypoints, isActive, dispatch]);
+
+  useEffect(() => {
+    if (isActive || !currentTrip.startPin) {
+      setProximity({ distanceM: null, checking: false, failed: false, note: '' });
+      return;
+    }
+    if (!navigator.geolocation) {
+      setProximity((p) => ({ ...p, distanceM: null, checking: false, failed: true }));
+      return;
+    }
+    let active = true;
+    setProximity((p) => ({ ...p, checking: true, failed: false }));
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        if (!active) return;
+        const d = distanceMeters({ lat: pos.coords.latitude, lng: pos.coords.longitude }, currentTrip.startPin);
+        setProximity((p) => ({ ...p, distanceM: d, checking: false, failed: false }));
+      },
+      () => {
+        if (!active) return;
+        setProximity((p) => ({ ...p, distanceM: null, checking: false, failed: true }));
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+    return () => { active = false; };
+  }, [currentTrip.startPin, isActive]);
+
+  // 🌟 تعديل الـ Pick عشان ميغيرش النقطة أوتوماتيك، بيستنى اليوزر يأكد بنفسه من الزرار
+  const handlePick = useCallback(
+    async (latlng) => {
+      if (!pickTarget) return;
+      const target = pickTarget;
+      const { name } = await resolvePinName(latlng.lat, latlng.lng);
+      const pin = { lat: latlng.lat, lng: latlng.lng, name };
+      
+      if (target === 'start') {
+        dispatch(updateStartPin(pin));
+      }
+      else if (target === 'end') {
+        dispatch(updateEndPin(pin));
+      }
+      else if (target?.waypoint) {
+        dispatch(addWaypoint(pin));
+      }
+    },
+    [pickTarget, dispatch, resolvePinName]
+  );
+
+  const handleSelectRouteOption = (index) => {
+    setSelectedRouteIndex(index);
+    const chosen = routeOptions[index];
+    if (chosen) dispatch(setRoute({ ...chosen, price: estimateFare(chosen.distanceKm) }));
+  };
+
+  // 🌟 دالة عشان تـ Toggle الحفظ (تحفظ أو تحذف لو محفوظة)
+  const handleToggleSaveTrip = () => {
+    if (isTripSaved) {
+      const savedTrip = savedTrips.find(
+        t => t.startPin.lat === currentTrip.startPin.lat && t.endPin.lat === currentTrip.endPin.lat
+      );
+      if (savedTrip) dispatch(removeSavedTrip(savedTrip.id));
+    } else {
+      dispatch(saveTrip({ startPin: currentTrip.startPin, endPin: currentTrip.endPin, waypoints: currentTrip.waypoints }));
+    }
+  };
+
+  const shortestRouteIndex = routeOptions.length > 1 ? routeOptions.reduce((minI, opt, i, arr) => (opt.distanceKm < arr[minI].distanceKm ? i : minI), 0) : 0;
+  const showRouteOptions = routeOptions.length > 1 && shortestRouteIndex !== 0;
+
+  const isFarFromPickup = proximity.distanceM !== null && proximity.distanceM > PROXIMITY_LIMIT_M;
+  const proximityNeedsNote = isFarFromPickup || proximity.failed;
+
+  const handleConfirmRequest = () => {
+    if (!currentTrip.startPin || !currentTrip.endPin) return;
+
+    if (proximity.distanceM !== null && proximity.distanceM > 1000000) {
+      setShowTooFarModal(true);
+      return;
+    }
+
+    if (proximityNeedsNote && !showProximityNote) {
+      setShowProximityNote(true);
+      return; 
+    }
+    if (proximityNeedsNote && showProximityNote && !proximity.note.trim()) {
+      return; 
+    }
+
+    setRequesting(true);
+    dispatch(
+      requestTrip({
+        clientId: authId,
+        price: currentTrip.route?.price || 0,
+        startTime: new Date().toLocaleTimeString('ar-EG'),
+        pickupDistanceM: proximity.distanceM,
+        farFromPickupNote: proximityNeedsNote ? proximity.note.trim() : null,
+      })
+    );
+    setRequesting(false);
+
+    // أظهر بوبوب نجاح الطلب ثم ارجع للهوم حتى يرى اليوزر الكارت
+    setShowRequestSuccess(true);
+    setTimeout(() => {
+      setShowRequestSuccess(false);
+      navigate('/');
+    }, 1300);
+  };
+
+  // حالة عرض بوبوب نجاح الطلب
+  const [showRequestSuccess, setShowRequestSuccess] = useState(false);
+
+  return (
+    // 🌟 لغينا حجز مساحة النافيجيشن بالأسفل وبقت الصفحة واخدة راحتها بالكامل
+    <div className='w-full h-screen flex flex-col bg-zinc-950 relative overflow-hidden'>
+      
+      {showTooFarModal && (
+        <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
+          <div className='w-full max-w-sm bg-zinc-900 border border-zinc-700/50 rounded-3xl p-6 flex flex-col items-center gap-4 text-center'>
+            <div className='w-16 h-16 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-3xl mb-2'>
+              <FontAwesomeIcon icon={faTriangleExclamation} />
+            </div>
+            <h3 className='text-lg font-bold text-white'>نقطة الانطلاق بعيدة جداً!</h3>
+            <p className='text-sm text-zinc-400'>
+              عذراً، نقطة الانطلاق التي حددتها تبعد عن موقعك الحالي بأكثر من 1000 كيلومتر. لا يمكنك طلب رحلة من هذه المسافة.
+            </p>
+            <button 
+              onClick={() => setShowTooFarModal(false)}
+              className='w-full bg-zinc-800 hover:bg-zinc-700 text-white rounded-xl py-3 mt-2 transition-colors'
+            >
+              حسناً، فهمت
+            </button>
+          </div>
+        </div>
+      )}
+
+      {showRequestSuccess && (
+        <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
+          <div className='w-full max-w-sm bg-zinc-900 border border-zinc-700/50 rounded-3xl p-6 flex flex-col items-center gap-4 text-center'>
+            <div className='w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mb-2'>
+              <FontAwesomeIcon icon={faCheck} />
+            </div>
+            <h3 className='text-lg font-bold text-white'>تم إرسال طلب الرحلة</h3>
+            <p className='text-sm text-zinc-400'>طلبك اتعرض على السواقين القريبين منك وسيتم التواصل لاحقًا.</p>
+            <div className='flex gap-2 w-full'>
+              <button
+                onClick={() => { setShowRequestSuccess(false); navigate('/'); }}
+                className='flex-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl py-3 mt-2 transition-colors'
+              >
+                اذهب للرئيسية
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className='flex-1 relative'>
+        <MapComponent
+          startPin={currentTrip.startPin}
+          endPin={currentTrip.endPin}
+          waypoints={currentTrip.waypoints}
+          routeCoords={currentTrip.route?.coordinates}
+          pickTarget={isActive ? null : pickTarget}
+          onPick={handlePick}
+          mapStyle={mapStyle}
+        />
+
+        {/* 🌟 زرار الرجوع فوق عالشمال */}
+        <button
+          onClick={() => navigate(-1)} // 🌟 يرجعه للصفحة اللي قبلها
+          className='absolute top-4 left-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-white hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'
+        >
+          <FontAwesomeIcon icon={faChevronRight} className="rotate-180" />
+        </button>
+
+        {/* 🌟 زرار تغيير التصميم يمين */}
+        <button
+          onClick={() => setShowMapDesign(true)}
+          className='absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-emerald-400 hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'
+        >
+          <FontAwesomeIcon icon={faPalette} />
+        </button>
+
+        <MapDesignModal isOpen={showMapDesign} onClose={() => setShowMapDesign(false)} onSelectDesign={setMapStyle} currentDesign={mapStyle} />
+
+        {!isActive ? (
+          <TripPlannerPanel
+            trip={currentTrip}
+            pickTarget={pickTarget}
+            onSetPickTarget={setPickTarget}
+            onRemoveWaypoint={(i) => dispatch(removeWaypoint(i))}
+            onConfirm={handleConfirmRequest}
+            resolving={resolving}
+            requesting={requesting}
+            routeOptions={routeOptions}
+            selectedRouteIndex={selectedRouteIndex}
+            shortestRouteIndex={shortestRouteIndex}
+            showRouteOptions={showRouteOptions}
+            onSelectRouteOption={handleSelectRouteOption}
+            proximity={proximity}
+            showProximityNote={showProximityNote}
+            onProximityNoteChange={(note) => setProximity((p) => ({ ...p, note }))}
+            savedTrips={savedTrips}
+            isTripSaved={isTripSaved} // 🌟 باصينا المتغير ده للبانل
+            onToggleSaveTrip={handleToggleSaveTrip} // 🌟 الدالة الجديدة
+            onLoadSavedTrip={(saved) => dispatch(loadSavedTrip(saved))}
+            onRemoveSavedTrip={(id) => dispatch(removeSavedTrip(id))}
+          />
+        ) : (
+          <TripStatusPanel
+            trip={currentTrip}
+            offers={currentTrip.status === 'pending' ? offers : []}
+            onAccept={(offer) => dispatch(acceptOffer(offer))}
+            onCancel={() => dispatch(cancelTrip())}
+            onFinish={() => dispatch(completeTrip())}
+          />
+        )}
+      </div>
+      
+      {/* 🌟 تم إلغاء النافيجيشن هنا تماماً */}
+    </div>
+  );
+};
+
+export default RequestTrip;
+</file>
+
+<file path="src/pages/driver/DriverHome.jsx">
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark, faWallet, faUser, faPlus, faGear, faHistory, faBell } from '@fortawesome/free-solid-svg-icons'
+import Setting from '../../components/Setting'
+const DriverHome = () => {
+	const [isSettingOpen, setIsSettingOpen] = React.useState(false)
+
+	return (
+		<div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative'>
+
+
+			<div className='text-white fixed top-0 left-0 right-0 flex justify-between p-4 items-center z-50'>
+
+				<div className='relative z-20 flex-1 max-w-[75%]'>
+					<button className='text-white bg-zinc-800 rounded-full h-14 w-14 max-w-full min-w-[3.5rem] flex items-center justify-start px-4 gap-4 overflow-hidden transition-all duration-500 ease-in-out hover:w-full group shadow-2xl hover:bg-blue-600'>
+
+						<FontAwesomeIcon icon={faBell} className='shrink-0 text-xl' />
+
+						<span className='whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 text-sm font-medium delay-100'>
+							تم قبول كابتن أحمد لرحلتك!
+						</span>
+					</button>
+				</div>
+
+				<h1 className='absolute left-1/2 -translate-x-1/2 text-base font-medium z-10 pointer-events-none transition-opacity duration-300 group-hover:opacity-0'>
+					مرحبا بك عمرو
+				</h1>
+
+				<button className='text-white bg-zinc-800 rounded-full px-4 h-14 flex items-center justify-center gap-2 shadow-lg z-20 active:scale-95 transition-all shrink-0'>
+					<FontAwesomeIcon icon={faWallet} className='text-green-400' />
+					<span className='font-semibold'>$100</span>
+				</button>
+
+			</div>
+
+
+
+			<div className='fixed -bottom-8 left-0 right-0 shadow-md flex justify-around items-center py-2 z-50'>
+				<button onClick={() => setIsSettingOpen(true)} className={`text-white bg-zinc-800 rounded-full w-14 h-14 flex items-center justify-center ${isSettingOpen ? '-mb-12' : 'mb-0'} transition-all duration-700`}><FontAwesomeIcon icon={faGear} /></button>
+				<button className={`text-white bg-zinc-800 rounded-full w-14 h-14 flex items-center justify-center ${isSettingOpen ? '-mb-12' : 'mb-16'} transition-all duration-500`}><FontAwesomeIcon icon={faHistory} /></button>
+				<button className={`text-white bg-green-500 rounded-full w-14 h-14 flex items-center justify-center ${isSettingOpen ? '-mb-12' : 'mb-20'} transition-all duration-500`}><FontAwesomeIcon icon={faPlus} /></button>
+				<button className={`text-white bg-zinc-800 rounded-full w-14 h-14 flex items-center justify-center ${isSettingOpen ? '-mb-12' : 'mb-16'} transition-all duration-500`}><FontAwesomeIcon icon={faBookmark} /></button>
+				<button className={`text-white bg-zinc-800 rounded-full w-14 h-14 flex items-center justify-center ${isSettingOpen ? '-mb-12' : 'mb-0'} transition-all duration-700`}><FontAwesomeIcon icon={faUser} /></button>
+			</div>
+			{isSettingOpen && (
+				<div
+					onClick={() => setIsSettingOpen(false)}
+					className='fixed inset-0 bg-black/10 backdrop-blur-sm z-40 transition-opacity duration-500 ease-in-out'
+				/>
+			)}
+			<Setting isOpen={isSettingOpen} onClose={() => setIsSettingOpen(false)} />
+		</div>
+	)
+}
+
+export default DriverHome
+</file>
+
+<file path="src/pages/driver/DriverSignIn.jsx">
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+function DriverSignIn() {
+	const navigate = useNavigate()
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState('')
+
+	const handleSubmit = async (e) => {
+		e.preventDefault()
+		setLoading(true)
+		setError('')
+
+		try {
+			// Add your driver sign-in API call here
+			// const response = await signInDriver({ email, password })
+			console.log('Driver Sign In:', { email, password })
+			// Handle successful sign-in
+		} catch (err) {
+			setError('فشل تسجيل دخول السائق. يرجى التحقق من البيانات.')
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	return (
+		<div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-green-500 to-green-600 p-4'>
+			<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+				<button
+					onClick={() => navigate('/sign')}
+					className='text-gray-600 hover:text-gray-800 mb-6 flex items-center'
+				>
+					← رجوع
+				</button>
+
+				<h1 className='text-3xl font-bold text-center text-gray-800 mb-2'>
+					تسجيل دخول السائق
+				</h1>
+				<p className='text-center text-gray-600 mb-8'>
+					مرحبًا! يرجى تسجيل الدخول إلى حساب السائق
+				</p>
+
+				{error && (
+					<div className='bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4'>
+						{error}
+					</div>
+				)}
+
+				<form onSubmit={handleSubmit} className='space-y-4'>
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							البريد الإلكتروني
+						</label>
+						<input
+							type='email'
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500'
+							placeholder='example@email.com'
+							required
+						/>
+					</div>
+
+					<div>
+						<label className='block text-gray-700 font-bold mb-2'>
+							كلمة المرور
+						</label>
+						<input
+							type='password'
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
+							className='w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-green-500'
+							placeholder='••••••••'
+							required
+						/>
+					</div>
+
+					<button
+						type='submit'
+						disabled={loading}
+						className='w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-400 text-white font-bold py-2 px-4 rounded-lg transition duration-200'
+					>
+						{loading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول'}
+					</button>
+				</form>
+
+				<div className='mt-6 text-center'>
+					<p className='text-gray-600 mb-4'>
+						ليس لديك حساب سائق؟
+					</p>
+					<button
+						onClick={() => navigate('/driver/sign-up')}
+						className='w-full bg-green-100 hover:bg-green-200 text-green-700 font-bold py-2 px-4 rounded-lg transition duration-200'
+					>
+						التقديم كسائق
+					</button>
+				</div>
+
+				<div className='mt-4 text-center'>
+					<button className='text-sm text-green-600 hover:text-green-700'>
+						نسيت كلمة المرور؟
+					</button>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default DriverSignIn
+</file>
+
+<file path="src/pages/driver/DriverSignUp.jsx">
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+
+function DriverSignUpMessage() {
+	const navigate = useNavigate()
+	return (
+		<div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-green-500 to-green-600 p-4'>
+			<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+				<button
+					onClick={() => navigate('/driver/sign-in')}
+					className='text-gray-600 hover:text-gray-800 mb-6 flex items-center'
+				>
+					← رجوع
+				</button>
+
+				<div className='text-center'>
+					<div className='text-6xl mb-4'>🚕</div>
+
+					<h1 className='text-3xl font-bold text-gray-800 mb-4'>
+						التقديم كسائق
+					</h1>
+
+					<div className='bg-blue-50 border-l-4 border-blue-500 p-4 mb-6'>
+						<p className='text-gray-700 font-semibold mb-2'>
+							⚠️ معلومات مهمة
+						</p>
+						<p className='text-gray-600 text-sm leading-relaxed'>
+							لتصبح سائقًا على منصتنا، يجب عليك زيارة المكتب الإداري شخصيًا.
+							سيقوم فريق الإدارة بمراجعة طلبك ووثائقك للتحقق من أهليتك وضمان
+							سلامة المنصة.
+						</p>
+					</div>
+
+					<div className='bg-green-50 border-l-4 border-green-500 p-4 mb-6'>
+						<p className='text-gray-700 font-semibold mb-2'>
+							✓ المستندات المطلوبة
+						</p>
+						<ul className='text-gray-600 text-sm text-left space-y-2'>
+							<li>• رخصة قيادة سارية</li>
+							<li>• تسجيل المركبة</li>
+							<li>• وثيقة التأمين</li>
+							<li>• بطاقة هوية سارية</li>
+							<li>• معلومات الاتصال</li>
+						</ul>
+					</div>
+
+					<div className='space-y-3'>
+						<button
+							onClick={() => navigate('/')}
+							className='w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200'
+						>
+							عرض مواقع المكتب الإداري
+						</button>
+
+						<button
+							onClick={() => navigate('/driver/sign-in')}
+							className='w-full bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-3 px-4 rounded-lg transition duration-200'
+						>
+							العودة إلى تسجيل الدخول
+						</button>
+					</div>
+
+					<p className='text-xs text-gray-500 mt-6'>
+						بعد الموافقة على طلبك في المكتب الإداري، ستتلقى
+						رسالة بالبريد الإلكتروني تحتوي على بيانات الدخول للوصول
+						إلى لوحة تحكم السائق.
+					</p>
+				</div>
+			</div>
+		</div>
+	)
+}
+
+export default DriverSignUpMessage
+</file>
+
+<file path="src/pages/Sign.jsx">
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
+function Sign() {
+	const navigate = useNavigate()
+	return (
+		<div className='flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-blue-600 p-4'>
+			<div className='bg-white rounded-lg shadow-lg p-8 w-full max-w-md'>
+				<h1 className='text-3xl font-bold text-center text-gray-800 mb-2'>
+					مرحبًا بك في تطبيق تاكسي العاصمة
+				</h1>
+				<p className='text-center text-gray-600 mb-8'>
+					يرجى اختيار دورك للمتابعة
+				</p>
+
+				<div className='space-y-4'>
+					<button
+						onClick={() => navigate('/client/sign-in')}
+						className='w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105'
+					>
+						🚗 أنا عميل
+					</button>
+
+					<button
+						onClick={() => navigate('/driver/sign-in')}
+						className='w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 transform hover:scale-105'
+					>
+						🚕 أنا سائق
+					</button>
+				</div>
+
+				<p className='text-xs text-gray-500 text-center mt-6'>
+					رحلتك تبدأ من هنا
+				</p>
+			</div>
+		</div>
+	)
+}
+
+export default Sign
+</file>
+
+<file path="src/popups/ImageCropperModel.jsx">
+import React, { useState, useCallback } from 'react'
+import Cropper from 'react-easy-crop'
+
+const ImageCropperModal = ({ imageSrc, onCropComplete, onCancel }) => {
+  const [crop, setCrop] = useState({ x: 0, y: 0 })
+  const [zoom, setZoom] = useState(1)
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
+
+  // بيسجل أبعاد الجزء اللي اليوزر قصه بالظبط
+  const onCropChange = useCallback((croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels)
+  }, [])
+
+  // الـ Function السحرية اللي بتقص الصورة حقيقي وتطلعها كـ Base64 عشان تعرضها فوراً
+  const handleSave = async () => {
+    try {
+      const croppedImage = await getCroppedImg(imageSrc, croppedAreaPixels)
+      onCropComplete(croppedImage) // بيبعت الصورة المقصوصة الجاهزة للبروفايل
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  return (
+    <div className='fixed inset-0 bg-black/90 z-50 flex flex-col justify-between p-4 backdrop-blur-md animate-fade-in'>
+      
+      {/* الـ Header بتاع المودال */}
+      <div className='flex justify-between items-center py-2 border-b border-zinc-800 z-10'>
+        <button onClick={onCancel} className='text-zinc-400 hover:text-white text-sm bg-zinc-800 px-4 py-2 rounded-xl'>إلغاء</button>
+        <h3 className='text-base font-semibold text-white'>تعديل أبعاد الصورة</h3>
+        <button onClick={handleSave} className='text-white bg-blue-600 hover:bg-blue-500 text-sm px-4 py-2 rounded-xl font-bold'>حفظ</button>
+      </div>
+
+      {/* منطقة الـ Cropper - بتاخد المساحة اللي في النص */}
+      <div className='relative flex-1 w-full my-4 rounded-2xl overflow-hidden bg-zinc-950'>
+        <Cropper
+          image={imageSrc}
+          crop={crop}
+          zoom={zoom}
+          aspect={1} // نسبة 1:1 يعني مربع (مثالي للـ Avatar الدائري)
+          cropShape="round" // بيخلي المربع الشفاف دائري عشان يوريك شكل البروفايل بالظبط
+          showGrid={false}
+          onCropChange={setCrop}
+          onCropComplete={onCropChange}
+          onZoomChange={setZoom}
+        />
+      </div>
+
+      {/* الـ Control بتاع الزوم تحت */}
+      <div className='w-full flex flex-col items-center gap-2 pb-6 z-10 px-4'>
+        <span className='text-xs text-zinc-400'>اسحب للتحكم في الحجم والوش</span>
+        <input
+          type="range"
+          value={zoom}
+          min={1}
+          max={3}
+          step={0.1}
+          aria-labelledby="Zoom"
+          onChange={(e) => setZoom(Number(e.target.value))}
+          className="w-full h-1.5 bg-zinc-800 rounded-lg appearance-none cursor-pointer accent-blue-500"
+        />
+      </div>
+
+    </div>
+  )
+}
+
+// الكود المساعد لقص الصورة حقيقي على Canvas وتحويلها لـ Image URL سريعة
+const getCroppedImg = (imageSrc, pixelCrop) => {
+  return new Promise((resolve, reject) => {
+    const image = new Image()
+    image.src = imageSrc
+    image.setAttribute('crossOrigin', 'anonymous')
+    image.onload = () => {
+      const canvas = document.createElement('canvas')
+      canvas.width = pixelCrop.width
+      canvas.height = pixelCrop.height
+      const ctx = canvas.getContext('2d')
+
+      ctx.drawImage(
+        image,
+        pixelCrop.x,
+        pixelCrop.y,
+        pixelCrop.width,
+        pixelCrop.height,
+        0,
+        0,
+        pixelCrop.width,
+        pixelCrop.height
+      )
+
+      resolve(canvas.toDataURL('image/jpeg')) // بتخرج كـ Base64 جاهز للعرض والرفع
+    }
+    image.onerror = (error) => reject(error)
+  })
+}
+
+export default ImageCropperModal
+</file>
+
+<file path="src/popups/MapDesignModal.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes, faMap, faSatellite, faMountain, faMoon, faCheck } from '@fortawesome/free-solid-svg-icons'
+
+const MapDesignModal = ({ isOpen, onClose, onSelectDesign, currentDesign }) => {
+  if (!isOpen) return null
+
+  const designs = [
+    {
+      id: 'standard',
+      name: 'الخريطة العادية',
+      icon: faMap,
+      description: 'خريطة OpenStreetMap العادية',
+      color: 'bg-blue-500'
+    },
+    {
+      id: 'satellite',
+      name: 'قمر صناعي',
+      icon: faSatellite,
+      description: 'صور قمرية فضائية',
+      color: 'bg-purple-500'
+    },
+    {
+      id: 'terrain',
+      name: 'تضاريس',
+      icon: faMountain,
+      description: 'خريطة التضاريس والارتفاعات',
+      color: 'bg-green-500'
+    },
+    {
+      id: 'dark',
+      name: 'الوضع الداكن',
+      icon: faMoon,
+      description: 'خريطة داكنة للرؤية الليلية',
+      color: 'bg-gray-800'
+    }
+  ]
+
+  return (
+    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-[60] p-4" dir="rtl">
+      <div className="bg-zinc-900 border border-zinc-700/50 rounded-3xl shadow-2xl max-w-sm w-full">
+        {/* Header */}
+        <div className="flex items-center justify-between p-5 border-b border-zinc-700/40">
+          <h2 className="text-base font-bold text-white">اختر تصميم الخريطة</h2>
+          <button
+            onClick={onClose}
+            className="text-zinc-400 hover:text-white transition"
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </button>
+        </div>
+
+        {/* Design Options */}
+        <div className="p-4 space-y-2.5">
+          {designs.map((design) => (
+            <button
+              key={design.id}
+              onClick={() => {
+                onSelectDesign(design.id)
+                onClose()
+              }}
+              className={`w-full p-3 rounded-2xl border transition flex items-center gap-3 ${
+                currentDesign === design.id
+                  ? 'border-emerald-500/60 bg-emerald-500/10'
+                  : 'border-zinc-700/40 hover:border-zinc-600'
+              }`}
+            >
+              {/* Icon */}
+              <div className={`${design.color} text-white p-3 rounded-xl flex items-center justify-center w-11 h-11 shrink-0`}>
+                <FontAwesomeIcon icon={design.icon} />
+              </div>
+
+              {/* Text */}
+              <div className="text-right flex-1 min-w-0">
+                <h3 className="text-sm font-semibold text-white">{design.name}</h3>
+                <p className="text-[11px] text-zinc-400 truncate">{design.description}</p>
+              </div>
+
+              {/* Checkmark */}
+              {currentDesign === design.id && (
+                <FontAwesomeIcon icon={faCheck} className="text-emerald-400 shrink-0" />
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default MapDesignModal
+</file>
+
+<file path="src/popups/ShareLocationModal.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faLocationCrosshairs, faTriangleExclamation, faSpinner } from '@fortawesome/free-solid-svg-icons'
+
+const ShareLocationModal = ({ status, onAllow, onSkip, onClose }) => {
+  const isRequesting = status === 'requesting'
+  const isDenied = status === 'denied'
+
+  return (
+    <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
+      <div className='w-full max-w-sm bg-zinc-900 border border-zinc-700/50 rounded-3xl p-6 flex flex-col items-center gap-4 shadow-2xl'>
+        <div
+          className={`h-16 w-16 rounded-full flex items-center justify-center shadow-[0_0_25px_-5px] ${
+            isDenied ? 'bg-red-500/15 text-red-400 shadow-red-500/40' : 'bg-emerald-500/15 text-emerald-400 shadow-emerald-500/40'
+          }`}
+        >
+          <FontAwesomeIcon icon={isDenied ? faTriangleExclamation : faLocationCrosshairs} className='text-2xl' />
+        </div>
+
+        <div className='text-center'>
+          <h2 className='text-base font-bold mb-1'>{isDenied ? 'تعذر الوصول لموقعك' : 'شارك موقعك الحالي'}</h2>
+          <p className='text-sm text-zinc-400 leading-relaxed'>
+            {isDenied
+              ? 'تم رفض صلاحية الموقع. فعّلها من إعدادات المتصفح لتحديد نقطة انطلاقك بدقة، أو استمر بدون تحديد الموقع.'
+              : 'نحتاج إلى صلاحية الموقع لتحديد نقطة انطلاق رحلتك بدقة وعرض أقرب السائقين إليك.'}
+          </p>
+        </div>
+
+        <button
+          onClick={onAllow}
+          disabled={isRequesting}
+          className='w-full bg-emerald-600 hover:bg-emerald-500 disabled:opacity-60 rounded-2xl py-3 text-sm font-bold flex items-center justify-center gap-2 transition-colors'
+        >
+          <FontAwesomeIcon icon={isRequesting ? faSpinner : faLocationCrosshairs} className={isRequesting ? 'animate-spin' : ''} />
+          {isRequesting ? 'جارِ تحديد الموقع...' : isDenied ? 'حاول مرة أخرى' : 'تفعيل الموقع'}
+        </button>
+
+        <button
+          onClick={onSkip}
+          disabled={isRequesting}
+          className='w-full bg-zinc-800 hover:bg-zinc-700 disabled:opacity-60 rounded-2xl py-3 text-sm font-medium text-zinc-300 transition-colors'
+        >
+          الاستمرار بدون تحديد الموقع
+        </button>
+
+        <button onClick={onClose} className='text-xs text-zinc-500 hover:text-zinc-300 mt-1'>
+          إلغاء
+        </button>
+      </div>
+    </div>
+  )
+}
+
+export default ShareLocationModal
+</file>
+
+<file path="src/redux/reducers/adminSlice.jsx">
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+	name: "عبدالعزيز محمد",
+	phone: "01098765432",
+	username: "admin_aziz",
+	E_mail:"admin@example.com",
+	officeAddress: "شارع التحرير - القاهرة",
+	password: "********",
+};
+const adminSlice = createSlice({
+	name: "admin",
+	initialState,
+	reducers: {
+
+	}
+});
+export const { } = adminSlice.actions;
+export default adminSlice.reducer;
+</file>
+
+<file path="src/redux/reducers/authSlice.jsx">
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+	name: "عمرو محمد",
+	phone: "01012345678",
+	email: "omar.mohamed@example.com",
+	homeAddress: "123 شارع التحرير، القاهرة، مصر",
+	id: "a_01",
+	old: 25,
+	avatar: '/images/14.png',
+	password: "********",
+	personal_ID_pic: "https://via.placeholder.com/150",
+	wallet: 0,
+	preferredTrips: [
+		{
+			from: { lat: 31.132, lng: 33.803, name: "ميدان الرفاعي - العريش" },
+			to: { lat: 31.115, lng: 33.752, name: "جامعة سيناء - المساعيد" }
+		},
+	],
+	favorites: [
+		{ id: "fav_1", name: "المنزل", address: "123 شارع التحرير، القاهرة، مصر", type: "home" },
+		{ id: "fav_2", name: "العمل", address: "مدينة نصر، القاهرة", type: "work" },
+	],
+	rates: {
+		sent: [
+			{ id: "rate_1", clientId: "c_99", driverId: "d_50", value: 5, comment: "سائق متعاون" },
+			{ id: "rate_2", clientId: "c_99", driverId: "d_62", value: 4, comment: "خدمة جيدة" }
+		],
+		received: []
+	},
+	reports: {
+		sent: [
+			{ id: "r_01", tripId: "trip_001", driverId: "d_50", reason: "تأخر السائق عن الموعد المحدد", attachment: "https://via.placeholder.com/150" },
+			{ id: "r_02", tripId: "trip_002", driverId: "d_62", reason: "السائق كان غير مهذب", attachment: "https://via.placeholder.com/150" }
+		],
+		received: [
+			{ id: "report_1", clientId: "c_99", reason: "تأخر السائق عن الموعد المحدد", attachment: "https://via.placeholder.com/150", time: "2024-06-01 14:30" },
+			{ id: "report_2", clientId: "c_99", reason: "السائق كان غير مهذب", attachment: "https://via.placeholder.com/150", time: "2024-06-01 14:30" }
+		]
+	}
+};
+
+const authSlice = createSlice({
+	name: "auth",
+	initialState,
+	reducers: {
+		updateClientInfo: (state, action) => {
+			Object.assign(state, action.payload)
+		},
+		addFavorite: (state, action) => {
+			state.favorites.push({ id: `fav_${Date.now()}`, ...action.payload })
+		},
+		removeFavorite: (state, action) => {
+			state.favorites = state.favorites.filter(f => f.id !== action.payload)
+		},
+		updateFavorite: (state, action) => {
+			state.favorites = state.favorites.map(f => f.id === action.payload.id ? { ...f, ...action.payload } : f)
+		},
+		// Rate Management
+		addRate: (state, action) => {
+			state.rates.sent.push({ id: `rate_${Date.now()}`, ...action.payload })
+		},
+		receiveRate: (state, action) => {
+			state.rates.received.push({ id: `rate_${Date.now()}`, ...action.payload })
+		},
+		// Report Management
+		addReport: (state, action) => {
+			state.reports.sent.push({ id: `r_${Date.now()}`, ...action.payload })
+		},
+		receiveReport: (state, action) => {
+			state.reports.received.push({ id: `report_${Date.now()}`, ...action.payload })
+		},
+		// Sync rates and reports from driver slice
+		syncRatesFromDriver: (state, action) => {
+			state.rates = { ...state.rates, ...action.payload }
+		},
+		syncReportsFromDriver: (state, action) => {
+			state.reports = { ...state.reports, ...action.payload }
+		}
+	}
+});
+export const { 
+	updateClientInfo, 
+	addFavorite, 
+	removeFavorite, 
+	updateFavorite,
+	addRate,
+	receiveRate,
+	addReport,
+	receiveReport,
+	syncRatesFromDriver,
+	syncReportsFromDriver
+} = authSlice.actions;
+export default authSlice.reducer;
+</file>
+
+<file path="src/redux/reducers/clientSlice.jsx">
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = [
+	{
+		name: "عمرو محمد",
+		phone: "01012345678",
+		email: "omar.mohamed@example.com",
+		homeAddress: "123 شارع التحرير، القاهرة، مصر",
+		id: "a_01",
+		old: 25,
+		avatar: '/images/14.png',
+		password: "********",
+		personal_ID_pic: "https://via.placeholder.com/150",
+		wallet: 0,
+		preferredTrips: [
+			{
+				from: { lat: 31.132, lng: 33.803, name: "ميدان الرفاعي - العريش" },
+				to: { lat: 31.115, lng: 33.752, name: "جامعة سيناء - المساعيد" }
+			},
+		],
+		favorites: [
+			{ id: "fav_1", name: "المنزل", address: "123 شارع التحرير، القاهرة، مصر", type: "home" },
+			{ id: "fav_2", name: "العمل", address: "مدينة نصر، القاهرة", type: "work" },
+		],
+		rates: {
+			sent: [],
+			recived: []
+		},
+		reports: {
+			sent: [
+				{ id: "r_01", tripId: "trip_001", driverId: "d_50", reason: "تأخر السائق عن الموعد المحدد", attachment: "https://via.placeholder.com/150" },
+				{ id: "r_02", tripId: "trip_002", driverId: "d_62", reason: "السائق كان غير مهذب", attachment: "https://via.placeholder.com/150" }
+			],
+			recived: []
+		},
+	},
+];
+const clientSlice = createSlice({
+	name: "client",
+	initialState,
+	reducers: {
+
+	}
+});
+export const { updateClientInfo, addFavorite, removeFavorite, updateFavorite } = clientSlice.actions;
+export default clientSlice.reducer;
+</file>
+
+<file path="src/redux/reducers/driverSlice.jsx">
+import { createSlice } from "@reduxjs/toolkit";
+
+const initialState = {
+	name: "أحمد منصور",
+	phone: "01012345678",
+	car: {
+		model: "فيرنا فيراني",
+		plateNumber: "12345",
+
+	},
+	username: "ahmedmansour",
+	ID: "d_50",
+	old: 30,
+	pic: "https://via.placeholder.com/150",
+	password: "********",
+	rates: {
+		sent: [
+			{ id: "rate_1", clientId: "c_99", driverId: "d_50", value: 5, comment: "سائق متعاون" },
+			{ id: "rate_2", clientId: "c_99", driverId: "d_62", value: 4, comment: "خدمة جيدة" }
+		],
+		received: []
+	},
+	reports: {
+		sent: [
+			{ id: "report_1", clientId: "c_99", reason: "تأخر السائق عن الموعد المحدد", attachment: "https://via.placeholder.com/150", time: "2024-06-01 14:30" },
+			{ id: "report_2", clientId: "c_99", reason: "السائق كان غير مهذب", attachment: "https://via.placeholder.com/150", time: "2024-06-01 14:30" }
+		],
+		received: []
+	}
+
+};
+const driverSlice = createSlice({
+	name: "driver",
+	initialState,
+	reducers: {
+		updateDriverInfo: (state, action) => {
+			Object.assign(state, action.payload)
+		},
+		addRate: (state, action) => {
+			state.rates.sent.push({ id: `rate_${Date.now()}`, ...action.payload })
+		},
+		receiveRate: (state, action) => {
+			state.rates.received.push({ id: `rate_${Date.now()}`, ...action.payload })
+		},
+		addReport: (state, action) => {
+			state.reports.sent.push({ id: `report_${Date.now()}`, ...action.payload })
+		},
+		receiveReport: (state, action) => {
+			state.reports.received.push({ id: `report_${Date.now()}`, ...action.payload })
+		}
+	}
+});
+export const { updateDriverInfo, addRate, receiveRate, addReport, receiveReport } = driverSlice.actions;
+export default driverSlice.reducer;
+</file>
+
+<file path="src/redux/reducers/ratesSlice.jsx">
+import { createSlice } from '@reduxjs/toolkit'
+
+
+const initialState = {
+  ratesList: [
+    {
+      id: "r-1",
+      rateerName: "الكابتن أحمد السويركي",
+      rateedId: "c_1", 
+      tripId: "trip-101",
+      date: "2026-06-21"
+    },
+    {
+      id: "r-2",
+      rateerName: "الكابتن محمد شتية",
+      rateedId: "c_1", 
+      tripId: "trip-204",
+      date: "2026-06-19"
+    },
+    {
+      id: "r-3",
+      rateerName: "الكابتن إبراهيم علي",
+      rateedId: "c_2", 
+      tripId: "trip-300",
+      comment: "العميل كان يتحدث بحدة.",
+      date: "2026-06-15"
+    }
+  ]
+}
+console.log( new Date().toISOString().split('T')[0])
+
+const ratesSlice = createSlice({
+  name: 'rates',
+  initialState,
+  reducers: {
+    addrate: (state, action) => {
+      const newrate = {
+        id: `r_${Date.now()}`,
+        date: new Date().toISOString().split('T')[0],
+        ...action.payload
+      }
+      state.ratesList.push(newrate)
+    },
+    deleterate: (state, action) => {
+      state.ratesList = state.ratesList.filter(rate => rate.id !== action.payload)
+    }
+  }
+})
+
+export const { addrate, deleterate } = ratesSlice.actions
+export default ratesSlice.reducer
+</file>
+
+<file path="src/redux/reducers/reportsSlice.jsx">
+import { createSlice } from '@reduxjs/toolkit'
+
+const initialState = {
+	reportsList: [
+		{
+			id: "rep-1",
+			reporterId: "d_50",
+			reportedId: "c_01",
+			tripId: "trip-101",
+			reason: "تأخير شديد عند الاستلام",
+			date: "2026-06-21",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		},
+		{
+			id: "rep-2",
+			reporterId: "d_50",
+			reportedId: "c_01",
+			tripId: "trip-204",
+			reason: "إلغاء الرحلة بعد الوصول",
+			date: "2026-06-19",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		},
+		{
+			id: "rep-3",
+			reporterId: "d_50",
+			reportedId: "c_02",
+			tripId: "trip-300",
+			reason: "سلوك غير لائق",
+			date: "2026-06-15",
+			attachment: "https://via.placeholder.com/150",
+			status: "pending",
+		}
+	]
+}
+
+const reportsSlice = createSlice({
+	name: 'reports',
+	initialState,
+	reducers: {
+		addReport: (state, action) => {
+			const newReport = {
+				id: `rep-${Date.now()}`,
+				date: new Date().toISOString().split('T')[0],
+				...action.payload
+			}
+			state.reportsList.push(newReport)
+		},
+	}
+})
+
+export const { addReport, deleteReport } = reportsSlice.actions
+export default reportsSlice.reducer
+</file>
+
+<file path="src/redux/store.jsx">
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from './reducers/authSlice';
+import adminReducer from './reducers/adminSlice';
+import driverReducer from './reducers/driverSlice';
+import tripReducer from './reducers/tripSlice';
+import clientReducer from './reducers/clientSlice';
+const store = configureStore({
+  reducer: {
+		auth: authReducer,
+		admin: adminReducer,
+		driver: driverReducer,
+		trip: tripReducer,
+		client: clientReducer,
+	}
+});
+
+export default store;
+</file>
+
+<file path="src/reportWebVitals.js">
+const reportWebVitals = onPerfEntry => {
+  if (onPerfEntry && onPerfEntry instanceof Function) {
+    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
+      getCLS(onPerfEntry);
+      getFID(onPerfEntry);
+      getFCP(onPerfEntry);
+      getLCP(onPerfEntry);
+      getTTFB(onPerfEntry);
+    });
+  }
+};
+
+export default reportWebVitals;
+</file>
+
+<file path="src/setupTests.js">
+// jest-dom adds custom jest matchers for asserting on DOM nodes.
+// allows you to do things like:
+// expect(element).toHaveTextContent(/react/i)
+// learn more: https://github.com/testing-library/jest-dom
+import '@testing-library/jest-dom';
+</file>
+
+<file path="src/utils/geo.js">
+// خدمات الخرائط - Nominatim للبحث/الأسماء و OSRM لحساب الطريق الفعلي
+// كلاهما مجاني وما يحتاج API key، بنناديهم مباشرة من الفرونت حاليًا
+// TODO: لما الباكاند يجهز، الأفضل تتحول الطلبات دي لسيرفرنا (proxy + كاش) بدل النداء المباشر من المتصفح
+// TODO: الراوتنج هنا مبني على OSRM المجاني كحل مبدئي بس - لما تتركب مكتبة الطرق الأدق المنوي استخدامها، فقط استبدل fetchRoute بنداء المكتبة الجديدة مع نفس الشكل الراجع { coordinates, distanceKm, durationMin }
+const NOMINATIM_URL = 'https://nominatim.openstreetmap.org';
+const OSRM_URL = 'https://router.project-osrm.org';
+
+// محيط مدينة العريش تقريبًا - لتحسين نتائج البحث (مش إلزامي)
+const EL_ARISH_VIEWBOX = '33.6,31.3,34.0,31.0';
+
+// حقول العنوان اللي تعتبر "اسم منطقة محلي" - مقصودًا مستبعدين المحافظة/المدينة/الدولة
+const LOCAL_NAME_FIELDS = ['neighbourhood', 'suburb', 'quarter', 'residential', 'hamlet', 'village', 'road'];
+
+function extractLocalName(address) {
+  if (!address) return null;
+  for (const field of LOCAL_NAME_FIELDS) {
+    if (address[field]) return address[field];
+  }
+  return null;
+}
+
+// المسافة بين نقطتين بالمتر (Haversine)
+export function distanceMeters(a, b) {
+  if (!a || !b) return Infinity;
+  const R = 6371000;
+  const toRad = (d) => (d * Math.PI) / 180;
+  const dLat = toRad(b.lat - a.lat);
+  const dLng = toRad(b.lng - a.lng);
+  const sinDLat = Math.sin(dLat / 2);
+  const sinDLng = Math.sin(dLng / 2);
+  const h = sinDLat * sinDLat + Math.cos(toRad(a.lat)) * Math.cos(toRad(b.lat)) * sinDLng * sinDLng;
+  return 2 * R * Math.asin(Math.sqrt(h));
+}
+
+// رجوع اسم محلي بس (بدون مدينة/محافظة) - لو مفيش اسم واضح بيرجع localName: null عشان نطلب من اليوزر يقترح اسم
+export async function reverseGeocode(lat, lng) {
+  try {
+    const res = await fetch(`${NOMINATIM_URL}/reverse?format=jsonv2&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1&accept-language=ar`);
+    if (!res.ok) throw new Error('reverse geocode failed');
+    const data = await res.json();
+    return { localName: extractLocalName(data.address), fullName: data.display_name || null };
+  } catch {
+    return { localName: null, fullName: null };
+  }
+}
+
+export async function searchPlaces(query) {
+  if (!query || query.trim().length < 2) return [];
+  try {
+    const params = new URLSearchParams({
+      format: 'jsonv2',
+      q: query,
+      'accept-language': 'ar',
+      limit: '6',
+      addressdetails: '1',
+      viewbox: EL_ARISH_VIEWBOX,
+    });
+    const res = await fetch(`${NOMINATIM_URL}/search?${params.toString()}`);
+    if (!res.ok) throw new Error('search failed');
+    const data = await res.json();
+    return data.map((item) => ({
+      lat: parseFloat(item.lat),
+      lng: parseFloat(item.lon),
+      localName: extractLocalName(item.address),
+      fullName: item.display_name,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// points: [{lat, lng}, ...] بالترتيب من نقطة الانطلاق للنهاية (وبينهم المحطات لو موجودة)
+// بيرجع مصفوفة خيارات طريق (الأساسي + بدائل لو OSRM لقى أي طريق تاني)، كل خيار { coordinates, distanceKm, durationMin }
+export async function fetchRouteOptions(points) {
+  if (!points || points.length < 2) return [];
+  const coordsParam = points.map((p) => `${p.lng},${p.lat}`).join(';');
+  try {
+    const res = await fetch(`${OSRM_URL}/route/v1/driving/${coordsParam}?overview=full&geometries=geojson&alternatives=true`);
+    if (!res.ok) throw new Error('route failed');
+    const data = await res.json();
+    const routes = data.routes || [];
+    return routes.map((route) => ({
+      coordinates: route.geometry.coordinates.map(([lng, lat]) => [lat, lng]),
+      distanceKm: route.distance / 1000,
+      durationMin: route.duration / 60,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+// تقدير سعر مبدئي للعرض على اليوزر فقط - التسعير الحقيقي هيحسبه الباكاند
+// TODO: لما الباكاند يجهز، السعر ده هيتحط بمنطق تسعير حقيقي (وقت/مسافة/طلب) بدل الصيغة المبسطة دي
+export function estimateFare(distanceKm = 0) {
+  const base = 10;
+  const perKm = 3.5;
+  return Math.max(base, Math.round(base + distanceKm * perKm));
+}
+</file>
+
+<file path="tailwind.config.js">
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ['./public/index.html', './src/**/*.{js,jsx,ts,tsx}'],
+  plugins: [],
+  // tailwind.config.js
+  theme: {
+    extend: {
+      backgroundImage: {
+        'client-app': 'linear-gradient(to bottom, #0f1f1a, #111827, #0a0a0a)',
+        'driver-app': 'linear-gradient(to bottom, #0c1a2e, #111827, #0a0a0a)',
+        'admin-app': 'linear-gradient(to bottom, #111827, #0a0a0a)',
+      },
+    },
+  },
+};
+</file>
+
+<file path="public/index.html">
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+		<meta name="google" content="notranslate" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+</file>
+
+<file path="src/App.jsx">
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import Sign from './pages/Sign';
+import ClientSignIn from './pages/client/ClientSignIn';
+import ClientSignUp from './pages/client/ClientSignUp';
+import DriverSignIn from './pages/driver/DriverSignIn';
+import DriverSignUp from './pages/driver/DriverSignUp';
+import ClientHome from './pages/client/ClientHome';
+import ClientProfile from './pages/client/ClientProfile';
+import Favorites from './pages/client/ClientFavorites';
+import History from './pages/client/ClientHistory';
+import RequestTrip from './pages/client/RequestTrip';
+import EditProfile from './pages/client/ClientEditProfile';
+import 'leaflet/dist/leaflet.css';
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
+
+function App() {
+  return (
+    <div className='main-app min-h-screen w-full bg-client-app text-white relative'>
+      <ScrollToTop />
+      <Routes>
+        <Route path='/' element={<ClientHome />} />
+        <Route path='/profile' element={<ClientProfile />} />
+        <Route path='/profile/edit' element={<EditProfile />} />
+        <Route path='/request-trip' element={<RequestTrip />} />
+        <Route path='/bookmarks' element={<Favorites />} />
+        <Route path='/history' element={<History />} />
+        <Route path='/sign' element={<Sign />} />
+        <Route path='/client/sign-in' element={<ClientSignIn />} />
+        <Route path='/client/sign-up' element={<ClientSignUp />} />
+        <Route path='/driver/sign-in' element={<DriverSignIn />} />
+        <Route path='/driver/sign-up' element={<DriverSignUp />} />
+      </Routes>
+    </div>
+  );
+}
+
+export default App;
+</file>
+
+<file path="src/components/Navigation.jsx">
+import React, { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBookmark, faUser, faPlus, faHistory, faHome } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import ShareLocationModal from '../popups/ShareLocationModal'
+import { ACTIVE_TRIP_STATUSES } from '../redux/reducers/tripSlice'
+
+const LOCATION_PERMISSION_KEY = 'locationPermission'
+
+const navItems = [
+	{ id: 'profile', icon: faUser, path: '/profile' },
+	{ id: 'bookmark', icon: faBookmark, path: '/bookmarks' },
+	{ id: 'home', icon: faHome, path: '/' },
+	{ id: 'request-trip', icon: faPlus, path: '/request-trip' },
+	{ id: 'history', icon: faHistory, path: '/history' },
+]
+
+const getActiveId = (pathname) => navItems.find((item) => item.path === pathname)?.id || 'home'
+
+const Navigation = () => {
+	const navigate = useNavigate()
+	const location = useLocation()
+	const tripStatus = useSelector((s) => s.trip.currentTrip.status)
+	const hasActiveTrip = ACTIVE_TRIP_STATUSES.includes(tripStatus)
+	const [activeId, setActiveId] = useState(() => getActiveId(location.pathname))
+	const [showLocationModal, setShowLocationModal] = useState(false)
+	const [locationStatus, setLocationStatus] = useState('idle')
+
+	useEffect(() => {
+		setActiveId(getActiveId(location.pathname))
+	}, [location.pathname])
+
+	const handleClick = (item) => {
+		if (item.id === 'request-trip') {
+			// رحلة شغالة بالفعل - روح لشاشة الحالة على طول من غير ما نطلب اللوكيشن تاني
+			if (hasActiveTrip) {
+				setActiveId(item.id)
+				navigate(item.path)
+				return
+			}
+
+			// اتسأل عن صلاحية الموقع قبل كدا في نفس السيشن - منعرض المودال تاني
+			const permission = sessionStorage.getItem(LOCATION_PERMISSION_KEY)
+			if (permission === 'granted') {
+				navigator.geolocation.getCurrentPosition(
+					(pos) => goToRequestTrip({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
+					() => goToRequestTrip(null),
+					{ enableHighAccuracy: true, timeout: 10000 }
+				)
+				return
+			}
+			if (permission === 'skipped' || permission === 'denied') {
+				goToRequestTrip(null)
+				return
+			}
+
+			setLocationStatus('idle')
+			setShowLocationModal(true)
+			return
+		}
+		setActiveId(item.id)
+		navigate(item.path)
+	}
+
+	const goToRequestTrip = (coords) => {
+		setShowLocationModal(false)
+		setLocationStatus('idle')
+		navigate('/request-trip', coords ? { state: { coords } } : undefined)
+	}
+
+	const handleAllowLocation = () => {
+		if (!navigator.geolocation) {
+			sessionStorage.setItem(LOCATION_PERMISSION_KEY, 'skipped')
+			goToRequestTrip(null)
+			return
+		}
+		setLocationStatus('requesting')
+		navigator.geolocation.getCurrentPosition(
+			(pos) => {
+				sessionStorage.setItem(LOCATION_PERMISSION_KEY, 'granted')
+				goToRequestTrip({ lat: pos.coords.latitude, lng: pos.coords.longitude })
+			},
+			() => {
+				sessionStorage.setItem(LOCATION_PERMISSION_KEY, 'denied')
+				setLocationStatus('denied')
+			},
+			{ enableHighAccuracy: true, timeout: 10000 }
+		)
+	}
+
+	const handleSkipLocation = () => {
+		sessionStorage.setItem(LOCATION_PERMISSION_KEY, 'skipped')
+		goToRequestTrip(null)
+	}
+
+	const handleCloseLocationModal = () => {
+		setShowLocationModal(false)
+		setLocationStatus('idle')
+	}
+
+	return (
+		<>
+			<nav className='fixed bottom-5 left-0 right-0 z-50 mx-auto w-11/12 max-w-md [padding-bottom:env(safe-area-inset-bottom)]'>
+				<div className='relative flex items-center justify-around rounded-full bg-zinc-900 border border-white/5 py-3 shadow-[0_12px_40px_rgba(0,0,0,0.5)] px-2'>
+					{navItems.map((item) => {
+						const isActive = activeId === item.id
+						const isCenterButton = item.id === 'home'
+
+						return (
+							<div key={item.id} className='relative flex h-14 w-14 items-center justify-center'>
+								{isActive && (
+									<motion.div
+										layoutId='nav-halo'
+										transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+										className='absolute -top-8 z-20 flex h-[70px] w-[70px] items-center justify-center rounded-full bg-zinc-900'
+									>
+										<button
+											onClick={() => handleClick(item)}
+											className={`flex h-14 w-14 items-center justify-center rounded-full border-2 bg-transparent shadow-lg transition-all
+												${isCenterButton
+													? 'border-yellow-400 text-yellow-400 shadow-[0_0_20px_rgba(250,204,21,0.4)]'
+													: 'border-emerald-400 text-emerald-400 shadow-[0_0_20px_rgba(16,185,129,0.35)]'
+												}`}
+										>
+											<FontAwesomeIcon icon={item.icon} className='text-xl' />
+										</button>
+									</motion.div>
+								)}
+
+								<button
+									onClick={() => handleClick(item)}
+									className={`flex items-center justify-center rounded-full transition-all duration-300
+										${isActive ? 'opacity-0' : 'text-zinc-400 hover:text-white'}
+										${isCenterButton
+											? 'h-14 w-14 bg-zinc-800 text-yellow-400 border border-yellow-400/20 shadow-md scale-105'
+											: 'h-14 w-14 bg-zinc-800/40 hover:bg-zinc-800'
+										}`}
+								>
+									<FontAwesomeIcon icon={item.icon} className={isCenterButton ? 'text-lg' : 'text-base'} />
+								</button>
+							</div>
+						)
+					})}
+				</div>
+			</nav>
+
+			{showLocationModal && (
+				<ShareLocationModal
+					status={locationStatus}
+					onAllow={handleAllowLocation}
+					onSkip={handleSkipLocation}
+					onClose={handleCloseLocationModal}
+				/>
+			)}
+		</>
+	)
+}
+
+export default Navigation
+</file>
+
+<file path="src/components/Sections.jsx">
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar, faTriangleExclamation, faCircleInfo, faHashtag, faUser, faClock, faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import Tag from './Tag'
+
+export const SentRates = ({ rates }) => {
+  if (!rates || rates.length === 0) {
+    return <p className='text-zinc-400 text-sm text-center py-8 font-light'>لا توجد تقييمات مرسلة حتى الآن</p>
+  }
+
+  return (
+    <div className='space-y-3.5 w-full animate-fade-in'>
+      {rates.map((rate) => (
+        <div key={rate.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
+          <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
+            <Tag color='blue'>تقييم مرسل</Tag>
+            <div className='flex text-yellow-400 text-xs gap-0.5 bg-yellow-500/5 px-2 py-0.5 rounded-lg'>
+              {[...Array(Number(rate.value || 5))].map((_, i) => (
+                <FontAwesomeIcon key={i} icon={faStar} />
+              ))}
+            </div>
+          </div>
+          
+          <div className='grid grid-cols-2 gap-2 text-xs text-zinc-400 mt-1'>
+            <p className='flex items-center gap-1.5'><FontAwesomeIcon icon={faUser} className='text-zinc-500 text-[10px]' /> <span className='text-zinc-200 font-medium'>السائق:</span> {rate.driverName || rate.driverId || '-'}</p>
+            <p className='flex items-center gap-1.5 justify-end'><FontAwesomeIcon icon={faHashtag} className='text-zinc-500 text-[10px]' /> <span className='text-zinc-200 font-medium'>الرحلة:</span> {rate.tripId || '-'}</p>
+          </div>
+
+          {rate.comment && (
+            <p className='text-zinc-300 text-xs bg-zinc-900/40 p-3 rounded-xl border border-zinc-800/60 mt-1 text-right font-light leading-relaxed relative before:content-["“"] before:text-zinc-600 before:text-lg before:ml-1'>
+              {rate.comment}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const ReceivedRates = ({ rates }) => {
+  if (!rates || rates.length === 0) {
+    return <p className='text-zinc-400 text-sm text-center py-8 font-light'>لا توجد تقييمات مستلمة حتى الآن</p>
+  }
+
+  return (
+    <div className='space-y-3.5 w-full animate-fade-in'>
+      {rates.map((rate) => (
+        <div key={rate.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
+          <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
+            <Tag color='green'>تقييم مستلم</Tag>
+            <div className='flex text-yellow-400 text-xs gap-0.5 bg-yellow-500/5 px-2 py-0.5 rounded-lg'>
+              {[...Array(Number(rate.value || 5))].map((_, i) => (
+                <FontAwesomeIcon key={i} icon={faStar} />
+              ))}
+            </div>
+          </div>
+
+          <div className='grid grid-cols-2 gap-2 text-xs text-zinc-400 mt-1'>
+            <p className='flex items-center gap-1.5'><FontAwesomeIcon icon={faUser} className='text-zinc-500 text-[10px]' /> <span className='text-zinc-200 font-medium'>الكابتن:</span> {rate.driverName || rate.driverId || '-'}</p>
+            <p className='flex items-center gap-1.5 justify-end'><FontAwesomeIcon icon={faHashtag} className='text-zinc-500 text-[10px]' /> <span className='text-zinc-200 font-medium'>الرحلة:</span> {rate.tripId || '-'}</p>
+          </div>
+
+          {rate.comment && (
+            <p className='text-zinc-300 text-xs bg-zinc-900/40 p-3 rounded-xl border border-zinc-800/60 mt-1 text-right font-light leading-relaxed'>
+              {rate.comment}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const SentReports = ({ reports }) => {
+  if (!reports || reports.length === 0) {
+    return <p className='text-zinc-400 text-sm text-center py-8 font-light'>لا توجد بلاغات مرسلة حتى الآن</p>
+  }
+
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'accepted':
+      case 'resolved':
+        return <Tag color='green' icon={faCheckCircle}>تم الحل</Tag>
+      case 'rejected':
+        return <Tag color='red' icon={faXmarkCircle}>مرفوض</Tag>
+      default:
+        return <Tag color='blue' icon={faClock} pulse>قيد المراجعة</Tag>
+    }
+  }
+
+  return (
+    <div className='space-y-3.5 w-full animate-fade-in'>
+      {reports.map((report) => (
+        <div key={report.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
+          <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
+            <Tag color='amber' icon={faTriangleExclamation}>بلاغ مرسل منك</Tag>
+            {getStatusBadge(report.status)}
+          </div>
+
+          <p className='text-zinc-100 text-sm font-semibold mt-1 text-right'>السبب: <span className='text-zinc-300 font-normal'>{report.reason}</span></p>
+          
+          <div className='grid grid-cols-2 gap-2 text-[11px] text-zinc-400 border-t border-zinc-800/30 pt-2 mt-1'>
+            <p className='flex items-center gap-1.5'><FontAwesomeIcon icon={faUser} className='text-zinc-500' /> ضد السائق: {report.driverName || report.driverId || '-'}</p>
+            <p className='flex items-center gap-1.5 justify-end'><FontAwesomeIcon icon={faHashtag} className='text-zinc-500' /> الرحلة: {report.tripId || '-'}</p>
+          </div>
+
+          <div className='flex justify-between items-center mt-1 text-[10px] text-zinc-500 font-mono'>
+            <span>{report.time || '-'}</span>
+            {report.attachment && (
+              <a href={report.attachment} target="_blank" rel="noreferrer" className='text-blue-400 hover:underline font-sans font-medium text-xs'>🔗 عرض المرفق</a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export const ReceivedReports = ({ reports }) => {
+  if (!reports || reports.length === 0) {
+    return <p className='text-zinc-400 text-sm text-center py-8 font-light'>لا توجد بلاغات مستلمة حتى الآن</p>
+  }
+
+  const getStatusBadge = (status) => {
+    switch (status) {
+      case 'accepted':
+      case 'resolved':
+        return <Tag color='green' icon={faCheckCircle}>تم الفصل فيه</Tag>
+      case 'rejected':
+        return <Tag color='red' icon={faXmarkCircle}>ملغي / مرفوض</Tag>
+      default:
+        return <Tag color='blue' icon={faClock} pulse>تحت التحقيق</Tag>
+    }
+  }
+
+  return (
+    <div className='space-y-3.5 w-full animate-fade-in'>
+      {reports.map((report) => (
+        <div key={report.id} className='w-full bg-zinc-700/30 border border-zinc-700/40 p-4 rounded-2xl flex flex-col gap-2 shadow-sm'>
+          <div className='flex justify-between items-center border-b border-zinc-700/40 pb-2'>
+            <Tag color='red' icon={faCircleInfo}>شكوى مقدمة ضدك</Tag>
+            {getStatusBadge(report.status)}
+          </div>
+
+          <p className='text-zinc-100 text-sm font-semibold mt-1 text-right'>موضوع الشكوى: <span className='text-zinc-300 font-normal'>{report.reason}</span></p>
+          
+          <div className='grid grid-cols-2 gap-2 text-[11px] text-zinc-400 border-t border-zinc-800/30 pt-2 mt-1'>
+            <p className='flex items-center gap-1.5'><FontAwesomeIcon icon={faUser} className='text-zinc-500' /> صاحب البلاغ: {report.senderName || report.sender || 'سائق مبهم'}</p>
+            <p className='flex items-center gap-1.5 justify-end'><FontAwesomeIcon icon={faHashtag} className='text-zinc-500' /> الرحلة: {report.tripId || '-'}</p>
+          </div>
+
+          <div className='flex justify-between items-center mt-1 text-[10px] text-zinc-500 font-mono'>
+            <span>{report.time || '-'}</span>
+            {report.attachment && (
+              <a href={report.attachment} target="_blank" rel="noreferrer" className='text-blue-400 hover:underline font-sans font-medium text-xs'>🔗 المستندات المرفقة</a>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+</file>
+
+<file path="src/index.js">
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './redux/store';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+
+  <React.StrictMode>
+    <Provider store={store}>
+      <Router>
+        <App />
+      </Router>
+    </Provider>
+  </React.StrictMode>
+);
+
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
+</file>
+
+<file path="src/pages/client/ClientHistory.jsx">
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faLocationDot, faCar, faCheckCircle, faXmarkCircle, faMapPin } from '@fortawesome/free-solid-svg-icons'
+import Navigation from '../../components/Navigation'
+import Tag from '../../components/Tag'
+
+const statusBadge = (status) =>
+	status === 'completed' ? (
+		<Tag color='green' icon={faCheckCircle}>مكتملة</Tag>
+	) : (
+		<Tag color='red' icon={faXmarkCircle}>ملغاة</Tag>
+	)
+
+const History = () => {
+	const navigate = useNavigate()
+	const allTrips = useSelector((state) => state.trip?.history || [])
+	const userId = useSelector((state) => state.auth?.id)
+	const trips = allTrips.filter((trip) => !trip.clientId || trip.clientId === userId)
+
+	return (
+		<div className='min-h-screen w-full bg-gradient-to-b from-gray-800 to-gray-900 text-white relative flex flex-col p-4 pt-20 pb-28' dir='rtl'>
+			<header className='fixed top-0 left-0 right-0 p-4 z-40 flex items-center gap-4 bg-gray-800/80 backdrop-blur-md'>
+				<button onClick={() => navigate(-1)} className='w-10 h-10 rounded-full bg-zinc-800 flex items-center justify-center'>
+					<FontAwesomeIcon icon={faChevronRight} />
+				</button>
+				<h1 className='text-lg font-bold'>رحلاتي السابقة</h1>
+			</header>
+
+			<div className='flex flex-col gap-3.5 mt-2'>
+				{trips.length === 0 ? (
+					<p className='text-zinc-400 text-sm text-center py-10'>لا توجد رحلات سابقة حتى الآن</p>
+				) : (
+					trips.map((trip) => (
+						<div key={trip.id} className='bg-zinc-800/70 border border-zinc-700/40 rounded-2xl p-4 flex flex-col gap-3'>
+							<div className='flex justify-between items-center'>
+								<span className='text-xs text-zinc-400'>{trip.date} · {trip.time}</span>
+								<div className='flex items-center gap-1.5'>
+									{trip.waypoints?.length > 0 && (
+										<Tag color='blue' icon={faMapPin}>{trip.waypoints.length} محطات</Tag>
+									)}
+									{statusBadge(trip.status)}
+								</div>
+							</div>
+
+							<div className='flex flex-col gap-1.5 text-sm'>
+								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-emerald-400 text-xs' /> {trip.startPin?.name}</p>
+								<p className='flex items-center gap-2'><FontAwesomeIcon icon={faLocationDot} className='text-red-400 text-xs' /> {trip.endPin?.name}</p>
+							</div>
+
+							<div className='flex justify-between items-center border-t border-zinc-700/40 pt-2.5 text-xs text-zinc-400'>
+								<span className='flex items-center gap-1.5'><FontAwesomeIcon icon={faCar} /> {trip.driverName} · {trip.car}</span>
+								<span className='font-bold text-white text-sm'>{trip.price > 0 ? `${trip.price} ج.م` : '—'}</span>
+							</div>
+						</div>
+					))
+				)}
+			</div>
+
+			<Navigation />
+		</div>
+	)
+}
+
+export default History
+</file>
+
+<file path="src/pages/client/ClientHome.jsx">
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux'; // Hook عشان نقرأ الداتا من الستور و Hook عشان ننفذ الأكشنز
+import { useNavigate } from 'react-router-dom'; // للتنقل بين الصفحات
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner, faLocationDot, faClock, faCarSide, faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { cancelTrip } from '../../redux/reducers/tripSlice'; // أكشن الإلغاء
+import Navigation from '../../components/Navigation'; // نافيجيشن بار
+import Header from '../../components/Header'; // الهيدر
+
+const ClientHome = () => {
+  const dispatch = useDispatch(); // بنستخدمه عشان نبعت أمر "إلغاء الرحلة"
+  const navigate = useNavigate(); // بنستخدمه عشان ننقل اليوزر لصفحة الخريطة
+
+  // بنسحب بيانات الرحلة من الـ Redux
+  const { currentTrip, offers } = useSelector((state) => state.trip);
+  
+  // بنحدد هل فيه رحلة شغالة؟ (حالتها pending يعني لسه بتدور، أو ongoing يعني السواق ركب)
+  const isTripActive = ["pending", "ongoing"].includes(currentTrip?.status);
+
+  return (
+    // min-h-screen بتخلي الصفحة واخدة طول الشاشة كله
+    // flex flex-col بتخلي العناصر فوق بعض بالترتيب
+    <div className="flex flex-col min-h-screen bg-zinc-950 text-white">
+      <Header />
+
+      {/* الجزء ده بيمثل محتوى الصفحة اللي في النص */}
+      {/* flex-1 بتخليه ياخد كل المساحة المتبقية بين الهيدر والنافيجيشن */}
+      <main className="flex-1 flex flex-col p-4">
+        
+        {isTripActive ? (
+          // لو في رحلة شغالة، اعرض كارت الرحلة (قابل للضغط للانتقال لتفاصيل الرحلة)
+          <div onClick={() => navigate('/request-trip')} className="bg-zinc-900 border border-emerald-500/30 rounded-3xl p-4 shadow-lg w-full cursor-pointer">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-white font-bold">
+                {currentTrip.status === "pending" ? "جاري البحث عن كابتن..." : "رحلتك الحالية"}
+              </h2>
+              <div className='flex items-center gap-2'>
+                <button 
+                  onClick={(e) => { e.stopPropagation(); dispatch(cancelTrip()); }} // وقف بابلينج عشان ميعملش ناڤيجيت
+                  className="text-red-400 text-xs bg-red-950/30 px-3 py-1 rounded-full"
+                >
+                  إلغاء
+                </button>
+                <button
+                  onClick={(e) => { e.stopPropagation(); navigate('/request-trip', { state: { editing: true } }); }}
+                  className='text-emerald-400 text-xs bg-emerald-950/10 px-3 py-1 rounded-full'
+                >
+                  تعديل
+                </button>
+              </div>
+            </div>
+            {/* ... بقية كود الرحلة ... */}
+          </div>
+        ) : (
+          // لو مفيش رحلات، استخدمنا flex-1 مع items-center و justify-center عشان نجيب الرسالة والزرار في النص بالظبط
+          <div className="flex-1 flex flex-col items-center justify-center gap-4">
+            <p className="text-zinc-500 text-sm">لا توجد رحلات نشطة حالياً</p>
+            
+            {/* زرار طلب رحلة جديدة - وده اللي كان غالباً ناقص عندك عشان اليوزر يعرف يبدأ */}
+            <button 
+              onClick={() => navigate('/request-trip')} // بنوديه لصفحة الخريطة
+              className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl font-bold transition-all"
+            >
+              <FontAwesomeIcon icon={faPlus} />
+              اطلب رحلة جديدة
+            </button>
+          </div>
+        )}
+      </main>
+
+      <Navigation />
+    </div>
+  );
+};
+
+export default ClientHome;
+</file>
+
+<file path="src/redux/reducers/tripSlice.jsx">
+import { createSlice } from '@reduxjs/toolkit';
+import { distanceMeters } from '../../utils/geo';
+
+// الحالات اللي تعتبر "رحلة شغالة" - طالما الرحلة في واحدة منهم العميل ميقدرش يطلب رحلة جديدة
+export const ACTIVE_TRIP_STATUSES = ['pending', 'ongoing'];
+
+// نطاق المنطقة المسماة - أي نقطة جوه الدايرة دي بتاخد نفس الاسم
+export const NAMED_AREA_RADIUS_M = 20;
+
+// بيدور على أقرب منطقة متسماة قبل كدا حوالين النقطة دي (لو موجودة)
+export const findNamedArea = (namedAreas, lat, lng) => namedAreas.find(area => distanceMeters(area, { lat, lng }) <= area.radiusM) || null;
+
+const emptyTrip = () => ({
+  id: null,
+  clientId: null,
+  driverId: null,
+  driverName: null,
+  car: null,
+  startPin: null,
+  endPin: null,
+  waypoints: [],
+  route: null, // { coordinates, distanceKm, durationMin, price } - جاي من OSRM
+  status: 'idle', // idle | pending | ongoing | completed | cancelled
+  price: 0,
+  ridersCount: 1,
+  createdAt: null,
+  startTime: null,
+});
+
+const toHistoryEntry = (trip, status) => ({
+  id: trip.id || `trip_${Date.now()}`,
+  clientId: trip.clientId,
+  startPin: trip.startPin,
+  endPin: trip.endPin,
+  waypoints: trip.waypoints,
+  driverName: trip.driverName,
+  car: trip.car,
+  price: trip.price,
+  distanceKm: trip.route?.distanceKm,
+  durationMin: trip.route?.durationMin,
+  date: new Date().toLocaleDateString('ar-EG'),
+  time: new Date().toLocaleTimeString('ar-EG'),
+  status,
+});
+
+const initialState = {
+  currentTrip: emptyTrip(),
+  savedTrips: [
+    // هنا سيتم حفظ الرحلات
+  ],
+  // أسماء المناطق المقترحة من اليوزرز - لحد ما يبقى فيه لوحة أدمن تدير اللستة دي رسميًا
+  namedAreas: [
+    // { id, lat, lng, radiusM: 20, name, suggestions: [{ name, at }] }
+  ],
+  offers: [
+    { id: 'o_1', driverId: 'd_50', driverName: 'أحمد منصور', price: 50, rate: 4.8, car: 'فيرنا فيراني', timeToReach: '4 دقائق', startTime: '3:05 PM' },
+    { id: 'o_2', driverId: 'd_62', driverName: 'إسلام علوان', price: 55, rate: 4.9, car: 'لانوس بيضاء', timeToReach: '6 دقائق', startTime: '3:15 PM' },
+  ],
+  history: [
+    { id: 'trip_098', clientId: 'a_01', startPin: { name: 'ميدان رمسيس', lat: 30.0444, lng: 31.2357 }, endPin: { name: 'مدينة نصر', lat: 30.1211, lng: 31.3452 }, waypoints: [], driverName: 'أحمد منصور', car: 'فيرنا فيراني', price: 45, date: '2024-06-12', time: '3:30 PM', status: 'completed' },
+    { id: 'trip_095', clientId: 'a_01', startPin: { name: 'المعادي', lat: 29.9561, lng: 31.22 }, endPin: { name: 'وسط البلد', lat: 30.0611, lng: 31.2446 }, waypoints: [], driverName: 'إسلام علوان', car: 'لانوس بيضاء', price: 38, date: '2024-06-09', time: '11:10 AM', status: 'completed' },
+    { id: 'trip_090', clientId: 'a_01', startPin: { name: 'الدقي', lat: 30.0794, lng: 31.1997 }, endPin: { name: 'مدينة نصر', lat: 30.1211, lng: 31.3452 }, waypoints: [], driverName: 'محمود سعيد', car: 'تويوتا كورولا', price: 0, date: '2024-06-02', time: '8:00 PM', status: 'cancelled' },
+  ],
+};
+
+const tripSlice = createSlice({
+  name: 'trip',
+  initialState,
+  reducers: {
+    updateStartPin: (state, action) => {
+      state.currentTrip.startPin = action.payload;
+    },
+    updateEndPin: (state, action) => {
+      state.currentTrip.endPin = action.payload;
+    },
+    addWaypoint: (state, action) => {
+      state.currentTrip.waypoints.push(action.payload);
+    },
+    updateWaypoint: (state, action) => {
+      const { index, pin } = action.payload;
+      state.currentTrip.waypoints[index] = pin;
+    },
+    removeWaypoint: (state, action) => {
+      state.currentTrip.waypoints.splice(action.payload, 1);
+    },
+    clearWaypoints: state => {
+      state.currentTrip.waypoints = [];
+    },
+    setRoute: (state, action) => {
+      state.currentTrip.route = action.payload;
+    },
+    saveTrip: (state, action) => {
+      const newTrip = {
+        ...action.payload,
+        id: `saved_${Date.now()}`,
+        createdAt: new Date().toLocaleString('ar-EG'),
+        status: 'saved',
+      };
+      state.savedTrips.unshift(newTrip);
+    },
+    removeSavedTrip: (state, action) => {
+      state.savedTrips = state.savedTrips.filter(t => t.id !== action.payload);
+    },
+    // يحمّل رحلة محفوظة في الرحلة الحالية عشان اليوزر يطلبها تاني من غير ما يعيد تحديد النقط
+    loadSavedTrip: (state, action) => {
+      const saved = action.payload;
+      state.currentTrip.startPin = saved.startPin;
+      state.currentTrip.endPin = saved.endPin;
+      state.currentTrip.waypoints = saved.waypoints || [];
+      state.currentTrip.route = null;
+    },
+    // اقتراح اسم لمنطقة غير معروفة - مؤقتًا بيتقبل الاسم على طول لحد ما تتجهز لوحة الأدمن لمراجعة/اختيار الاسم من اللستة
+    // TODO: لما لوحة الأدمن تجهز، الاسم المعروض للمستخدمين لازم يتحول لاسم "معتمد من الأدمن" بدل أول اقتراح بيوصل
+    suggestAreaName: (state, action) => {
+      const { lat, lng, name } = action.payload;
+      const trimmedName = name.trim();
+      if (!trimmedName) return;
+      const existing = findNamedArea(state.namedAreas, lat, lng);
+      if (existing) {
+        existing.suggestions.push({ name: trimmedName, at: new Date().toLocaleString('ar-EG') });
+        if (!existing.name) existing.name = trimmedName;
+      } else {
+        state.namedAreas.push({
+          id: `area_${Date.now()}`,
+          lat,
+          lng,
+          radiusM: NAMED_AREA_RADIUS_M,
+          name: trimmedName,
+          suggestions: [{ name: trimmedName, at: new Date().toLocaleString('ar-EG') }],
+        });
+      }
+    },
+    // ... داخل الـ reducers في tripSlice.js
+
+    requestTrip: (state, action) => {
+      const { clientId, price, startTime, pickupDistanceM, farFromPickupNote } = action.payload;
+
+      // تحديث الـ currentTrip ببيانات الطلب
+      state.currentTrip = {
+        ...state.currentTrip,
+        status: 'pending',
+        id: `TRIP_${Date.now()}`,
+        clientId: clientId,
+        price: price,
+        // حفظ وقت الطلب وتاريخه
+        requestedStartTime: startTime || new Date().toLocaleTimeString('ar-EG'),
+        createdAt: new Date().toISOString(), // تنسيق ISO للتعامل الأسهل برمجياً
+        pickupDistanceM: pickupDistanceM,
+        farFromPickupNote: farFromPickupNote,
+      };
+
+      // ممكن هنا نفضي العروض القديمة أو نجهزها لاستقبال عروض جديدة
+      state.offers = [];
+    },
+
+    acceptOffer: (state, action) => {
+      const offer = action.payload;
+      // بنحدث حالة الرحلة لـ ongoing وبنربطها ببيانات السواق
+      state.currentTrip = {
+        ...state.currentTrip,
+        driverId: offer.driverId,
+        driverName: offer.driverName,
+        car: offer.car,
+        price: offer.price,
+        status: 'ongoing',
+      };
+    },
+
+    cancelTrip: state => {
+      // قبل ما نصفر الرحلة، بنضيفها للهيستوري
+      if (state.currentTrip.startPin) {
+        state.history.unshift(toHistoryEntry(state.currentTrip, 'cancelled'));
+      }
+      state.currentTrip = emptyTrip(); // إعادة الستيت لحالتها الفاضية
+    },
+    // TODO: مؤقت لحد ما الباكاند يبعت إشعار إنهاء حقيقي من تطبيق السائق - هنا بنخلص الرحلة يدويًا
+    completeTrip: state => {
+      state.history.unshift(toHistoryEntry(state.currentTrip, 'completed'));
+      state.currentTrip = emptyTrip();
+    },
+    addTripToHistory: (state, action) => {
+      state.history.unshift(action.payload);
+    },
+    clearCurrentTrip: state => {
+      state.currentTrip = emptyTrip();
+    },
+  },
+});
+
+export const { updateStartPin, updateEndPin, addWaypoint, updateWaypoint, removeWaypoint, clearWaypoints, setRoute, saveTrip, removeSavedTrip, loadSavedTrip, suggestAreaName, requestTrip, acceptOffer, cancelTrip, completeTrip, addTripToHistory, clearCurrentTrip } = tripSlice.actions;
+
+export default tripSlice.reducer;
+</file>
+
+<file path="package.json">
+{
+  "name": "taxi-el3asmh",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
+    "@reduxjs/toolkit": "^2.11.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^13.5.0",
+    "@tsparticles/react": "^3.0.0",
+    "@tsparticles/slim": "^3.9.1",
+    "framer-motion": "^12.40.0",
+    "leaflet": "^1.9.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-easy-crop": "^6.0.2",
+    "react-leaflet": "^5.0.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^7.14.1",
+    "react-scripts": "5.0.1",
+    "swiper": "^12.1.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.5.0",
+    "postcss": "^8.5.15",
+    "tailwindcss": "^3.4.19"
+  }
+}
+</file>
+
+<file path="src/index.css">
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	direction: rtl;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+.main-app:has(.page-screen) {
+  padding: 40px;
+	padding-top: 80px;
+}
+
+.map-pin {
+	width: 24px;
+	height: 24px;
+	border-radius: 9999px;
+	border: 3px solid white;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.leaflet-container {
+	font-family: inherit;
+	background: #111827;
+}
+</file>
+
+</files>
