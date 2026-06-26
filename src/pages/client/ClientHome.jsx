@@ -20,12 +20,12 @@ const ClientHome = () => {
   return (
     // min-h-screen بتخلي الصفحة واخدة طول الشاشة كله
     // flex flex-col بتخلي العناصر فوق بعض بالترتيب
-    <div className="flex flex-col min-h-screen bg-zinc-950 text-white">
+    <div className="flex flex-col min-h-screen text-white">
       <Header />
 
       {/* الجزء ده بيمثل محتوى الصفحة اللي في النص */}
       {/* flex-1 بتخليه ياخد كل المساحة المتبقية بين الهيدر والنافيجيشن */}
-      <main className="flex-1 flex flex-col p-4">
+      <main className="flex-1 flex flex-col p-4 pt-20">
         
         {isTripActive ? (
           // لو في رحلة شغالة، اعرض كارت الرحلة (قابل للضغط للانتقال لتفاصيل الرحلة)
@@ -57,8 +57,18 @@ const ClientHome = () => {
             <p className="text-zinc-500 text-sm">لا توجد رحلات نشطة حالياً</p>
             
             {/* زرار طلب رحلة جديدة - وده اللي كان غالباً ناقص عندك عشان اليوزر يعرف يبدأ */}
-            <button 
-              onClick={() => navigate('/request-trip')} // بنوديه لصفحة الخريطة
+            <button
+              onClick={() => {
+                if (navigator.geolocation) {
+                  navigator.geolocation.getCurrentPosition(
+                    pos => navigate('/request-trip', { state: { coords: { lat: pos.coords.latitude, lng: pos.coords.longitude } } }),
+                    () => navigate('/request-trip'),
+                    { enableHighAccuracy: true, timeout: 8000 },
+                  );
+                } else {
+                  navigate('/request-trip');
+                }
+              }}
               className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 px-6 py-3 rounded-2xl font-bold transition-all"
             >
               <FontAwesomeIcon icon={faPlus} />

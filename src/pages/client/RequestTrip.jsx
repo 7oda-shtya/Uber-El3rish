@@ -33,7 +33,7 @@ const RequestTrip = () => {
   const [showProximityNote, setShowProximityNote] = useState(false);
   const [showTooFarModal, setShowTooFarModal] = useState(false);
 
-  const isActive = ACTIVE_TRIP_STATUSES.includes(currentTrip.status);
+  const isActive = ACTIVE_TRIP_STATUSES.includes(currentTrip.status) && !state?.editing;
   const coords = state?.coords;
 
   // 🌟 الكشف هل الرحلة دي محفوظة حالياً ولا لأ عشان نعرض شكل الزرار
@@ -149,7 +149,7 @@ const RequestTrip = () => {
   const isFarFromPickup = proximity.distanceM !== null && proximity.distanceM > PROXIMITY_LIMIT_M;
   const proximityNeedsNote = isFarFromPickup || proximity.failed;
 
-  const handleConfirmRequest = () => {
+  const handleConfirmRequest = (opts = {}) => {
     // 1. فحص النقط (إضافة log للتأكد من الحالة)
     console.log('Current Trip State:', currentTrip);
 
@@ -180,7 +180,9 @@ const RequestTrip = () => {
     dispatch(
       requestTrip({
         ...currentTrip,
-        // أي بيانات إضافية يحتاجها الـ reducer
+        scheduledTime: opts.scheduledTime || null,
+        customerNote: opts.customerNote || null,
+        passengerCount: opts.passengerCount || 1,
       }),
     );
 
@@ -189,11 +191,7 @@ const RequestTrip = () => {
     // 4. إظهار البوب أب (هنا السحر)
     setShowRequestSuccess(true);
 
-    // 5. الانتظار ثم الانتقال
-    setTimeout(() => {
-      setShowRequestSuccess(false);
-      navigate('/home'); // أو المسار الذي تريده للهوم
-    }, 1500);
+    // لا نغلق البوبوب تلقائياً بعد الآن — ننتظر ضغط المستخدم على زر "اذهب للرئيسية"
   };
 
   // حالة عرض بوبوب نجاح الطلب

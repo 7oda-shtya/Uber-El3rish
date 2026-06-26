@@ -132,8 +132,9 @@ const tripSlice = createSlice({
     },
     // ... داخل الـ reducers في tripSlice.js
 
+
     requestTrip: (state, action) => {
-      const { clientId, price, startTime, pickupDistanceM, farFromPickupNote } = action.payload;
+      const { clientId, price, startTime, pickupDistanceM, farFromPickupNote, scheduledTime, customerNote, passengerCount } = action.payload;
 
       // تحديث الـ currentTrip ببيانات الطلب
       state.currentTrip = {
@@ -147,6 +148,9 @@ const tripSlice = createSlice({
         createdAt: new Date().toISOString(), // تنسيق ISO للتعامل الأسهل برمجياً
         pickupDistanceM: pickupDistanceM,
         farFromPickupNote: farFromPickupNote,
+        scheduledTime: scheduledTime || null,
+        customerNote: customerNote || null,
+        passengerCount: passengerCount || state.currentTrip.ridersCount || 1,
       };
 
       // ممكن هنا نفضي العروض القديمة أو نجهزها لاستقبال عروض جديدة
