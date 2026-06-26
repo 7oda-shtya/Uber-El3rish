@@ -2,6 +2,17 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCar, faStar, faRoute, faClock, faFlagCheckered } from '@fortawesome/free-solid-svg-icons'
 
+/**
+ * TripStatusPanel
+ * props:
+ * - trip: كائن الرحلة الحالية
+ * - offers: قائمة العروض من السائقين (تُعرض عندما تكون الرحلة في حالة 'pending')
+ * - onAccept(offer): قبول عرض سائق
+ * - onCancel(): إلغاء الطلب
+ * - onFinish(): تأكيد انتهاء الرحلة (تجريبي)
+ *
+ * يعرض حالة الرحلة الحالية، النقاط (بداية/محطات/نهاية)، وقائمة العروض إن وُجدت.
+ */
 const TripStatusPanel = ({ trip, offers, onAccept, onCancel, onFinish }) => {
   const isPending = trip.status === 'pending'
 
@@ -87,7 +98,6 @@ const TripStatusPanel = ({ trip, offers, onAccept, onCancel, onFinish }) => {
             <span className='font-bold'>{trip.price} ج.م</span>
           </div>
 
-          {/* TODO: الزر ده مؤقت للتجربة لحد ما الباكاند يبعت إشعار إنهاء حقيقي من تطبيق السائق */}
           <button
             onClick={onFinish}
             className='w-full bg-emerald-600 hover:bg-emerald-500 rounded-2xl py-2.5 text-xs font-bold flex items-center justify-center gap-2 transition-colors'

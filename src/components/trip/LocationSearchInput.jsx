@@ -3,11 +3,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass, faSpinner, faLocationDot } from '@fortawesome/free-solid-svg-icons'
 import { searchPlaces } from '../../utils/geo'
 
+/**
+ * LocationSearchInput
+ * props:
+ * - placeholder: نص إرشادي لحقل البحث
+ * - onSelect(place): تستدعى عند اختيار مكان من النتائج
+ *
+ * هذا المكوّن يتعامل مع حالة البحث المحلية، يطلب مقترحات أماكن من `searchPlaces`
+ * ويعرض النتائج مع تأخير بسيط (debounce) لتقليل الطلبات.
+ */
 const LocationSearchInput = ({ placeholder, onSelect }) => {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState([])
   const [loading, setLoading] = useState(false)
 
+  // يتابع قيمة البحث ويجلب نتائج بعد تأخير بسيط
   useEffect(() => {
     if (query.trim().length < 2) {
       setResults([])

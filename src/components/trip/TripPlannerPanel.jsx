@@ -2,6 +2,20 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleDot, faMapPin, faFlagCheckered } from '@fortawesome/free-solid-svg-icons';
 
+/**
+ * TripPlannerPanel
+ * props:
+ * - trip: كائن الرحلة الحالية (`currentTrip` من الـ Redux)
+ * - pickTarget: الحالة التي تحدد أي نقطة يتم اختيارها عند النقر على الخريطة
+ * - onSetPickTarget(target): تعيّن هدف الاختيار ('start' | 'end' | { waypoint: true })
+ * - onConfirm(opts): تُستدعى عند تأكيد الطلب مع الـ opts التي تحتوي على `scheduledTime`, `customerNote`, `passengerCount`
+ * - requesting: علم يوضح أن هناك عملية طلب جارية
+ * - isTripSaved: هل الرحلة محفوظة مسبقاً
+ * - onToggleSaveTrip: تبديل حالة الحفظ
+ *
+ * هذا المكوّن يعرض أزرار تحديد النقاط، ونموذج صغير لتفاصيل الرحلة (تحديد موعد، عدد ركاب، ملاحظات)،
+ * ويقوم بتجميع هذه القيم وإعادة الاتصال للـ parent عبر `onConfirm`.
+ */
 const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onConfirm, requesting, isTripSaved, onToggleSaveTrip }) => {
   const isTripReady = trip.startPin && trip.endPin;
   const [showInfoModal, setShowInfoModal] = useState(false);
@@ -11,7 +25,7 @@ const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onConfirm, reques
   const [customerNote, setCustomerNote] = useState('');
   const [passengerCount, setPassengerCount] = useState(1);
 
-  // دالة ذكية تحدد إيه اللي مكتوب في الإشعار
+  // يرجع نص الحالة الظاهر في الشريط العلوي بناءً على هدف الاختيار أو جاهزية النقاط
   const getStatusText = () => {
     if (pickTarget === 'start') return 'يتم تحديد نقطة البداية...';
     if (pickTarget === 'end') return 'يتم تحديد نقطة الوصول...';
@@ -21,13 +35,10 @@ const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onConfirm, reques
 
   return (
     <div className='absolute inset-x-0 top-16 z-30 flex flex-col items-center p-4 gap-4'>
-      
-      {/* 1. الإشعار الطايف */}
       <div className='bg-black/70 backdrop-blur-md text-white px-4 py-2 rounded-full text-xs font-bold border border-white/10 shadow-lg'>
         {getStatusText()}
       </div>
 
-      {/* 2. شريط الأزرار (Controls) - showing selected names when available */}
       <div className='flex gap-2 w-full justify-center'>
         <button onClick={() => onSetPickTarget('start')} className={`p-3 rounded-2xl flex flex-col items-center gap-1 w-28 shadow-lg ${pickTarget === 'start' ? 'bg-emerald-600' : 'bg-zinc-900'}`}>
           <FontAwesomeIcon icon={faCircleDot} />
@@ -35,7 +46,7 @@ const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onConfirm, reques
         </button>
         <button onClick={() => onSetPickTarget({ waypoint: true })} className={`p-3 rounded-2xl flex flex-col items-center gap-1 w-28 shadow-lg ${pickTarget?.waypoint ? 'bg-blue-600' : 'bg-zinc-900'}`}>
           <FontAwesomeIcon icon={faMapPin} />
-          <span className='text-[11px] text-center truncate w-20'>{/* waypoint label - show generic */}محطة</span>
+          <span className='text-[11px] text-center truncate w-20'>محطة</span>
         </button>
         <button onClick={() => onSetPickTarget('end')} className={`p-3 rounded-2xl flex flex-col items-center gap-1 w-28 shadow-lg ${pickTarget === 'end' ? 'bg-red-600' : 'bg-zinc-900'}`}>
           <FontAwesomeIcon icon={faFlagCheckered} />
@@ -43,7 +54,6 @@ const TripPlannerPanel = ({ trip, pickTarget, onSetPickTarget, onConfirm, reques
         </button>
       </div>
 
-      {/* 3. كارت تفاصيل الرحلة (يظهر فقط لو فيه بداية ونهاية) */}
       {isTripReady && (
         <>
           <div className='w-full flex justify-center'>

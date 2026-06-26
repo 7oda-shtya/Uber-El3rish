@@ -2,8 +2,10 @@ import React, { useEffect } from 'react'
 import { MapContainer, TileLayer, Marker, Polyline, useMap, useMapEvents } from 'react-leaflet'
 import L from 'leaflet'
 
+// مركز افتراضي للخريطة عند التحميل
 const EL_ARISH_CENTER = [31.1285, 33.8015]
 
+// خرائط القواعد المتاحة (مصادر البلاطات لكل تصميم)
 const MAP_STYLES = {
   standard: { url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', attribution: '&copy; OpenStreetMap' },
   satellite: { url: 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', attribution: 'Tiles &copy; Esri' },
@@ -11,7 +13,7 @@ const MAP_STYLES = {
   dark: { url: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', attribution: '&copy; CARTO' },
 }
 
-// أيقونات بسيطة ونضيفة بدل الماركر التقليدي - من غير عرض أي إحداثيات
+// ينشئ أيقونة ماركر بسيطة قابلة للتخصيص
 const pinIcon = (color, label) =>
   L.divIcon({
     className: '',
@@ -20,6 +22,7 @@ const pinIcon = (color, label) =>
     iconAnchor: [13, 13],
   })
 
+// مكوّن داخلي يلتقط نقرات الخريطة ويعيدها للـ caller عبر `onPick`
 const ClickCapture = ({ onPick }) => {
   useMapEvents({
     click: (e) => onPick && onPick(e.latlng),
@@ -27,6 +30,7 @@ const ClickCapture = ({ onPick }) => {
   return null
 }
 
+// يضبط مدى الخريطة ليتناسب مع مجموعة نقاط معطاة
 const FitToPoints = ({ points }) => {
   const map = useMap()
   useEffect(() => {
@@ -41,11 +45,21 @@ const FitToPoints = ({ points }) => {
   return null
 }
 
+/**
+ * MapComponent
+ * props:
+ * - startPin: { lat, lng, name } أو null
+ * - endPin: { lat, lng, name } أو null
+ * - waypoints: مصفوفة نقاط بين البداية والنهاية
+ * - routeCoords: مصفوفة إحداثيات لرسم المسار على الخريطة
+ * - pickTarget: عند وجود قيمة غير null يصبح الكورسور لاختيار نقاط بالنقر
+ * - onPick: دالة تستقبل latlng عند النقر (تستخدم مع `pickTarget`)
+ * - mapStyle: اسم تصميم الخريطة
+ */
 const MapComponent = ({ startPin, endPin, waypoints = [], routeCoords, pickTarget, onPick, mapStyle = 'dark' }) => {
   const layer = MAP_STYLES[mapStyle] || MAP_STYLES.dark
   const boundsPoints = [startPin, ...waypoints, endPin].filter(Boolean).map((p) => [p.lat, p.lng])
 
-  // position+z-index هنا لازمين عشان يحصروا الـ z-index الداخلي لطبقات Leaflet (لحد 700) جوه الخريطة، وما يطلعش يتعارض مع عناصر الواجهة اللي فوقها
   return (
     <div style={{ height: '100%', width: '100%' }} className={`relative z-0 ${pickTarget ? 'cursor-crosshair' : ''}`}>
       <MapContainer center={EL_ARISH_CENTER} zoom={14} zoomControl={false} scrollWheelZoom style={{ height: '100%', width: '100%' }}>

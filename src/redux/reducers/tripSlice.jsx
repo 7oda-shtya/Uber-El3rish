@@ -67,28 +67,36 @@ const tripSlice = createSlice({
   name: 'trip',
   initialState,
   reducers: {
+    // تحديث نقطة البداية في الـ currentTrip
     updateStartPin: (state, action) => {
       state.currentTrip.startPin = action.payload;
     },
+    // تحديث نقطة النهاية في الـ currentTrip
     updateEndPin: (state, action) => {
       state.currentTrip.endPin = action.payload;
     },
+    // إضافة محطة (waypoint) إلى مصفوفة المحطات
     addWaypoint: (state, action) => {
       state.currentTrip.waypoints.push(action.payload);
     },
+    // تحديث محطة محددة بمؤشر index
     updateWaypoint: (state, action) => {
       const { index, pin } = action.payload;
       state.currentTrip.waypoints[index] = pin;
     },
+    // إزالة محطة بمؤشر معين
     removeWaypoint: (state, action) => {
       state.currentTrip.waypoints.splice(action.payload, 1);
     },
+    // تفريغ كل المحطات المؤقتة
     clearWaypoints: state => {
       state.currentTrip.waypoints = [];
     },
+    // ضبط معلومات المسار (coordinates, distanceKm, durationMin, price)
     setRoute: (state, action) => {
       state.currentTrip.route = action.payload;
     },
+    // حفظ رحلة في قائمة الرحلات المحفوظة (savedTrips)
     saveTrip: (state, action) => {
       const newTrip = {
         ...action.payload,
@@ -98,10 +106,11 @@ const tripSlice = createSlice({
       };
       state.savedTrips.unshift(newTrip);
     },
+    // حذف رحلة محفوظة بناءً على الـ id
     removeSavedTrip: (state, action) => {
       state.savedTrips = state.savedTrips.filter(t => t.id !== action.payload);
     },
-    // يحمّل رحلة محفوظة في الرحلة الحالية عشان اليوزر يطلبها تاني من غير ما يعيد تحديد النقط
+    // تحميل رحلة محفوظة إلى `currentTrip` ليتم تعديلها أو طلبها
     loadSavedTrip: (state, action) => {
       const saved = action.payload;
       state.currentTrip.startPin = saved.startPin;
@@ -109,8 +118,7 @@ const tripSlice = createSlice({
       state.currentTrip.waypoints = saved.waypoints || [];
       state.currentTrip.route = null;
     },
-    // اقتراح اسم لمنطقة غير معروفة - مؤقتًا بيتقبل الاسم على طول لحد ما تتجهز لوحة الأدمن لمراجعة/اختيار الاسم من اللستة
-    // TODO: لما لوحة الأدمن تجهز، الاسم المعروض للمستخدمين لازم يتحول لاسم "معتمد من الأدمن" بدل أول اقتراح بيوصل
+    // اقتراح اسم لمنطقة غير معروفة وحفظ الاقتراحات محليًا
     suggestAreaName: (state, action) => {
       const { lat, lng, name } = action.payload;
       const trimmedName = name.trim();
@@ -130,22 +138,27 @@ const tripSlice = createSlice({
         });
       }
     },
-    // ... داخل الـ reducers في tripSlice.js
 
-
+    /*
+     * requestTrip reducer
+     * يتلقى بيانات الطلب من الـ UI ويحوّل `currentTrip` إلى حالة 'pending'
+     * ويخزن حقولًا إضافية مهمة:
+     * - scheduledTime: حقل ISO datetime لو المستخدم حدد موعد لاحق
+     * - customerNote: ملاحظات للمسؤول/السائق
+     * - passengerCount: عدد الركاب المطلوب
+     */
     requestTrip: (state, action) => {
       const { clientId, price, startTime, pickupDistanceM, farFromPickupNote, scheduledTime, customerNote, passengerCount } = action.payload;
 
-      // تحديث الـ currentTrip ببيانات الطلب
       state.currentTrip = {
         ...state.currentTrip,
         status: 'pending',
         id: `TRIP_${Date.now()}`,
         clientId: clientId,
         price: price,
-        // حفظ وقت الطلب وتاريخه
+        // وقت الطلب (نص الوقت المعروض) ووقت الإنشاء بصيغة ISO
         requestedStartTime: startTime || new Date().toLocaleTimeString('ar-EG'),
-        createdAt: new Date().toISOString(), // تنسيق ISO للتعامل الأسهل برمجياً
+        createdAt: new Date().toISOString(),
         pickupDistanceM: pickupDistanceM,
         farFromPickupNote: farFromPickupNote,
         scheduledTime: scheduledTime || null,
@@ -153,13 +166,13 @@ const tripSlice = createSlice({
         passengerCount: passengerCount || state.currentTrip.ridersCount || 1,
       };
 
-      // ممكن هنا نفضي العروض القديمة أو نجهزها لاستقبال عروض جديدة
+      // تفريغ العروض القديمة استعدادًا لطلبات العروض الجديدة
       state.offers = [];
     },
 
+    // قبول عرض سائق: تحويل الرحلة إلى 'ongoing' وربط بيانات السائق
     acceptOffer: (state, action) => {
       const offer = action.payload;
-      // بنحدث حالة الرحلة لـ ongoing وبنربطها ببيانات السواق
       state.currentTrip = {
         ...state.currentTrip,
         driverId: offer.driverId,
@@ -170,21 +183,30 @@ const tripSlice = createSlice({
       };
     },
 
+    /*
+     * cancelTrip reducer
+     * عند إلغاء الرحلة نضيفها لتاريخ الرحلات (history) كـ 'cancelled'
+     * ثم نعيد `currentTrip` إلى القيمة الفارغة (emptyTrip)
+     */
     cancelTrip: state => {
-      // قبل ما نصفر الرحلة، بنضيفها للهيستوري
       if (state.currentTrip.startPin) {
         state.history.unshift(toHistoryEntry(state.currentTrip, 'cancelled'));
       }
-      state.currentTrip = emptyTrip(); // إعادة الستيت لحالتها الفاضية
+      state.currentTrip = emptyTrip();
     },
-    // TODO: مؤقت لحد ما الباكاند يبعت إشعار إنهاء حقيقي من تطبيق السائق - هنا بنخلص الرحلة يدويًا
+
+    // إتمام الرحلة: إضافة لهيستوري ثم تفريغ currentTrip
     completeTrip: state => {
       state.history.unshift(toHistoryEntry(state.currentTrip, 'completed'));
       state.currentTrip = emptyTrip();
     },
+
+    // إضافة عنصر للهيستوري يدويًا
     addTripToHistory: (state, action) => {
       state.history.unshift(action.payload);
     },
+
+    // إعادة تعيين الرحلة الحالية إلى الحالة الفارغة
     clearCurrentTrip: state => {
       state.currentTrip = emptyTrip();
     },

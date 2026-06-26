@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // 🌟 ضفنا useNavigate
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPalette, faTriangleExclamation, faChevronRight, faCheck } from '@fortawesome/free-solid-svg-icons'; // 🌟 ضفنا أيقونة الرجوع
+import { faPalette, faTriangleExclamation, faChevronRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import MapComponent from '../../components/MapComponent';
 import MapDesignModal from '../../popups/MapDesignModal';
 import TripPlannerPanel from '../../components/trip/TripPlannerPanel';
@@ -10,11 +10,17 @@ import TripStatusPanel from '../../components/trip/TripStatusPanel';
 import { ACTIVE_TRIP_STATUSES, findNamedArea, updateStartPin, updateEndPin, addWaypoint, removeWaypoint, setRoute, saveTrip, removeSavedTrip, loadSavedTrip, requestTrip, acceptOffer, cancelTrip, completeTrip } from '../../redux/reducers/tripSlice';
 import { reverseGeocode, fetchRouteOptions, estimateFare, distanceMeters } from '../../utils/geo';
 
+// PROXIMITY_LIMIT_M: المسافة بالميتر اللي لو كانت المسافة أكبر منها نعرض ملاحظة للمستخدم
 const PROXIMITY_LIMIT_M = 20;
 
+/**
+ * RequestTrip page
+ * هذا الملف يحتوي الصفحة التي تعرض الخريطة، وتسمح بتحديد نقاط البداية والنهاية،
+ * وتعرض كلاً من `TripPlannerPanel` و `TripStatusPanel` حسب حالة الرحلة.
+ */
 const RequestTrip = () => {
   const { state } = useLocation();
-  const navigate = useNavigate(); // 🌟 للتوجيه للخلف
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentTrip = useSelector(s => s.trip.currentTrip);
   const offers = useSelector(s => s.trip.offers);
@@ -33,12 +39,14 @@ const RequestTrip = () => {
   const [showProximityNote, setShowProximityNote] = useState(false);
   const [showTooFarModal, setShowTooFarModal] = useState(false);
 
+  // isActive يوضح لو في رحلة شغالة لا تسمح بتغيير النقاط عبر pick
   const isActive = ACTIVE_TRIP_STATUSES.includes(currentTrip.status) && !state?.editing;
   const coords = state?.coords;
 
-  // 🌟 الكشف هل الرحلة دي محفوظة حالياً ولا لأ عشان نعرض شكل الزرار
+  // فحص إن كانت الرحلة الحالية محفوظة مسبقاً (لمظهر زر الحفظ)
   const isTripSaved = savedTrips?.some(saved => saved.startPin?.lat === currentTrip.startPin?.lat && saved.startPin?.lng === currentTrip.startPin?.lng && saved.endPin?.lat === currentTrip.endPin?.lat && saved.endPin?.lng === currentTrip.endPin?.lng);
 
+  // دالة مساعدة لتحويل إحداثيات لاسم نقطة (من المناطق المسماة أو Reverse Geocode)
   const resolvePinName = useCallback(
     async (lat, lng) => {
       const area = findNamedArea(namedAreas, lat, lng);
@@ -50,6 +58,7 @@ const RequestTrip = () => {
     [namedAreas],
   );
 
+  // لو الصفحة اتفتحت مع coords (جت من الـ Home بعد الضغط على اطلب رحلة جديدة) نعبي نقطة البداية تلقائياً
   useEffect(() => {
     if (isActive || currentTrip.startPin || !coords) return;
     let active = true;
@@ -63,6 +72,7 @@ const RequestTrip = () => {
     };
   }, [isActive, currentTrip.startPin, coords, dispatch, resolvePinName]);
 
+  // عند وجود بداية ونهاية، نجيب خيارات المسارات من الخدمة الخارجية ونحفظ أقصر مسار بشكل افتراضي
   useEffect(() => {
     if (isActive || !currentTrip.startPin || !currentTrip.endPin) return;
     const points = [currentTrip.startPin, ...currentTrip.waypoints, currentTrip.endPin];
@@ -80,6 +90,7 @@ const RequestTrip = () => {
     };
   }, [currentTrip.startPin, currentTrip.endPin, currentTrip.waypoints, isActive, dispatch]);
 
+  // قياس المسافة بين المستخدم ونقطة الانطلاق لإظهار ملاحظات القرب
   useEffect(() => {
     if (isActive || !currentTrip.startPin) {
       setProximity({ distanceM: null, checking: false, failed: false, note: '' });
@@ -108,7 +119,7 @@ const RequestTrip = () => {
     };
   }, [currentTrip.startPin, isActive]);
 
-  // 🌟 تعديل الـ Pick عشان ميغيرش النقطة أوتوماتيك، بيستنى اليوزر يأكد بنفسه من الزرار
+  // دالة التعامل مع نقر الخريطة: تحدد اسم النقطة ثم تحفظها في الـ Redux حسب الهدف
   const handlePick = useCallback(
     async latlng => {
       if (!pickTarget) return;
@@ -127,13 +138,14 @@ const RequestTrip = () => {
     [pickTarget, dispatch, resolvePinName],
   );
 
+  // اختيار خيار المسار من اللستة
   const handleSelectRouteOption = index => {
     setSelectedRouteIndex(index);
     const chosen = routeOptions[index];
     if (chosen) dispatch(setRoute({ ...chosen, price: estimateFare(chosen.distanceKm) }));
   };
 
-  // 🌟 دالة عشان تـ Toggle الحفظ (تحفظ أو تحذف لو محفوظة)
+  // حفظ أو حذف رحلة محفوظة
   const handleToggleSaveTrip = () => {
     if (isTripSaved) {
       const savedTrip = savedTrips.find(t => t.startPin.lat === currentTrip.startPin.lat && t.endPin.lat === currentTrip.endPin.lat);
@@ -149,13 +161,14 @@ const RequestTrip = () => {
   const isFarFromPickup = proximity.distanceM !== null && proximity.distanceM > PROXIMITY_LIMIT_M;
   const proximityNeedsNote = isFarFromPickup || proximity.failed;
 
+  // دالة تأكيد الطلب — تستقبل خيار إضافي من TripPlannerPanel (schedule, note, passengers)
   const handleConfirmRequest = (opts = {}) => {
-    // 1. فحص النقط (إضافة log للتأكد من الحالة)
+    // 1. فحص النقط
     console.log('Current Trip State:', currentTrip);
 
     if (!currentTrip.startPin || !currentTrip.endPin) {
       console.error('خطأ: النقاط ناقصة!');
-      alert('برجاء تحديد نقطة البداية ونقطة الوصول أولاً!'); // تنبيه للمستخدم
+      alert('برجاء تحديد نقطة البداية ونقطة الوصول أولاً!');
       return;
     }
 
@@ -176,7 +189,7 @@ const RequestTrip = () => {
     console.log('جاري طلب الرحلة...');
     setRequesting(true);
 
-    // تأكد أنك ترسل البيانات الصحيحة
+    // تمرير بيانات الجدولة، الملاحظات، وعدد الركاب إلى الريدوكس
     dispatch(
       requestTrip({
         ...currentTrip,
@@ -188,17 +201,14 @@ const RequestTrip = () => {
 
     setRequesting(false);
 
-    // 4. إظهار البوب أب (هنا السحر)
+    // 4. إظهار بوبوب النجاح — الاستمرار لغاية ضغط العميل على "اذهب للرئيسية"
     setShowRequestSuccess(true);
-
-    // لا نغلق البوبوب تلقائياً بعد الآن — ننتظر ضغط المستخدم على زر "اذهب للرئيسية"
   };
 
   // حالة عرض بوبوب نجاح الطلب
   const [showRequestSuccess, setShowRequestSuccess] = useState(false);
 
   return (
-    // 🌟 لغينا حجز مساحة النافيجيشن بالأسفل وبقت الصفحة واخدة راحتها بالكامل
     <div className='w-full h-screen flex flex-col bg-zinc-950 relative overflow-hidden'>
       {showTooFarModal && (
         <div className='fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 animate-fade-in' dir='rtl'>
@@ -240,14 +250,12 @@ const RequestTrip = () => {
       <div className='flex-1 relative'>
         <MapComponent startPin={currentTrip.startPin} endPin={currentTrip.endPin} waypoints={currentTrip.waypoints} routeCoords={currentTrip.route?.coordinates} pickTarget={isActive ? null : pickTarget} onPick={handlePick} mapStyle={mapStyle} />
 
-        {/* 🌟 زرار الرجوع فوق عالشمال */}
         <button
-          onClick={() => navigate(-1)} // 🌟 يرجعه للصفحة اللي قبلها
+          onClick={() => navigate(-1)}
           className='absolute top-4 left-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-white hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'>
           <FontAwesomeIcon icon={faChevronRight} className='rotate-180' />
         </button>
 
-        {/* 🌟 زرار تغيير التصميم يمين */}
         <button onClick={() => setShowMapDesign(true)} className='absolute top-4 right-4 z-30 w-11 h-11 rounded-full bg-zinc-900 border border-zinc-700/50 text-emerald-400 hover:bg-zinc-800 flex items-center justify-center shadow-lg transition-colors'>
           <FontAwesomeIcon icon={faPalette} />
         </button>
@@ -272,8 +280,8 @@ const RequestTrip = () => {
             showProximityNote={showProximityNote}
             onProximityNoteChange={note => setProximity(p => ({ ...p, note }))}
             savedTrips={savedTrips}
-            isTripSaved={isTripSaved} // 🌟 باصينا المتغير ده للبانل
-            onToggleSaveTrip={handleToggleSaveTrip} // 🌟 الدالة الجديدة
+            isTripSaved={isTripSaved}
+            onToggleSaveTrip={handleToggleSaveTrip}
             onLoadSavedTrip={saved => dispatch(loadSavedTrip(saved))}
             onRemoveSavedTrip={id => dispatch(removeSavedTrip(id))}
           />
@@ -281,8 +289,6 @@ const RequestTrip = () => {
           <TripStatusPanel trip={currentTrip} offers={currentTrip.status === 'pending' ? offers : []} onAccept={offer => dispatch(acceptOffer(offer))} onCancel={() => dispatch(cancelTrip())} onFinish={() => dispatch(completeTrip())} />
         )}
       </div>
-
-      {/* 🌟 تم إلغاء النافيجيشن هنا تماماً */}
     </div>
   );
 };
