@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+	direction: rtl;
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+
+.main-app:has(.page-screen) {
+  padding: 40px;
+	padding-top: 80px;
+}
+
+.map-marker-icon{
+	width:25px;
+	height:41px;
+	display:block;
+}
+
+.map-marker-icon-small{
+  width:18px;
+  height:30px;
+}
+
+.map-location-marker{
+  display:flex;
+  flex-direction:row-reverse;
+  align-items:center;
+  gap:6px;
+  white-space:nowrap;
+}
+
+.map-label{
+  color:#fff;
+  background:rgba(17,24,39,0.75);
+  padding:2px 6px;
+  border-radius:8px;
+  white-space:nowrap;
+  line-height:1.2;
+}
+
+.leaflet-container {
+	font-family: inherit;
+	background: #111827;
+}
