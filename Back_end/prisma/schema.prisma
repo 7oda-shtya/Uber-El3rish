@@ -1,0 +1,295 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CLIENT
+  DRIVER
+  ADMIN
+}
+
+enum CouponType {
+  MONTHLY
+  REFERRAL
+  PERMANENT
+  CONTRIBUTOR
+}
+
+enum TripStatus {
+  PENDING
+  BOOKED
+  STARTED
+  COMPLETED
+  CANCELLED
+}
+
+enum OfferStatus {
+  PENDING
+  ACCEPTED
+  CANCELLED
+  REJECTED
+}
+
+enum ReportStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+enum PenaltyStatus {
+  PENDING
+  PAID
+  WAIVED
+}
+
+enum SuggestionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum AccountStatus {
+  PENDING
+  ACTIVE
+  BANNED
+}
+
+model User {
+  id              String           @id @default(uuid())
+  name            String
+  phone           String           @unique
+  email           String?          @unique
+  password        String
+  role            Role
+  avatar          String?
+  homeAddress     String?
+  old             Int?
+  wallet          Int              @default(0)
+  username        String           @unique
+  avgRating       Float?           @default(0)
+  officeAddress   String?
+  referralCode    String           @unique
+  referredById    String?
+  token           String?          @unique
+  referredBy      User?            @relation("UserReferrals", fields: [referredById], references: [id])
+  referrals       User[]           @relation("UserReferrals")
+  createdAt       DateTime         @default(now())
+  accountStatus   AccountStatus?   @default(ACTIVE)
+  car             Car?
+  savedTrips      SavedTrip[]
+  coupon          Coupon[]
+  notifications   Notification[]
+  offers          Offer[]
+  SupportMessages SupportMessage[]
+
+  suspendedUntil DateTime?
+
+  tripsAsClient Trip[] @relation("ClientTrips")
+  tripsAsDriver Trip[] @relation("DriverTrips")
+
+  ratesGiven    Rate[] @relation("RaterUser")
+  ratesReceived Rate[] @relation("RatedUser")
+
+  reportsSent     Report[] @relation("ReporterUser")
+  reportsReceived Report[] @relation("ReportedUser")
+
+  weeklyLeaderboards WeeklyLeaderboard[]
+
+  areaSuggestion AreaSuggestion[]
+  penalty        Penalty[]
+  warnings       Warning[]
+}
+
+model Coupon {
+  id          String     @id @default(uuid())
+  code        String     @unique
+  type        CouponType
+  value       Int
+  description String?
+  validUntil  DateTime?
+  createdAt   DateTime   @default(now())
+  userId      String?
+  user        User?      @relation(fields: [userId], references: [id])
+}
+
+model Car {
+  id          String  @id @default(uuid())
+  model       String
+  seats       Int     @default(4)
+  plateNumber String
+  picture     String?
+  driverId    String  @unique
+  driver      User    @relation(fields: [driverId], references: [id])
+}
+
+model Trip {
+  id       String  @id @default(uuid())
+  clientId String
+  client   User    @relation("ClientTrips", fields: [clientId], references: [id])
+  driverId String?
+  driver   User?   @relation("DriverTrips", fields: [driverId], references: [id])
+
+  startLat  Float?
+  startLng  Float?
+  startName String?
+  endLat    Float?
+  endLng    Float?
+  endName   String?
+  waypoints Json? // مصفوفة { lat, lng, name }
+  route     Json? // { coordinates, distanceKm, durationMin } من OSRM
+
+  status            TripStatus @default(PENDING)
+  price             Int        @default(0)
+  ridersCount       Int        @default(1)
+  customerNote      String?
+  scheduledTime     DateTime?
+  pickupDistanceM   Float?
+  farFromPickupNote String?
+  createdAt         DateTime   @default(now())
+
+  offers Offer[]
+  rate   Rate?
+  report Report?
+}
+
+model SavedTrip {
+  id        String   @id @default(uuid())
+  fromLat   Float
+  fromLng   Float
+  fromName  String?
+  toLat     Float
+  toLng     Float
+  toName    String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Offer {
+  id          String      @id @default(uuid())
+  tripId      String
+  trip        Trip        @relation(fields: [tripId], references: [id])
+  driverId    String
+  driver      User        @relation(fields: [driverId], references: [id])
+  price       Int
+  note        String?
+  rate        Float?
+  timeToReach String?
+  startTime   String?
+  status      OfferStatus @default(PENDING)
+}
+
+model Rate {
+  id        String   @id @default(uuid())
+  raterId   String
+  rater     User     @relation("RaterUser", fields: [raterId], references: [id])
+  ratedId   String
+  rated     User     @relation("RatedUser", fields: [ratedId], references: [id])
+  tripId    String?  @unique
+  trip      Trip?    @relation(fields: [tripId], references: [id])
+  rateStars Int
+  comment   String?
+  createdAt DateTime @default(now())
+}
+
+model Report {
+  id         String       @id @default(uuid())
+  reporterId String
+  reporter   User         @relation("ReporterUser", fields: [reporterId], references: [id])
+  reportedId String
+  reported   User         @relation("ReportedUser", fields: [reportedId], references: [id])
+  tripId     String?      @unique
+  trip       Trip?        @relation(fields: [tripId], references: [id])
+  penalty    Penalty?
+  reason     String
+  attachment String?
+  status     ReportStatus @default(PENDING)
+  createdAt  DateTime     @default(now())
+  Warning    Warning?
+}
+
+model Penalty {
+  id       String        @id @default(uuid())
+  userId   String
+  user     User          @relation(fields: [userId], references: [id])
+  reportId String?       @unique
+  report   Report?       @relation(fields: [reportId], references: [id])
+  amount   Int?
+  status   PenaltyStatus @default(PENDING)
+  issuedAt DateTime      @default(now())
+  paidAt   DateTime?
+  waivedAt DateTime?
+}
+
+model Warning {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  reportId  String?  @unique
+  report    Report?  @relation(fields: [reportId], references: [id])
+  reason    String
+  createdAt DateTime @default(now())
+}
+
+model WeeklyLeaderboard {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  role        Role
+  weekStart   DateTime
+  weekEnd     DateTime
+  tripCount   Int
+  rank        Int
+  bonusAmount Float?
+  bonusGiven  Boolean  @default(false)
+
+  @@unique([userId, weekStart, role])
+  @@index([weekStart, role, rank])
+}
+
+model Location {
+  id        String   @id @default(uuid())
+  lat       Float
+  lng       Float
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model AreaSuggestion {
+  id        String   @id @default(uuid())
+  lat       Float
+  lng       Float
+  name      String
+  createdAt DateTime @default(now())
+
+  status        SuggestionStatus @default(PENDING)
+  suggestedById String
+  suggestedBy   User             @relation(fields: [suggestedById], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String
+  body      String
+  type      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([userId, read])
+  @@index([createdAt])
+}
+
+model SupportMessage {
+  id         String   @id @default(uuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  message    String
+  attachment String?
+  createdAt  DateTime @default(now())
+}
